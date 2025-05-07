@@ -43,18 +43,7 @@
 \todo{Te from sweeps vs triple probe}
 
 \begin{abstract}
-Mirror machines are rising again as a potential class of fusion reactors, but cross-field transport and turbulence in mirrors remains relatively understudied compared to toroidal devices. Turbulence and transport in edge-like conditions in mirror configurations were studied utilizing the flexible magnetic geometry of the Large Plasma Device (LAPD). Multiple mirror ratios from $M=1$ to $M=2.68$ and three lengths from $L=3.51$m to $L=10.86$m were examined.
-Langmuir and Bdot probes were used to measure profiles and spectra of density, temperature, floating and plasma potentials, and magnetic fluctuations. The fluctuation-driven $\tilde{E} \times B$ particle flux was calculated from these quantities. Two probe correlation techniques were used to infer wavenumbers and 2d structure.
-Cross-field particle flux and density fluctuation power decreased with increased mirror ratio.
-Core density and temperatures remain similar with mirror ratio, but radial line-integrated density increased.
-The physical expansion of the plasma in the mirror cell by using a higher field in the source region may have led to reduced density fluctuation power through the increased gradient scale length. This increased scale length reduced the growth rate and saturation level of rotational interchange and drift-like instabilities.
-Despite the introduction of magnetic curvature, no evidence of mirror driven instabilities — interchange, velocity space, or otherwise — were observed. For curvature-induced interchange, many possible stabilization mechanisms were present, suppressing the visibility of the instability.
-Based on these observations, the cold edge in a mirror-based fusion reactor with a sufficiently long density gradient scale length may not make an appreciable contribution to cross-field particle transport.
-\end{abstract}
 
-%\maketitle
-
-\begin{abstract}
 Thanks to advances in plasma science and enabling technology, mirror machines are being reconsidered for fusion power plants and as possible fusion volumetric neutron sources. However cross-field transport and turbulence in mirrors remains relatively understudied compared to toroidal devices. Turbulence and transport in mirror configurations were studied utilizing the flexible magnetic geometry of the Large Plasma Device (LAPD). Multiple mirror ratios from $M=1$ to $M=2.68$ and three mirror-cell lengths from $L=3.51$m to $L=10.86$m were examined.
 Langmuir and magnetic probes were used to measure profiles of density, temperature, potential, and magnetic field. The fluctuation-driven $\tilde{E} \times B$ particle flux was calculated from these quantities. Two probe correlation techniques were used to infer wavenumbers and two-dimensional structure.
 Cross-field particle flux and density fluctuation power decreased with increased mirror ratio.
@@ -184,7 +173,20 @@ The second phase, \texttt{DR2}, was conducted with a similar set of diagnostics 
 \end{table}
 
 Because the field at the plasma source increases with $M$, the midplane plasma expands by a factor of $\sqrt{M}$. The physical locations of the peak fluctuation region -- $x_{PF}$ (maximum gradient) -- and the cathode radius $x_c$ can be seen in tab. \ref{tab:x_PF}. This expansion leads to broader plasma profiles and decreased core density but are similar in the core and at $x_{PF}$ when magnetically-mapped to the cathode radius $x_c$ as seen in fig. \ref{fig:isat_profile}. Dips between the core ($x/x_c=0)$ and the peak fluctuation region ($x=x_{PF})$ are seen, but fluctuation power from this region ($x/x_c = 0.5$ to $0.7$) is not significant (fig. \ref{fig:isat-fluct-prof}) so this region is not the focus of this study. The line-integrated density as measured by a 56 GHz heterodyne interferometer increases up to $\sim 35\%$ from the M=1 case of $\approx8 \times 10^{13}$ cm$^{-2}$ (fig. \ref{fig:density-line}) but does not increase past a mirror ratio of 2.3.
+
+The error of on the $I_\text{sat}$ profiles as represented by the standard deviation (scaled by the time-averaged profiles) can be seen in fig. \ref{fig_extra:isat-profile-stddev}. The error is relatively small and should not play a factor in our analysis -- rarely are differences between quantities of the different mirror ratios that small.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=300pt]{figures/extra/isat-profile-stddev.pdf}
+    \caption[Shot-to-shot variation of $I_\text{sat}$ profiles]{Shot-to-shot variation of $I_\text{sat}$ profiles}
+    \label{fig_extra:isat-profile-stddev}
+\end{figure}
+
+
 Discharge power increases only slightly ($3\%$) at higher mirror ratios suggesting negligible impact on density. Langmuir sweeps and triple probe measurements of $T_e$ (\texttt{DR2}) show slightly (less than 25\%) depressed core and slightly elevated edge $T_e$ with increasing mirror ratio (fig. \ref{fig:Te-sweeps}) but otherwise remains unaffected. The temperature affects $I_\text{sat}$ measurements through the $\sqrt{T_e}$ term so small changes are insignificant. The low temperatures indicate that the plasma is collisional given the length scales of the system (as seen in table \ref{tab:plasma-parameters}) and isotropic. Plasma potential decreases across the plasma (fig. \ref{fig:Vp_ExB}) when the mirror ratio exceeds 1.9. This drop in plasma potential may be caused by the grounding of the anode to the wall, which should begin at $M=1.93$ given the $72$ cm anode and $100$ cm vessel diameters. The reason for the local minimum in the M=2.68 is unknown. This potential profile creates a sheared $\boldsymbol{E \times B}$ velocity profile (fig. \ref{fig:Vp_ExB}) limited to $500$ m/s in the core and exceeding $\sim 3$ km/s at the far edge. The flow does not exceed 4\% of the sound speed (tab. \ref{tab:plasma-parameters}) in the core or gradient ($x=x_{PF}$) region. The mirror ratio does not appear to significantly alter azimuthal flow. The floating potential (Vf) profile also exhibits similar behavior to the plasma potential (fig. \ref{fig:Vp_ExB}), but is modified by the presence of primary electrons. 
+
+
 
 \begin{figure}
     \centering
@@ -250,6 +252,49 @@ The $\tilde{E} \times B$ particle flux clearly decreases with mirror ratio; most
 $T_e$ profiles and fluctuations may affect particle fluxes but measurements of both were not taken in the same datarun; nevertheless, a quantification of the effect of $T_e$ on particle flux is attempted.
 $T_e$ fluctuations affect $I_\text{sat}$-based density measurements through the $T_e^{-1/2}$ term, and triple probe and Langmuir sweep $T_e$ measurements suggest that temperature gradients have a negligible impact. A naive incorporation of temperature fluctuation data from \texttt{DR2} into particle fluxes from \texttt{DR1} suggest that cross-field particle flux may be underestimated by up to $50\%$ via the $I_\text{sat}$ temperature term, but the trend and relative fluxes across mirror ratios remain unchanged. Such a naive incorporation should be treated with suspicion because of the sensitive nature of the flux with respect to the gradient and the differences in profiles between \texttt{DR1} and \texttt{DR2}. These difference in profiles made be caused by cathode condition, deposits on the anode, or a different gas mix and are difficult to account for.
 
+\subsection{Compensating for Te profile}
+
+Electron temperature (Te) compensation for the $I_\text{sat}$ measurement can be done in several ways. One way is to account for the average temperature (i.e., steady state) when calculating the density from $I_\text{sat}$. Te can be gathered from triple probe or swept measurements. Triple probe measurements are generally less reliable than swept probe measurements. The difference between swept and triple probe Te measurements can be seen in fig. \ref{fig:Te_swept_vs_triple}. The two techniques have roughly good agreement, though the triple probe appears to slightly underestimate the temperature. The spikes in the edge are likely from sheath expansion of the probe in the swept measurements (see fig. \ref{fig:Te-sweeps}). 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=300pt]{figures/Te_sweep-TP_diff.pdf}
+    \caption[Swept vs triple probe measurements]{Difference between swept and triple probe temperature measurements. The triple probe appears to slightly underestimate the temperature and temperature gradient. }
+    \label{fig:Te_swept_vs_triple}
+\end{figure}
+
+Te fluctuations can affect $I_\text{sat}$ fluctuation measurements through the $\sqrt{\text{Te}}$ term. In this case, Te measurements are difficult to compensate for in \texttt{DR1} because of the changes in profiles between \texttt{DR1} and \texttt{DR2}, so the Te fluctuations were included by finding the ratio in \texttt{DR2} of $I_\text{sat}$ fluctuations before and after including these Te fluctuations. This ratio was then applied to \texttt{DR1}. The issue of mismatched profiles still persists but this method allows for changes in fluctuation power between the two datarun sets. In general, $\widetilde{\text{Te}} / \text{Te}$ fluctuations are at most than 30\% (near the edge), and much lower in the core seen in fig. \ref{fig_extra:Te_prof_flucts}. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=300pt]{figures/extra/Te_prof_flucts.pdf}
+    \caption[Triple probe Te and Te fluctuation profiles]{Te and Te fluctuation profiles from the triple probe. RMS electron temperature fluctuations are not particularly large.}
+    \label{fig_extra:Te_prof_flucts}
+\end{figure}
+
+This Te compensation becomes particularly important when calculating the $I_\text{sat}$ profile gradients which is needed when calculating the diffusivity. A calculation of the diffusivity scaled to the Bohm diffusivity $D_B = \frac{1}{16} \frac{T}{eB}$ can be seen in fig. \ref{fig_extra:diffusivity_tanh}. This calculation uses the particle flux calculated earlier (in the paper) and tanh fit on the density profile for a density smooth gradient. In general, mirror ratios higher than two have a lower diffusivity. When the particle flux is compensated for Te fluctuations, the temperature profile used in for the Bohm diffusion coefficient, and the density profile is smoothed convoluting a $\sigma=2$ cm gaussian, the diffusion coefficient relative to $D_B$ are roughly 2.5 times greater, seen in fig. \ref{fig_extra:diffusivity_Te-comp}. The trend, however, remains relatively the same: higher mirror ratios tend to have a lower diffusivity. The impact of different profile smoothing methods on the density gradient can be seen in fig. \ref{fig_extra:isat_prof_gradient_smoothing}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=300pt]{figures/extra/diffusivity_tanh-prof-fit.pdf}
+    \caption[Diffusivity relative to $D_B$]{Diffusivity relative to $D_B$ using a tanh fit for the density profile and the particle flux measurement assuming a constant Te of 4.5 eV across the profile.}
+    \label{fig_extra:diffusivity_tanh}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=300pt]{figures/extra/diffusivity_Te-comp.pdf}
+    \caption[Diffusivity with Te compensation relative to $D_B$]{Diffusivity with Te compensation relative to $D_B$. The particle flux is compensated for Te fluctuations, and the swept-probe temperature profile is used for Te. The diffusivity is around 2.5 times higher than without compensation, but the trend remains similar.}
+    \label{fig_extra:diffusivity_Te-comp}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=300pt]{figures/extra/isat_prof_gradient_smoothing.pdf}
+    \caption[$I_\text{sat}$ gradients under varying profile smoothing methods]{$I_\text{sat}$ gradients under varying profile smoothing methods}
+    \label{fig_extra:isat_prof_gradient_smoothing}
+\end{figure}
+
 \subsection{Drift waves}
 The $I_\text{sat}$ fluctuation power spectra in the region of peak power $x \sim x_\text{PF}$, also where the density gradient is strongest, can be seen in fig. \ref{fig:isat_fluct_power}. Notably, the fluctuation peaks shift to higher frequencies and decrease in total fluctuation power. The shift in frequency may be the Doppler shift caused by the change $\boldsymbol{E \times B}$ plasma rotation seen in fig. \ref{fig:Vp_ExB} at the location $x/x_c \approx x_\text{PF}$. The shift in frequency is somewhat smaller than what would be expected from the field line-averaged increase in Alfv\'en speed at the longest possible wavelength.
 \begin{figure}
@@ -269,6 +314,28 @@ As seen in fig. \ref{fig:isat-Vf_phase}, the phase shift between $I_\text{sat}$ 
 \end{figure}
 The phase difference between two Vf probes, $3.83$ m apart, was used to calculate the parallel wavelength $\frac{2 \pi}{\lambda} = k_\parallel = \phi_{\text{Vf1, Vf2}} / \Delta z$ assuming the wavelengths are greater than $7.66$ m. The two probes mapped to the same field line only in the $M=1$ configuration, so parallel wavenumbers are available only for the flat case. Parallel wavenumbers are theoretically calculable from 2d correlation planes but the coherency dropped dramatically when a mirror geometry was introduced.
 A $34$ m wavelength mode likely contributes to the measured $k_\parallel$ from $3$ to  $\gtrsim 10$ kHz (fig \ref{fig:kparallel-coherency}). Drift waves are long-wavelength modes so coherent density and potential fluctuations along the flux tube are expected. The coherency is a measure of similarity of the spectral content of two signals, in this case Vf probes 1 and 2. The coherency is defined as $\gamma = \frac{|\langle P_{1,2} \rangle|}{\langle |P_{1,1}|^2 \rangle \langle |P_{2,2}|^2 \rangle}$ where $P_{x,y}$ is the cross-spectrum between signals $x$ and $y$ and the angle brackets $\langle \rangle$ denote the mean over shots. The coherency between the two Vf probes drops off with increasing frequency, with a slight bump at around 12 kHz. There are several candidates for the driving mechanism of the 3-5 kHz mode, but the 12 kHz mode is most likely a drift-Alfvén wave.
+
+%\subsection{Drift waves: comparison with theory}
+Drift wave theory\cite{Liewer_measurements_1985} suggests that the normalized density fluctuation level $\widetilde n / n$ should fall near 3-10 $\rho_s / L_n$. A plot of this relation using experimental data can be seen in fig. \ref{fig_extra:density-fluct_vs_rhos-Ln}. However, comparison of $\widetilde n / n$ with $1/(k_y L_n)$ show that the normalized density fluctuations are about an order of magnitude too small for the $1/(k_y L_n)$ observed which is unexpected and this conflict has not been able to be resolved in this study. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=300pt]{figures/extra/density-fluct_vs_rhos-Ln.pdf}
+    \caption[Normalized density fluctuations vs $\rho_s / L_n$]{Normalized density fluctuations vs $\rho_s / L_n$. The measured values fall close to the $\tilde{n}/n = 3 \rho_s / L_n$ line which is consistent with theory.}
+    \label{fig_extra:density-fluct_vs_rhos-Ln}
+\end{figure}
+
+Another issue with this drift-wave interpretation of results is that the electron thermal diffusion along the field line is too high. The plasma must be collisional enough that thermal equilibrium is guaranteed (i.e., the temperature is Maxwellian) , but if the collision rate is too high then thermal gradients can develop along the field line\cite{Goldston_textbook}. This condition on thermal diffusivity condition for the drift wave $\omega$ and $k_z$ is $\omega \ll k_z^2 v_{e, th}^2 / \nu_{ei}$. Plugging in values from the experiments yields frequencies at least 5 times greater than mandated by the diffusivity condition and the condition is violated. This condition violation may be responsible for the odd phase shifts seen between the density and potential fluctuations.
+
+In saturated drift wave turbulence, the normalized density fluctuation amplitude is expected to scale with the gradient scale length $L_n$, so the fluctuation power then scales with $L_n^2$. A plot of this can be seen in fig. \ref{fig_extra:isat_Ln2_n2}. This assumes the same $k_y$, but as mentioned earlier, that scaling and the relationship in general is not consistent with theoretical predictions for saturated drift wave turbulence.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=300pt]{figures/extra/isat_fluct_power_Ln2_n2.pdf}
+	\caption[$I_\text{sat}$ scaled by $L_n^2 / n^2$]{$I_\text{sat}$ fluctuation power when scaled by the square of the gradient scale length and the squared density. We expect this value to be constant (assuming the same $k_\perp$.}
+	\label{fig_extra:isat_Ln2_n2}
+\end{figure}
+
 
 \subsection{\label{sec:sub_turbulence}Turbulence modification}
  The wavenumber-power relation in fig. \ref{fig:fluct-power_ky} shows decreased fluctuation power when a mirror configuration is introduced. However, there is no discernible trend when the mirror ratio is increased further. The exponential nature of the curve also remains unchanged. The greatest decrease in fluctuation power occurred in low and high $k_y$'s, around $10$ and $70$ rad/m. The shape of the power-$k_y$ curves follow an exponential distribution, and is inconsistent with a 2d drift-wave turbulent cascade (Wakatani Hasegawa $k^{-3}$) \cite{Hasegawa-Wakatani}. The steep dropoff in fluctuation power with $k_y$ suggests that higher-wavenumber fluctuations do not have a significant effect on transport.
@@ -442,28 +509,18 @@ The conducting wall mode and nonlinear instability may be present in these mirro
 
 The reduction in particle flux explained by a reduction in density fluctuations likely caused by a increased gradient scale length $L_n = \frac{n}{\nabla n }$ (fig. \ref{fig:L_n}), decreasing the linear drift wave growth rate and saturation level seen in sec. \ref{sec:sub_turbulence}. This gradient length reduction may also reduce the growth rate of the rotational interchange instability, which may be the dominate driver for the low-frequency large-amplitude density fluctuations.
 
+A plot showing the breakdown in particle flux can be seen in fig. \ref{fig_extra:particle_flux_breakdown}. The changes in $I_\text{sat}$ fluctuation power is the most obvious driver, but the $I_\text{sat}$ - Vf phase difference, coherency and wavenumber also seem to have an effect. The Vf fluctuation power remains largely consistent across the different mirror ratios. Note that this particle flux appears somewhat different because this is using the uncalibrated $I_\text{sat}$ values and the flux is not scaled by solid angle. This flux also does not use temperature-compensated $I_\text{sat}$ measurements.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=400pt]{figures/extra/particle_flux_breakdown.pdf}
+    \caption[Particle flux: breakdown into components]{The particle flux broken down into the components used to calculate it. The dashed black line is simply a visual reference near the peak particle flux at $x/x_c=0.95$. The $I_\text{sat}$ fluctuation power appears to be the largest driver in changes in particle flux. The colored lines correspond to mirror ratio as seen in earlier plots.}
+    \label{fig_extra:particle_flux_breakdown}
+\end{figure}
+
 The decorrelation time of $I_\text{sat}$ time series data is around 0.15 ms at $x_\text{PF}$. An estimate of the $\boldsymbol{E \times B}$ flow shear from fig. \ref{fig:Vp_ExB} (\texttt{DR2}) yields a shearing time between 0.1 and 0.3 ms at $x_\text{PF}$. These times suggest that spontaneous flow shear may be important for suppressing turbulence, as seen in other studies \cite{Schaffner_turbulence_2013,Cho_2005}, at all mirror ratios. However, no clear trend in shearing strength is seen with mirror ratio.
 
-It is important to note that the electron thermal diffusion time along the field line is very long compared to the frequency of the drift wave ($\omega \gtrsim k_\parallel \bar{v}_e^2 / \nu_{ei}$) \cite{Goldston_textbook} so the electron temperature along the field line may not be constant on the drift wave timescale. This factor is not taken into account in this analysis but may have substantial impact on interpretations of the measured phase shift.
-
-\section{\label{sec:conclusion}Conclusions and future work}
-
-Turbulence and transport was studied in mirrors with varying lengths and ratios using the flexible magnetic geometry of the LAPD. Particle flux and fluctuation amplitudes decreased up to a factor of two when mirror ratio was increased. The primary drivers of turbulence were identified as the rotational interchange mode, caused by spontaneous rotation, and unstable drift-Alfvén waves driven by the density gradient. The decrease in density fluctuation amplitudes can be attributed to an increase in the gradient scale length caused by the dimensionally wider plasma at the mirror midplane. Despite imposing a mirror configuration, no signs of mirror-driven instabilities were observed. The highly-collisional, GDT-like plasma produced suppressed any velocity space instabilities. The interchange growth rate was likely suppressed to an undetectable level by line-tying, in-cell electron production, and shear flow.
-
-Future experiments in hotter regimes with the new LaB6 cathode \cite{LAPD_LaB6} will need to be performed to evaluate the robustness of these results, particularly concerning the stabilization of curvature-induced interchange. Additionally, the source field should be matched to the mirror midplane field so that the plasma remains the same radius to isolate geometric effects.
-Simultaneous measurements using flux and/or vorticity probes and $I_\text{sat}$ are needed to concretely determine if azimuthal flow shear is modified by the mirror field, and to quantify the effect of flows on rotational interchange and drift wave instability drive in general.
-Multiple simultaneous axial measurements of potential would enable better understanding of the axial wavenumber and identification of possible modes.
-
-This work was performed at the Basic Plasma Science Facility, which is a DOE Office of Science, FES collaborative user facility and is funded by DOE (DE-FC02-07ER54918) and the National Science Foundation (NSF-PHY 1036140). The authors would like to thank Dr. Giovanni Rossi and Dr. Steven Vincena for probe setup and assistance with data collection, and Dr. Mel Abler, Prof. Walter Gekelman, and Prof. George Morales for insightful discussion.
-
-The data and code supporting this study are available from the corresponding author upon reasonable request.
-
-Competing interests: The author(s) declare none.
-
-\section{Additional writing}
-
-\subsection{Turbulence}
-Decorrelation time: fig. \ref{fig_extra:decorrelation_time}. Calculated by taking the autocorrelation of a signal -- $I_\text{sat}$ in this case -- and finding the full-width half-max of the envelope (which was calculated using a Hilbert transform). 
+The decorrelation time of a signal is calculated by taking the autocorrelation of a signal -- $I_\text{sat}$ in this case -- and finding the full-width half-max of the envelope using a Hilbert transform. This decorrelation time can be seen in fig. \ref{fig_extra:decorrelation_time}. The decorrelation is minimized  at $x_{PF}$ and maximized in the core, further confirming the turbulent nature of the fluctuations at $x_{PF}$.
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/extra/decorrelation_time.pdf}
@@ -471,7 +528,7 @@ Decorrelation time: fig. \ref{fig_extra:decorrelation_time}. Calculated by takin
     \label{fig_extra:decorrelation_time}
 \end{figure}
 
-The estimated shearing rate from \texttt{DR2} can be seen in fig. \ref{fig_extra:ExB_shearing-rate}. The rate is plotted instead of time because of the singularity when the flow reverses. At around $x_{PF}$ ($x/x_c \approx 0.87$), the shearing rate is around 2 to 8 kHz meaning the shearing time is around 0.5 to 0.125 ms. This is fairly close to the decorrelation time from the $I_\text{sat}$ time series measurements (fig. \ref{fig_extra:decorrelation_time}). These similar times/rates suggests that ExB shearing sets the limit on cross-field transport.
+The estimated shearing rate from \texttt{DR2} can be seen in fig. \ref{fig_extra:ExB_shearing-rate}. The rate is plotted instead of time because of the singularity when the flow reverses. At around $x_{PF}$ ($x/x_c \approx 0.87$), the shearing rate is around 2 to 8 kHz meaning the shearing time is around 0.5 to 0.125 ms. This is fairly close to the decorrelation time from the $I_\text{sat}$ time series measurements (fig. \ref{fig_extra:decorrelation_time}). These similar times/rates suggests that ExB shearing may set the limit on cross-field transport.
 
 \begin{figure}
     \centering
@@ -479,6 +536,9 @@ The estimated shearing rate from \texttt{DR2} can be seen in fig. \ref{fig_extra
     \caption[ExB shearing rate]{ExB shearing rate.}
     \label{fig_extra:ExB_shearing-rate}
 \end{figure}
+
+
+It is important to note that the electron thermal diffusion time along the field line is very long compared to the frequency of the drift wave ($\omega \gtrsim k_\parallel \bar{v}_e^2 / \nu_{ei}$) \cite{Goldston_textbook} so the electron temperature along the field line may not be constant on the drift wave timescale. This factor is not taken into account in this analysis but may have substantial impact on interpretations of the measured phase shift.
 
 \subsection{Differences between \texttt{DR1} and \texttt{DR2}}
 Directly applying signals between runs is fraught with danger because the profiles/plasmas changed appreciably between the two.
@@ -515,90 +575,20 @@ Differences could also occur within dataruns. Calibrating the effective area of 
     \label{fig_extra:isat_calibration_factor}
 \end{figure}
 
-\subsection{Additional particle flux analysis}
 
-A plot showing the breakdown in particle flux can be seen in fig. \ref{fig_extra:particle_flux_breakdown}. The changes in $I_\text{sat}$ fluctuation power is the most obvious driver, but the $I_\text{sat}$ - Vf phase difference, coherency and wavenumber also seem to have an effect. The Vf fluctuation power remains largely consistent across the different mirror ratios. Note that this particle flux appears somewhat different because this is using the uncalibrated $I_\text{sat}$ values and the flux is not scaled by solid angle. This flux also does not use temperature-compensated $I_\text{sat}$ measurements.
+\section{\label{sec:conclusion}Conclusions and future work}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=400pt]{figures/extra/particle_flux_breakdown.pdf}
-    \caption[Particle flux: breakdown into components]{The particle flux broken down into the components used to calculate it. The dashed black line is simply a visual reference near the peak particle flux at $x/x_c=0.95$. The $I_\text{sat}$ fluctuation power appears to be the largest driver in changes in particle flux. The colored lines correspond to mirror ratio as seen in earlier plots.}
-    \label{fig_extra:particle_flux_breakdown}
-\end{figure}
+Turbulence and transport was studied in mirrors with varying lengths and ratios using the flexible magnetic geometry of the LAPD. Particle flux and fluctuation amplitudes decreased up to a factor of two when mirror ratio was increased. The primary drivers of turbulence were identified as the rotational interchange mode, caused by spontaneous rotation, and unstable drift-Alfvén waves driven by the density gradient. The decrease in density fluctuation amplitudes can be attributed to an increase in the gradient scale length caused by the dimensionally wider plasma at the mirror midplane. Despite imposing a mirror configuration, no signs of mirror-driven instabilities were observed. The highly-collisional, GDT-like plasma produced suppressed any velocity space instabilities. The interchange growth rate was likely suppressed to an undetectable level by line-tying, in-cell electron production, and shear flow.
 
-Electron temperature (Te) compensation for the $I_\text{sat}$ measurement can be done in several ways. One way is to account for the average temperature (i.e., steady state) when calculating the density from $I_\text{sat}$. Te can be gathered from triple probe or swept measurements. Triple probe measurements are generally less reliable than swept probe measurements. The difference between swept and triple probe Te measurements can be seen in fig. \ref{fig:Te_swept_vs_triple}. The two techniques have roughly good agreement, though the triple probe appears to slightly underestimate the temperature. The spikes in the edge are likely from sheath expansion of the probe in the swept measurements (see fig. \ref{fig:Te-sweeps}). 
+Future experiments in hotter regimes with the new LaB6 cathode \cite{LAPD_LaB6} will need to be performed to evaluate the robustness of these results, particularly concerning the stabilization of curvature-induced interchange. Additionally, the source field should be matched to the mirror midplane field so that the plasma remains the same radius to isolate geometric effects.
+Simultaneous measurements using flux and/or vorticity probes and $I_\text{sat}$ are needed to concretely determine if azimuthal flow shear is modified by the mirror field, and to quantify the effect of flows on rotational interchange and drift wave instability drive in general.
+Multiple simultaneous axial measurements of potential would enable better understanding of the axial wavenumber and identification of possible modes.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=300pt]{figures/Te_sweep-TP_diff.pdf}
-    \caption[Swept vs triple probe measurements]{Difference between swept and triple probe temperature measurements. The triple probe appears to slightly underestimate the temperature and temperature gradient. }
-    \label{fig:Te_swept_vs_triple}
-\end{figure}
-
-Te fluctuations can affect $I_\text{sat}$ fluctuation measurements through the $\sqrt{\text{Te}}$ term. In this case, Te measurements are difficult to compensate for in \texttt{DR1} because of the changes in profiles between \texttt{DR1} and \texttt{DR2}, so the Te fluctuations were included by finding the ratio in \texttt{DR2} of $I_\text{sat}$ fluctuations before and after including these Te fluctuations. This ratio was then applied to \texttt{DR1}. The issue of mismatched profiles still persists but this method allows for changes in fluctuation power between the two datarun sets. In general, $\widetilde{\text{Te}} / \text{Te}$ fluctuations are at most than 30\% (near the edge), and much lower in the core seen in fig. \ref{fig_extra:Te_prof_flucts}. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=300pt]{figures/extra/Te_prof_flucts.pdf}
-    \caption[Triple probe Te and Te fluctuation profiles]{Te and Te fluctuation profiles from the triple probe. RMS electron temperature fluctuations are not particularly large.}
-    \label{fig_extra:Te_prof_flucts}
-\end{figure}
-
-This Te compensation becomes particularly important when calculating the $I_\text{sat}$ profile gradients which is needed when calculating the diffusivity. A calculation of the diffusivity scaled to the Bohm diffusivity $D_B = \frac{1}{16} \frac{T}{eB}$ can be seen in fig. \ref{fig_extra:diffusivity_tanh}. This calculation uses the particle flux calculated earlier (in the paper) and tanh fit on the density profile for a density smooth gradient. In general, mirror ratios higher than two have a lower diffusivity. When the particle flux is compensated for Te fluctuations, the temperature profile used in for the Bohm diffusion coefficient, and the density profile is smoothed convoluting a $\sigma=2$ cm gaussian, the diffusion coefficient relative to $D_B$ are roughly 2.5 times greater, seen in fig. \ref{fig_extra:diffusivity_Te-comp}. The trend, however, remains relatively the same: higher mirror ratios tend to have a lower diffusivity. The impact of different profile smoothing methods on the density gradient can be seen in fig. \ref{fig_extra:isat_prof_gradient_smoothing}.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=300pt]{figures/extra/diffusivity_tanh-prof-fit.pdf}
-    \caption[Diffusivity relative to $D_B$]{Diffusivity relative to $D_B$ using a tanh fit for the density profile and the particle flux measurement assuming a constant Te of 4.5 eV across the profile.}
-    \label{fig_extra:diffusivity_tanh}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=300pt]{figures/extra/diffusivity_Te-comp.pdf}
-    \caption[Diffusivity with Te compensation relative to $D_B$]{Diffusivity with Te compensation relative to $D_B$. The particle flux is compensated for Te fluctuations, and the swept-probe temperature profile is used for Te. The diffusivity is around 2.5 times higher than without compensation, but the trend remains similar.}
-    \label{fig_extra:diffusivity_Te-comp}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=300pt]{figures/extra/isat_prof_gradient_smoothing.pdf}
-    \caption[$I_\text{sat}$ gradients under varying profile smoothing methods]{$I_\text{sat}$ gradients under varying profile smoothing methods}
-    \label{fig_extra:isat_prof_gradient_smoothing}
-\end{figure}
-
-\subsection{Drift waves: comparison with theory}
-Drift wave theory\cite{Liewer_measurements_1985} suggests that the normalized density fluctuation level $\widetilde n / n$ should fall near 3-10 $\rho_s / L_n$. A plot of this relation using experimental data can be seen in fig. \ref{fig_extra:density-fluct_vs_rhos-Ln}. However, comparison of $\widetilde n / n$ with $1/(k_y L_n)$ show that the normalized density fluctuations are about an order of magnitude too small for the $1/(k_y L_n)$ observed which is unexpected and this conflict has not been able to be resolved in this study. 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=300pt]{figures/extra/density-fluct_vs_rhos-Ln.pdf}
-    \caption[Normalized density fluctuations vs $\rho_s / L_n$]{Normalized density fluctuations vs $\rho_s / L_n$. The measured values fall close to the $\tilde{n}/n = 3 \rho_s / L_n$ line which is consistent with theory.}
-    \label{fig_extra:density-fluct_vs_rhos-Ln}
-\end{figure}
-
-Another issue with this drift-wave interpretation of results is that the electron thermal diffusion along the field line is too high. The plasma must be collisional enough that thermal equilibrium is guaranteed (i.e., the temperature is Maxwellian) , but if the collision rate is too high then thermal gradients can develop along the field line\cite{Goldston_textbook}. This condition on thermal diffusivity condition for the drift wave $\omega$ and $k_z$ is $\omega \ll k_z^2 v_{e, th}^2 / \nu_{ei}$. Plugging in values from the experiments yields frequencies at least 5 times greater than mandated by the diffusivity condition and the condition is violated. This condition violation may be responsible for the odd phase shifts seen between the density and potential fluctuations.
-
-In saturated drift wave turbulence, the normalized density fluctuation amplitude is expected to scale with the gradient scale length $L_n$, so the fluctuation power then scales with $L_n^2$. A plot of this can be seen in fig. \ref{fig_extra:isat_Ln2_n2}. This assumes the same $k_y$, but as mentioned earlier, that scaling and the relationship in general is not consistent with theoretical predictions for saturated drift wave turbulence.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=300pt]{figures/extra/isat_fluct_power_Ln2_n2.pdf}
-	\caption[$I_\text{sat}$ scaled by $L_n^2 / n^2$]{$I_\text{sat}$ fluctuation power when scaled by the square of the gradient scale length and the squared density. We expect this value to be constant (assuming the same $k_\perp$.}
-	\label{fig_extra:isat_Ln2_n2}
-\end{figure}
-
-\subsection{Error on $I_\text{sat}$ profiles}
-
-The error of on the $I_\text{sat}$ profiles as represented by the standard deviation (scaled by the time-averaged profiles) can be seen in fig. \ref{fig_extra:isat-profile-stddev}. The error is relatively small and should not play a factor in our analysis -- rarely are differences between quantities of the different mirror ratios that small.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=300pt]{figures/extra/isat-profile-stddev.pdf}
-    \caption[Shot-to-shot variation of $I_\text{sat}$ profiles]{Shot-to-shot variation of $I_\text{sat}$ profiles}
-    \label{fig_extra:isat-profile-stddev}
-\end{figure}
-
+%This work was performed at the Basic Plasma Science Facility, which is a DOE Office of Science, FES collaborative user facility and is funded by DOE (DE-FC02-07ER54918) and the National Science Foundation (NSF-PHY 1036140). The authors would like to thank Dr. Giovanni Rossi and Dr. Steven Vincena for probe setup and assistance with data collection, and Dr. Mel Abler, Prof. Walter Gekelman, and Prof. George Morales for insightful discussion.
+%
+%The data and code supporting this study are available from the corresponding author upon reasonable request.
+%
+%Competing interests: The author(s) declare none.
 
 
 %\section{Bibliography}
