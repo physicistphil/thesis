@@ -1,0 +1,38 @@
+%\usepackage[all]{xy}
+%\usepackage{setspace}				% change line spacing
+%\usepackage{array}
+%\usepackage{paralist}
+%\usepackage{fancyhdr}				% control of headers & footers
+%\usepackage{moreverb}				% extension of verbatim package
+%\usepackage{verbatim}				% extension of verbatim environment
+%\usepackage{ulem}				% underlining
+%\usepackage{color}				% color commands
+
+\usepackage{amsmath}				%American Mathematical Society math typesetting package
+\usepackage{amsfonts}				%American Mathematical Society font package
+\usepackage{amssymb}				%American Mathematical Society symbols package
+\usepackage{graphicx}				% Include figure files
+\usepackage{subfig}					% allow subfigures
+\usepackage{epstopdf}				% allow eps figures
+\usepackage{bm}					% bold math
+\usepackage{units}					% nice fractions
+\usepackage{dcolumn}				% Align table columns on decimal point
+\usepackage{hyperref}				% support for hypertext
+\usepackage{booktabs}				% higher quality tables
+\usepackage{nicefrac}				% nice inline fractions
+%\usepackage[labelfont=bf]{caption}		%caption options
+
+\usepackage{tikz}
+\usepackage{color}
+\usepackage[]{xcolor}
+\usepackage{amsmath}
+\newcommand{\marker}[3]{
+  \tikz[baseline=(X.base)]{
+    \node[fill=#1!40,rounded corners] (X) {#2:};
+  }
+  {\color{#1!80!black}#3}
+}
+% make new commands here
+\newcommand{\phil}[1]{\marker{cyan}{phil}{#1}}  % Phil
+\newcommand{\troy}[1]{\marker{green}{Troy}{#1}}  % Troy
+\newcommand{\todo}[1]{\marker{orange}{TODO}{#1}}  % Phil

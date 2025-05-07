@@ -1,0 +1,33 @@
+\documentclass [PhD] {uclathes}
+
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{siunitx}
+
+\special{papersize=8.5in,11in}
+\setlength{\pdfpageheight}{11in}
+\setlength{\pdfpagewidth}{8.5in}
+
+\input{mymacros}                         		% personal LaTeX macros
+\input{prelim}                           	% preliminary page info
+\begin{document}
+\makeintropages
+\input{Chapters/Chapter_intro/chapter_intro}
+\input{Chapters/Chapter_mirror-turb/chapter_mirror-turb}
+\input{Chapters/Chapter_isat-predict/chapter_isat-predict}
+\input{Chapters/Chapter_ebm/chapter_ebm}
+\input{Chapters/Chapter_conclusion/chapter_conclusion}
+
+\appendix
+\input{Appendix/appendix_0d-mirror}
+\input{Appendix/appendix_autosweep.tex}
+\input{Appendix/appendix_wisdom.tex}
+
+\bibliography {bibliography.bib}
+\bibliographystyle{uclathes}   		
+%\bibliographystyle{plain}
+\end{document}

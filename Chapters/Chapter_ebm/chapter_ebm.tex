@@ -1,0 +1,40 @@
+\graphicspath{{../Thesis/Chapters/Chapter_ebm/}}
+
+\chapter{Reconstructing missing diagnostics using energy-based models}
+
+The goal here is to show that diagnostics can be reconstructed from other diagnostics and machine state information (MSI) using energy-based models (EBMs). This is the first time that EBMs have been used and possibly the first time diagnostics reconstruction has been attempted using neural networks in a magnetized plasma context. The bulk of this work was performed in 2021 and 2022.  
+
+\section{Brief introduction to energy-based models (EBMs)}
+
+\section{Building a 15 million shot dataset}
+
+The LAPD has a set of permanent diagnostics and machine state information (MSI) that is produced but was not recorded for every shot. I built out a diagnostics pipeline that would record the following for every single shot, continuously:
+\begin{enumerate}
+	\item Discharge current (time series)
+	\item Discharge voltage (time series)
+	\item 56 GHz interferometer (time series)
+	\item Five axially spaced photodiodes, one having a He-II filter (time series)
+	\item RGA and total gas pressures (single point for each mass)
+	\item Magnetic field profile
+\end{enumerate}
+These data were recorded so that the shots could be synchronized with the data acquisition system used for probe measurements. A plot of a couple of shots can be seen in fig. \ref{}.
+
+These diagnostics and MSI have some particular characteristics. The discharge current may not be accurate based on how the value is measured. The interferometer skips when the plasma density gets too high and the signal cannot be recovered. However, the interferometer signal is still included because these fringe skips (and timing thereof) contain information about the plasma density evolution, though the numerical value may be difficult to acquire. The diodes are not absolutely calibrated, have a nonlinear response, and are not restricted the visible spectrum. The RGA takes a minute or two to sweep, so partial pressures are not necessarily exact for the particular shot it is recorded. The magnetic field profile is calculated, not measured, so some field measurements may be incorrect if the state of a magnet power supply is recorded incorrectly, or if the source field currents were not manually updated. Despite all these issues, we proceed.
+
+TODO: Plot of example data
+
+This system recorded shots continuously, capturing a wide variety of LAPD machine conditions and experiments. Some particular challenges with this dataset was that other important information was not recorded in an orderly way. The north LaB6 source current and voltage time traces were not recorded even though the north source parameters could have a significant impact on the behavior of the plasma. The locations of large antennas or obstructions were also not recorded conveniently: retrieving this information would require manually opening and reading many experimental datarun files, but that only corresponds to probe data. In general this information was not recorded between dataruns. 
+
+In addition, the data may be highly biased towards a particular set of cases. The LAPD was often left as-is without changing parameters for considerable lengths of time, either between dataruns or campaigns, or in general for a particular experiment week. Thus, the data collected may not contain sufficient diversity to learn trends well, particularly with important machine state information not recorded.
+
+The general cathode (and thus plasma condition) was also left unquantified. Variation emissivity across the cathode could lead to considerable changes across the plasma column, and the discharge characteristics could drift over time. This unquantified drift in plasma conditions further makes this dataset a difficult training target, given that the same machine configuration could lead to multiple types of plasma.
+
+TODO: show plot of long-term trends of the discharge current and density changing.
+
+\section{Training the model}
+
+\section{Unconditional sampling}
+
+\section{Reconstructing missing diagnostics via conditional sampling}
+
+\section{Inferring trends and outlook}
