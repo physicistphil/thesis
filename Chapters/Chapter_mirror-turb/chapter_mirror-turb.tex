@@ -36,17 +36,24 @@
 
 \begin{abstract}
 
-Thanks to advances in plasma science and enabling technology, mirror machines are being reconsidered for fusion power plants and as possible fusion volumetric neutron sources. However cross-field transport and turbulence in mirrors remains relatively understudied compared to toroidal devices. Turbulence and transport in mirror configurations were studied utilizing the flexible magnetic geometry of the Large Plasma Device (LAPD). Multiple mirror ratios from $M=1$ to $M=2.68$ and three mirror-cell lengths from $L=3.51$m to $L=10.86$m were examined.
+In this chapter we study turbulence and cross-field particle transport in LAPD mirror configurations. 
+%Cross-field transport and turbulence in mirrors remains relatively understudied compared to toroidal devices. 
+%Turbulence and transport in mirror configurations were studied utilizing the flexible magnetic geometry of the Large Plasma Device (LAPD). 
+Mirror machines are once again rising in prominence as a candidate for commercial fusion reactors with the advent of highly-funded commercial ventures and high-field high-temperature superconducting magnets \cite{WHAM, BEAM}, so development of a functional understanding of cross-field transport in mirrors is imperative. 
+Using the LAPD, multiple mirror ratios from $M=1$ to $M=2.68$ and three mirror-cell lengths from $L=3.51$m to $L=10.86$m were examined.
 Langmuir and magnetic probes were used to measure profiles of density, temperature, potential, and magnetic field. The fluctuation-driven $\tilde{E} \times B$ particle flux was calculated from these quantities. Two probe correlation techniques were used to infer wavenumbers and two-dimensional structure.
 Cross-field particle flux and density fluctuation power decreased with increased mirror ratio.
 Core density and temperatures remain similar with mirror ratio, but radial line-integrated density increased.
 The physical expansion of the plasma in the mirror cell by using a higher field in the source region may have led to reduced density fluctuation power through the increased gradient scale length. This increased scale length reduced the growth rate and saturation level of rotational interchange and drift-like instabilities.
 Despite the introduction of magnetic curvature, no evidence of mirror driven instabilities — interchange, velocity space, or otherwise — were observed. For curvature-induced interchange, many possible stabilization mechanisms were present, suppressing the visibility of the instability.
+
+This chapter is based on my 2025 publication in the Journal of Plasma Physics titled ``Turbulence and transport in mirror geometries in the Large Plasma Device'' \cite{travis_turbulence_2025}.
 \end{abstract}
 
 \section{\label{sec:intro}Introduction}
 
-Historically, mirror research has prioritized the main issues with mirror confinement: stabilizing the interchange instability, stabilizing velocity-space (loss-cone-driven) instabilities, and minimizing axial electron heat losses. Nevertheless cross-field transport remains an important topic in magnetic-confinement fusion reactor development, in both linear and toroidal geometries. Insight into edge-relevant turbulence, and its coupling to interchange and other mirror-driven instabilities, performed in a basic plasma science device may be useful for a mirror-based reactor. Although not at fusion-relevant core temperatures or densities, the Large Plasma Device (LAPD) operates at conditions similar to the edge of fusion devices and can provide insight into the physical processes in that region. Mirror machines are once again rising in prominence as a candidate for commercial fusion reactors with the advent of highly-funded commercial ventures and high-field high-temperature superconducting magnets \cite{WHAM, BEAM}, so development of a functional understanding of cross-field transport in mirrors is imperative. A characterization of edge fluctuations has been undertaken, with emphasis on interpreting these fluctuations within the context of mirror. 
+Historically, mirror research has prioritized the main issues with mirror confinement: stabilizing the interchange instability, stabilizing velocity-space (loss-cone-driven) instabilities, and minimizing axial electron heat losses. Nevertheless cross-field transport remains an important topic in magnetic-confinement fusion reactor development, in both linear and toroidal geometries. Insight into edge-relevant turbulence, and its coupling to interchange and other mirror-driven instabilities, performed in a basic plasma science device may be useful for a mirror-based reactor. Although not at fusion-relevant core temperatures or densities, the Large Plasma Device (LAPD) operates at conditions similar to the edge of fusion devices and can provide insight into the physical processes in that region. 
+A characterization of edge fluctuations has been undertaken, with emphasis on interpreting these fluctuations within the context of mirror. 
 
 Non-classical cross-field particle transport is often caused by low-frequency, large-amplitude fluctuations. These fluctuations are the result of various instabilities. One such process is the "universal" drift instability, which appears in the presence of a density gradient and finite resistivity. Drift wave turbulence and the effect on transport has been extensively studied in the past \cite{Horton_1999, Tynan_review_2009}. In the presence of sufficiently high rotation or sheared flow, rotational interchange and the Kelvin-Helmholtz instabilities also contribute or couple to these fluctuations. 
 
@@ -63,10 +70,12 @@ The LAPD exhibits a high degree of turbulence so it is difficult to identify the
 This goal of this study was to investigate the changes to turbulence and transport in LAPD mirror configurations. Of particular interest were the potential coupling of the interchange instability with drift waves or other modes, and the effect of the mirror geometry on cross-field particle flux. Presented is a characterization of the observed modes and the effect of introducing a mirror geometry.
 This paper is organized as follows. Sec. \ref{sec:methods} discusses the configuration of the LAPD and the diagnostics used. Sec. \ref{sec:changes} covers the changes seen when imposing a magnetic mirror configuration on profiles, particle flux, drift waves, turbulence, and magnetic fluctuations. Sec. \ref{sec:structure} explores the changes in 2d (x-y plane) structure. Sec. \ref{sec:discussion} discusses the active and expected instabilities and reasons for their modification. Sec. \ref{sec:conclusion} summarizes the study and discusses the requirements for a deeper investigation.
 
-\section{\label{sec:methods}Device configuration}
+\section{\label{sec:methods}The experiment and device configuration}
 
 \subsection{\label{sec:sub_exp}The Large Plasma Device (LAPD)}
-The Large Plasma Device (LAPD) is a 20 meter long, 1 meter diameter basic plasma device at UCLA \cite{LAPD_BaO}. The LAPD has a variable magnetic field, from 250G to 1.6 kG and can be varied axially. Probes inserted into the plasma can collect high-resolution, temporal information on density, temperature, potential, and magnetic field fluctuations. In this study, the plasma was formed using an emissive, $72$ cm  diameter barium-oxide (BaO) cathode (mapped to 60 cm in a flat field) and a $72$ cm diameter, 50\% transparent molybdenum anode that accelerate electrons across a configurable $40-70$V potential; voltages of $60$ and $63$V were used in this study. The source has since been upgraded to a lanthanum hexaboride (LaB6) cathode \cite{LAPD_LaB6} that enables access to higher-density, higher-temperature regimes, but all the data in this study are from plasma formed by a BaO cathode. 
+%The Large Plasma Device (LAPD) is a 20 meter long, 1 meter diameter basic plasma device at UCLA \cite{LAPD_BaO}. The LAPD has a variable magnetic field, from 250G to 1.6 kG and can be varied axially. Probes inserted into the plasma can collect high-resolution, temporal information on density, temperature, potential, and magnetic field fluctuations. 
+
+In this study, the plasma was formed using an emissive, $72$ cm  diameter barium-oxide (BaO) cathode \cite{LAPD_BaO} (mapped to 60 cm in a flat field) and a $72$ cm diameter, 50\% transparent molybdenum anode that accelerate electrons across a configurable $40-70$V potential; voltages of $60$ and $63$V were used in this study. The source has since been upgraded to a lanthanum hexaboride (LaB6) cathode \cite{LAPD_LaB6} that enables access to higher-density, higher-temperature regimes, but all the data in this study are from plasma formed by a BaO cathode. 
 
 The flexible magnetic geometry of the LAPD was used to construct a variety of magnetic mirror configurations. The discharge current, fill pressure, and other machine parameters were held constant. The typical plasma parameters observed in this study can be seen in table \ref{tab:plasma-parameters}. 
 Data in several mirror ratios and lengths were collected (see table \ref{tab:fields}) but emphasis is placed on the short cell because the highest mirror ratio possible ($M=2.68$) with a $500$ Gauss midplane field could be accessed and probes were able to be placed outside of the mirror cell. An overview of the axial magnetic field for the the short mirror configurations and probe locations can be seen in fig. \ref{fig:magnetic_geometry}. 2- or 3-cell mirror configurations were also explored but are not examined in this study. All results presented below are from the short mirror cell configuration unless otherwise specified.
@@ -108,6 +117,7 @@ The second phase, \texttt{DR2}, was conducted with a similar set of diagnostics 
 
 \begin{table}
     \centering
+    \setlength\extrarowheight{-6pt}
     \begin{tabular}{l l l l l}
         Cathode radius (M=1) & $x_c$ & $30$ && cm \\
         Machine radius & $R$ & $50$ && cm \\
@@ -380,7 +390,7 @@ The sub-$2$ kHz modes in $B_\perp$ and its harmonics are nearly constant in powe
 The drift-Alfv\'enic nature of the 12 kHz Bdot feature is confirmed by changing the flat field from 500G to 400G: the feature shifts down in frequency from 12 to 10 kHz seen in fig. \ref{fig_extra:bperp_500G-vs-400G}. From the drift wave and Alfv\'en wave dispersion relations the frequency is expected to be 400G / 500G $= 0.8$ of the original, which is approximately what is observed. The $k_y$ of the drift-Alfv\'en wave also has an effect and may be responsible for a 10 kHz / 12 kHz $= 0.83$ factor instead. 
 \begin{figure}
     \centering
-    \includegraphics[width=300pt]{figures/extra/Bperp_fluct_power_M=1_400G_500G.pdf}
+    \includegraphics[width=250pt]{figures/extra/Bperp_fluct_power_M=1_400G_500G.pdf}
     \caption[$B_\perp$, flat field 500G vs 400G]{$B_\perp$ flat field for 500G and 400G flat fields. The frequency of the identified drift-Alfv\'en wave at 12 kHz drops when the field is lowered, as expected.}
     \label{fig_extra:bperp_500G-vs-400G}
 \end{figure}
@@ -476,7 +486,7 @@ Interchange could also be at least partially stabilized by the continuous produc
 
 The $\boldsymbol{E \times B}$ shear flow present (fig. \ref{fig:Vp_ExB}) may also make a contribution to the stabilization of interchange \cite{Ryutov_2011,Bagryansky_2003,Bagryansky_2007,Beklemishev_2010}. The estimated shearing rate is between 3 and 10 kHz, which is greater than the estimated $\approx 1.2$ kHz growth rate of the interchange mode.
 
-\subsection{Instabilities driving turbulence}
+\subsection{Instabilities driving LAPD turbulence}
 
 Rotational interchange can be significant driver of the broadband turbulence spectrum in the LAPD, particularly when a biased limiter is installed. This observation has been confirmed by both linear simulations \cite{Popovich_2010} and biasing experiments \cite{Schaffner_2013}. 
 
@@ -499,13 +509,11 @@ The conducting wall mode and nonlinear instability may be present in these mirro
     \label{fig:L_n}
 \end{figure}
 
-The reduction in particle flux explained by a reduction in density fluctuations likely caused by a increased gradient scale length $L_n = \frac{n}{\nabla n }$ (fig. \ref{fig:L_n}), decreasing the linear drift wave growth rate and saturation level seen in sec. \ref{sec:sub_turbulence}. This gradient length reduction may also reduce the growth rate of the rotational interchange instability, which may be the dominate driver for the low-frequency large-amplitude density fluctuations.
-
-A plot showing the breakdown in particle flux can be seen in fig. \ref{fig_extra:particle_flux_breakdown}. The changes in $I_\text{sat}$ fluctuation power is the most obvious driver, but the $I_\text{sat}$ - Vf phase difference, coherency and wavenumber also seem to have an effect. The Vf fluctuation power remains largely consistent across the different mirror ratios. Note that this particle flux appears somewhat different because this is using the uncalibrated $I_\text{sat}$ values and the flux is not scaled by solid angle. This flux also does not use temperature-compensated $I_\text{sat}$ measurements.
+The reduction in particle flux explained by a reduction in density fluctuations likely caused by a increased gradient scale length $L_n = \frac{n}{\nabla n }$ (fig. \ref{fig:L_n}), decreasing the linear drift wave growth rate and saturation level seen in sec. \ref{sec:sub_turbulence}. This gradient length reduction may also reduce the growth rate of the rotational interchange instability, which may be the dominate driver for the low-frequency large-amplitude density fluctuations. The influence of this density fluctuation reduction appears reduced at higher mirror ratios past $M=1.9$, where the wavenumber and phase angle appear to decrease in magnitude. The plot showing this breakdown in particle flux can be seen in fig. \ref{fig_extra:particle_flux_breakdown}. The changes in $I_\text{sat}$ fluctuation power is the most obvious driver, but the $I_\text{sat}$ - Vf phase difference, coherency and wavenumber also seem to have an effect. The Vf fluctuation power remains largely consistent across the different mirror ratios. Note that this particle flux appears somewhat different because this is using the uncalibrated $I_\text{sat}$ values and the flux is not scaled by solid angle. This flux also does not use temperature-compensated $I_\text{sat}$ measurements.
 
 \begin{figure}
     \centering
-    \includegraphics[width=400pt]{figures/extra/particle_flux_breakdown.pdf}
+    \includegraphics[width=450pt]{figures/extra/particle_flux_breakdown.pdf}
     \caption[Particle flux: breakdown into components]{The particle flux broken down into the components used to calculate it. The dashed black line is simply a visual reference near the peak particle flux at $x/x_c=0.95$. The $I_\text{sat}$ fluctuation power appears to be the largest driver in changes in particle flux. The colored lines correspond to mirror ratio as seen in earlier plots.}
     \label{fig_extra:particle_flux_breakdown}
 \end{figure}
@@ -533,9 +541,7 @@ The estimated shearing rate from \texttt{DR2} can be seen in fig. \ref{fig_extra
 It is important to note that the electron thermal diffusion time along the field line is very long compared to the frequency of the drift wave ($\omega \gtrsim k_\parallel \bar{v}_e^2 / \nu_{ei}$) \cite{Goldston_textbook} so the electron temperature along the field line may not be constant on the drift wave timescale. This factor is not taken into account in this analysis but may have substantial impact on interpretations of the measured phase shift.
 
 \subsection{Differences between \texttt{DR1} and \texttt{DR2}}
-Directly applying signals between runs is fraught with danger because the profiles/plasmas changed appreciably between the two.
-
-The discharge power for \texttt{DR2} was roughly 10\% smaller than what was seen in \texttt{DR2} seen in fig. \ref{fig_extra:discharger-power_vs_M}. Since the discharge voltages were similar (\texttt{DR1}: 62.5 vs \texttt{DR2}: 60.5) we expect to see less dense plasmas in \texttt{DR2}. 
+Directly applying signals between these two dataruns is not quite appropriate because the profiles/plasmas changed appreciably. These changes could have been caused by differences in cathode temperature, emissivity, or other properties. The discharge power for \texttt{DR2} was roughly 10\% smaller than what was seen in \texttt{DR2} seen in fig. \ref{fig_extra:discharger-power_vs_M}. Since the discharge voltages were similar (\texttt{DR1}: 62.5 vs \texttt{DR2}: 60.5) we expect to see less dense plasmas in \texttt{DR2}. 
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/extra/discharge-power_vs_M.pdf}
@@ -543,7 +549,7 @@ The discharge power for \texttt{DR2} was roughly 10\% smaller than what was seen
     \label{fig_extra:discharger-power_vs_M}
 \end{figure}
 
-Changes in the $I_\text{sat}$ profiles between the two dataruns (and between two separate measurements in \texttt{DR1}) can be seen in fig. \ref{fig_extra:DR1-DR2_isat_profile_comparison}. Interestingly, there is some difference in the profiles \emph{within the same datarun} which could be caused by probe shadowing. Probe shadowing effects should be less important in mirrors because the probe closest to the cathode magnetically maps to a region further outside than the probes in the mirror cell. This difference in density can also be seen in the line-integrated density from the 56 GHz interferometer (port 23): fig. \ref{fig_extra:M_vs_nbar}. These differences in density could also be caused by different hydrogen and helium pressures in the runs. Helium pressure was roughly the same for both dataruns (6e-6 to 3e-6 for \texttt{DR1}, 6e-6 to 2e-5 for \texttt{DR2}), but the hydrogen pressure was an order of magnitude higher for the \texttt{DR2}, on the order 7e-6 instead of 1e-7 for \texttt{DR1}. These differences in pressures could have had an effect on plasma formation and transport, thus affecting profiles. Hydrogen fraction is known to have an effect on breakdown characteristics in the new LaB6 cathode (cite Shreekrishna?).
+Changes in the $I_\text{sat}$ profiles between the two dataruns (and between two separate measurements in \texttt{DR1}) can be seen in fig. \ref{fig_extra:DR1-DR2_isat_profile_comparison}. Interestingly, there is some difference in the profiles \emph{within the same datarun} which could be caused by probe shadowing. Probe shadowing effects should be less important in mirrors because the probe closest to the cathode magnetically maps to a region further outside than the probes in the mirror cell. This difference in density can also be seen in the line-integrated density from the 56 GHz interferometer (port 23): fig. \ref{fig_extra:M_vs_nbar}. These differences in density could also be caused by different hydrogen and helium pressures in the runs. Helium pressure was roughly the same for both dataruns (6e-6 to 3e-6 for \texttt{DR1}, 6e-6 to 2e-5 for \texttt{DR2}), but the hydrogen pressure was an order of magnitude higher for the \texttt{DR2}, on the order 7e-6 instead of 1e-7 for \texttt{DR1}. These differences in pressures could have had an effect on plasma formation and transport, thus affecting profiles. Hydrogen fraction is known to have an effect on breakdown characteristics in the newer Lanthanum-hexaboride (LaB6) cathode.
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/extra/isat_profile_comparison.pdf}
