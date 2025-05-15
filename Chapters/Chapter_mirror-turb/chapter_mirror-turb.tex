@@ -47,7 +47,7 @@ Core density and temperatures remain similar with mirror ratio, but radial line-
 The physical expansion of the plasma in the mirror cell by using a higher field in the source region may have led to reduced density fluctuation power through the increased gradient scale length. This increased scale length reduced the growth rate and saturation level of rotational interchange and drift-like instabilities.
 Despite the introduction of magnetic curvature, no evidence of mirror driven instabilities — interchange, velocity space, or otherwise — were observed. For curvature-induced interchange, many possible stabilization mechanisms were present, suppressing the visibility of the instability.
 
-This chapter is based on my 2025 publication in the Journal of Plasma Physics titled ``Turbulence and transport in mirror geometries in the Large Plasma Device'' \cite{travis_turbulence_2025}.
+This chapter is largely a copy of my 2025 publication in the Journal of Plasma Physics titled ``Turbulence and transport in mirror geometries in the Large Plasma Device'' \cite{travis_turbulence_2025}, with some additions and small changes
 \end{abstract}
 
 \section{\label{sec:intro}Introduction}
@@ -83,7 +83,7 @@ Data in several mirror ratios and lengths were collected (see table \ref{tab:fie
 \begin{figure*}
     \centering
     \includegraphics[width=\textwidth]{figures/fig1.pdf}
-    \caption{Cartoon of the Large Plasma Device and the coordinate system used. Only four of the eleven mirror configurations studied are plotted for clarity (mirrors of the same length have similar shapes and simply scale with mirror ratio). Diagnostic set varied by datarun; unlabeled diagnostics were used in both dataruns.}
+    \caption[Cartoon of the mirror turbulence experiment setup]{Cartoon of the Large Plasma Device and the coordinate system used. Only four of the eleven mirror configurations studied are plotted for clarity (mirrors of the same length have similar shapes and simply scale with mirror ratio). Diagnostic set varied by datarun; unlabeled diagnostics were used in both dataruns.}
     \label{fig:magnetic_geometry}
 \end{figure*}
 
@@ -97,7 +97,7 @@ Data in several mirror ratios and lengths were collected (see table \ref{tab:fie
  7.03 m (medium) & 1.49 & 1.98 & 2.46 & \\
  10.86 m (long) & 1.47 & 1.97 & 2.44 & \\
  \end{tabular}
-\caption{\label{tab:fields}Magnetic mirror lengths and ratios. The lengths are measured where the curvature changes sign and the ratio is the maximum divided by the minimum. Approximately $3.5$m must be added to the length if the good-curvature region is included. In the case of small asymmetries, the field strengths were averaged before calculation of the mirror ratio.}
+\caption[Magnetic mirror lengths and ratios]{\label{tab:fields}Magnetic mirror lengths and ratios. The lengths are measured where the curvature changes sign and the ratio is the maximum divided by the minimum. Approximately $3.5$m must be added to the length if the good-curvature region is included. In the case of small asymmetries, the field strengths were averaged before calculation of the mirror ratio.}
 \end{table}
 
 \subsection{\label{sec:sub_diagnostics}Diagnostics}
@@ -107,7 +107,7 @@ All diagnostics were recorded with a effective sampling rate of 6.25 MHz (16-sam
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/fig2.pdf}
-    \caption{Raw data and basic processing steps for LAPD probe diagnostics as demonstrated by an $I_\text{sat}$ trace from a \texttt{DR1}, $M=1$ mirror at 26 cm. Data are truncated from 4.8 to 11.2 ms (a) and detrended (b). Power spectral density is calculated (c), and a power profiles can be constructed (d). The shaded regions are excluded from this analysis.}
+    \caption[Raw data processing steps]{Raw data and basic processing steps for LAPD probe diagnostics as demonstrated by an $I_\text{sat}$ trace from a \texttt{DR1}, $M=1$ mirror at 26 cm. Data are truncated from 4.8 to 11.2 ms (a) and detrended (b). Power spectral density is calculated (c), and a power profiles can be constructed (d). The shaded regions are excluded from this analysis.}
     \label{fig:raw-signals-plots}
 \end{figure}
 
@@ -153,7 +153,7 @@ The second phase, \texttt{DR2}, was conducted with a similar set of diagnostics 
         Spitzer resitivity &  $\eta$ & $192$ & $146$ & \SI{}{\micro \ohm \meter} \\
         
     \end{tabular}
-    \caption{LAPD machine information and plasma parameters in the core and peak-fluctuation region ($x=x_\text{PF}$) at the midplane in this study. Dashed quantities are assumed to be identical to core quantities.}
+    \caption[LAPD plasma parameters]{LAPD machine information and plasma parameters in the core and peak-fluctuation region ($x=x_\text{PF}$) at the midplane in this study. Dashed quantities are assumed to be identical to core quantities.}
     \label{tab:plasma-parameters}
 \end{table}
 
@@ -170,7 +170,7 @@ The second phase, \texttt{DR2}, was conducted with a similar set of diagnostics 
          $x_{c}$ (cm) & 30 & 36 & 41 & 45 & 49 \\
          $x_{PF}$ (cm) & 26 & 32 & 36 & 40 & 43 \\
     \end{tabular}
-    \caption{$x_c$ and $x_{PF}$ locations for each mirror ratio when scaled by the expected magnetic expansion.}
+    \caption[$x_c$ and $x_{PF}$ locations for each mirror ratio]{$x_c$ and $x_{PF}$ locations for each mirror ratio when scaled by the expected magnetic expansion.}
     \label{tab:x_PF}
 \end{table}
 
@@ -193,28 +193,28 @@ Discharge power increases only slightly ($3\%$) at higher mirror ratios suggesti
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig3.pdf}
-    \caption{Midplane $I_\text{sat}$ profile, shot-averaged and time-averaged from 4.8 to 11.2 ms (assumed of $T_e = 4.5$ eV based on triple probe and Langmuir sweep measurements). Effective area was calibrated using a nearby interferometer. Profile shape remains similar in the core and gradient region when mapped to the cathode radius $x_c$. The dips in profiles at higher $M$ below $x=x_\text{PF}$ are of unknown origin and are not the focus of this study. Shot-to-shot variation is less than 5\% for $x \leq 0.95 x_c$ and less than 9\% for $x \leq 1.4 x_c$ for all cases.}
+    \caption[Midplane $I_\text{sat}$ profile]{Midplane $I_\text{sat}$ profile, shot-averaged and time-averaged from 4.8 to 11.2 ms (assumed of $T_e = 4.5$ eV based on triple probe and Langmuir sweep measurements). Effective area was calibrated using a nearby interferometer. Profile shape remains similar in the core and gradient region when mapped to the cathode radius $x_c$. The dips in profiles at higher $M$ below $x=x_\text{PF}$ are of unknown origin and are not the focus of this study. Shot-to-shot variation is less than 5\% for $x \leq 0.95 x_c$ and less than 9\% for $x \leq 1.4 x_c$ for all cases.}
     \label{fig:isat_profile}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig4.pdf}
-    \caption{Line-integrated density as measured by a 56 GHz heterodyne interferometer as a function of mirror ratio, taken from four discharges for each mirror configuration. Density increases up to a mirror ratio of 2.3 where it appears to level off. The interferometer is located in the mirror cell bad-curvature region at 9.59m, 1.3m closer to the cathode from the midplane.}
+    \caption[Line-integrated density]{Line-integrated density as measured by a 56 GHz heterodyne interferometer as a function of mirror ratio, taken from four discharges for each mirror configuration. Density increases up to a mirror ratio of 2.3 where it appears to level off. The interferometer is located in the mirror cell bad-curvature region at 9.59m, 1.3m closer to the cathode from the midplane.}
     \label{fig:density-line}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig5.pdf}
-    \caption{$T_e$ from Langmuir sweeps (\texttt{DR2}) at the midplane. Triple probe results are nearly identical. The increased temperatures directly at the plasma edge, indicated by dotted portions of the curves, are likely artifacts caused by sheath expansion in lower densities. Changes in mirror ratio lead to at most 25\% change in $T_e$. The plasma is collisional and isotropic.}
+    \caption[$T_e$ from Langmuir sweeps at the midplane]{$T_e$ from Langmuir sweeps (\texttt{DR2}) at the midplane. Triple probe results are nearly identical. The increased temperatures directly at the plasma edge, indicated by dotted portions of the curves, are likely artifacts caused by sheath expansion in lower densities. Changes in mirror ratio lead to at most 25\% change in $T_e$. The plasma is collisional and isotropic.}
     \label{fig:Te-sweeps}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig6.pdf}
-    \caption{Plasma potential (a) and derived $\boldsymbol{E \times B}$ velocity profiles (b) from Langmuir sweeps at the midplane. $x/x_c > 1.2$ has been excluded from the graph for greater clarity in the core and gradient region. The electric field was calculated by taking the gradient of the spline-smoothed plasma potential profile. The Mach number (in percent) is calculated using the approximate sound speed evaluated at $x=x_{PF}$ (tab. \ref{tab:plasma-parameters}). The overall structure of the flows does not appreciably change when mirror ratio is varied.}
+    \caption[Plasma potential and derived $\boldsymbol{E \times B}$ velocity profiles]{Plasma potential (a) and derived $\boldsymbol{E \times B}$ velocity profiles (b) from Langmuir sweeps at the midplane. $x/x_c > 1.2$ has been excluded from the graph for greater clarity in the core and gradient region. The electric field was calculated by taking the gradient of the spline-smoothed plasma potential profile. The Mach number (in percent) is calculated using the approximate sound speed evaluated at $x=x_{PF}$ (tab. \ref{tab:plasma-parameters}). The overall structure of the flows does not appreciably change when mirror ratio is varied.}
     \label{fig:Vp_ExB}
 \end{figure}
 
@@ -224,7 +224,7 @@ The density fluctuation power peaks at the steepest gradient region ($x_{PF} = x
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig7.pdf}
-    \caption{$I_\text{sat}$ (a) and $B_\perp$ (b) fluctuation power profiles for signals 2 kHz and up at z=8.3m (midplane) and z=7.7m, respectively. The lower frequency components in $I_\text{sat}$ are associated with bulk profile evolution, dominate the core region, and are not the focus of this study.}
+    \caption[$I_\text{sat}$ and $B_\perp$ fluctuation power profiles]{$I_\text{sat}$ (a) and $B_\perp$ (b) fluctuation power profiles for signals 2 kHz and up at z=8.3m (midplane) and z=7.7m, respectively. The lower frequency components in $I_\text{sat}$ are associated with bulk profile evolution, dominate the core region, and are not the focus of this study.}
     \label{fig:isat-fluct-prof}
 \end{figure}
 
@@ -240,14 +240,14 @@ The $\tilde{E} \times B$ particle flux clearly decreases with mirror ratio; most
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig8.pdf}
-    \caption{Cross-field, $\tilde{E} \times B$ fluctuation-based particle flux (calculated using eq. \ref{eq:flux}) with respect to mirror ratio. A monotonic decrease in particle flux is observed with increasing mirror ratio at the midplane. Particle flux is normalized by plasma circumference to the $M=1$ case to account for the geometry-induced decrease in particle flux caused by a larger-diameter plasma.}
+    \caption[Cross-field, $\tilde{E} \times B$ particle flux]{Cross-field, $\tilde{E} \times B$ fluctuation-based particle flux (calculated using eq. \ref{eq:flux}) with respect to mirror ratio. A monotonic decrease in particle flux is observed with increasing mirror ratio at the midplane. Particle flux is normalized by plasma circumference to the $M=1$ case to account for the geometry-induced decrease in particle flux caused by a larger-diameter plasma.}
     \label{fig:particle-flux}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig9.pdf}
-    \caption{Phase (a) and coherency (b) of $I_\text{sat}$ current and Vf near $x_{PF}$ at the midplane, smoothed. Positive phase means $I_\text{sat}$ leads Vf. Peaks in coherency occur between 3-5 kHz and at the drift-Alv\'en wave peaks between 12 and 25 kHz. These coherency peaks tend to have larger phase shifts than other nearby frequencies. }
+    \caption[Phase and coherency of $I_\text{sat}$ current and Vf near $x_{PF}$]{Phase (a) and coherency (b) of $I_\text{sat}$ current and Vf near $x_{PF}$ at the midplane, smoothed. Positive phase means $I_\text{sat}$ leads Vf. Peaks in coherency occur between 3-5 kHz and at the drift-Alv\'en wave peaks between 12 and 25 kHz. These coherency peaks tend to have larger phase shifts than other nearby frequencies. }
     \label{fig:isat-Vf_phase}
 \end{figure}
 
@@ -302,7 +302,7 @@ The $I_\text{sat}$ fluctuation power spectra in the region of peak power $x \sim
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig10.pdf}
-    \caption{$I_\text{sat}$ (density) fluctuation power averaged over a 1 cm region around $x_\text{PF}$ at the midplane. The fluctuation power is largely featureless below 2 kHz and beyond 40 kHz aside from electronics noise.}
+    \caption[$I_\text{sat}$ (density) fluctuation power]{$I_\text{sat}$ (density) fluctuation power averaged over a 1 cm region around $x_\text{PF}$ at the midplane. The fluctuation power is largely featureless below 2 kHz and beyond 40 kHz aside from electronics noise.}
     \label{fig:isat_fluct_power}
 \end{figure}
 The phase angle of $I_\text{sat}$ and Vf provides insight into the nature of the driving instability. Including a nonzero resistivity $\eta$ in the drift wave leads to a small phase shift $\delta$ between density and potential.
@@ -311,7 +311,7 @@ As seen in fig. \ref{fig:isat-Vf_phase}, the phase shift between $I_\text{sat}$ 
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig11.pdf}
-    \caption{$k_\parallel$ (a) and coherency $\gamma$ (b) as a function of frequency. Only results from the $M=1$ case are available, but it is clear that there are long ($\gtrsim 34$m) wavelength modes at 3 and 12 kHz. The probes used for calculating $k_\parallel$ were located at the midplane (z=8.31) and z=12.14 m, 3.83 m apart.}
+    \caption[$k_\parallel$ and coherency $\gamma$]{$k_\parallel$ (a) and coherency $\gamma$ (b) as a function of frequency. Only results from the $M=1$ case are available, but it is clear that there are long ($\gtrsim 34$m) wavelength modes at 3 and 12 kHz. The probes used for calculating $k_\parallel$ were located at the midplane (z=8.31) and z=12.14 m, 3.83 m apart.}
     \label{fig:kparallel-coherency}
 \end{figure}
 The phase difference between two Vf probes, $3.83$ m apart, was used to calculate the parallel wavelength $\frac{2 \pi}{\lambda} = k_\parallel = \phi_{\text{Vf1, Vf2}} / \Delta z$ assuming the wavelengths are greater than $7.66$ m. The two probes mapped to the same field line only in the $M=1$ configuration, so parallel wavenumbers are available only for the flat case. Parallel wavenumbers are theoretically calculable from 2d correlation planes but the coherency dropped dramatically when a mirror geometry was introduced.
@@ -344,7 +344,7 @@ In saturated drift wave turbulence, the normalized density fluctuation amplitude
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig12.pdf}
-    \caption{Fluctuation power summed for each $k_y$ for frequencies up to 100 kHz, smoothed. The contribution to fluctuation power is negligible past 100 kHz. The fluctuation power decreases substantially when a mirror configuration is introduced, but no trend is seen otherwise and the $k_y$ spectra remain exponential. Note the logarithmic scale.}
+    \caption[Fluctuation power summed for each $k_y$]{Fluctuation power summed for each $k_y$ for frequencies up to 100 kHz, smoothed. The contribution to fluctuation power is negligible past 100 kHz. The fluctuation power decreases substantially when a mirror configuration is introduced, but no trend is seen otherwise and the $k_y$ spectra remain exponential. Note the logarithmic scale.}
     \label{fig:fluct-power_ky}
 \end{figure}
 
@@ -359,7 +359,7 @@ The perpendicular magnetic fluctuation ($B_\perp$) component of the drift-Alfvé
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig13.pdf}
-    \caption{$B_\perp$ fluctuation power averaged at the core from 0 to 3 cm (a) and around the peak fluctuation point $(x \sim x_{PF})$ (b). Fluctuation power decreases across the board with mirror ratio except for core frequencies close to $\Omega_{ci}$. Peaks around $10-30$ kHz at $x_{PF}$ are consistent (region 2) with drift-Alfvén waves and the near-cyclotron frequency features in the core may be resonating Alfvén waves created by the magnetic mirror. Frequencies below 2 kHz and dominated by instrumentation noise and thus excluded.}
+    \caption[$B_\perp$ fluctuation power spectra at various locations]{$B_\perp$ fluctuation power averaged at the core from 0 to 3 cm (a) and around the peak fluctuation point $(x \sim x_{PF})$ (b). Fluctuation power decreases across the board with mirror ratio except for core frequencies close to $\Omega_{ci}$. Peaks around $10-30$ kHz at $x_{PF}$ are consistent (region 2) with drift-Alfvén waves and the near-cyclotron frequency features in the core may be resonating Alfvén waves created by the magnetic mirror. Frequencies below 2 kHz and dominated by instrumentation noise and thus excluded.}
     \label{fig:bperp_fluct}
 \end{figure}
 Drift-Alfvén waves have been studied in the LAPD in the past \cite{Maggs_1997, Vincena_2006}; strong coupling is observed for $\beta_e > m_e / m_i$ which is satisfied in this study. The Alfvén speed $\omega / k_\parallel = v_A = B/\sqrt{4 \pi n M}$ (given $\omega \ll \Omega_{ci}$) when averaged over the entire column ranges from $\sim 450$ to $\sim 1600$ km/s. A $k_\parallel$ corresponding to a wavelength $\lambda = 34$m roughly falls within the bound established by the kinetic and inertial Alfvén wave dispersion relations at the frequency peaks observed at $x \sim x_{PF}$ seen in fig. \ref{fig:bperp_fluct}. The lengthening of field lines caused by curvature accounts for at most $10\%$ of the change in frequency.
@@ -369,7 +369,7 @@ The spatial extent of the $B_\perp$ features identified in fig. \ref{fig:bperp_f
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig14.pdf}
-    \caption{$B_\perp$ fluctuation power profiles for the three regions shown in fig. \ref{fig:bperp_fluct}: region 1 (6 kHz) (a), region 2 — where frequencies are taken from the peaks of the drift-Alfv\'en waves for each mirror ratio (b), and region 3 (114 kHz) (c).}
+    \caption[$B_\perp$ fluctuation power profiles for three regions]{$B_\perp$ fluctuation power profiles for the three regions shown in fig. \ref{fig:bperp_fluct}: region 1 (6 kHz) (a), region 2 — where frequencies are taken from the peaks of the drift-Alfv\'en waves for each mirror ratio (b), and region 3 (114 kHz) (c).}
     \label{fig:Bperp_power_profiles}
 \end{figure}
 
@@ -380,7 +380,7 @@ These fluctuations have been observed in the LAPD in the source region alongside
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig15.pdf}
-    \caption{Summed fluctuation power of $B_\perp$ in the core ($x/x_c \leq 0.3$) as a function of mirror length and ratio. Top (a): the fluctuation power is normalized by the sum of the full-spectrum summed power. Bottom(b): the frequency of the power distribution > 50 kHz weighted by the fluctuation power.}
+    \caption[Summed fluctuation power of $B_\perp$ in the core]{Summed fluctuation power of $B_\perp$ in the core ($x/x_c \leq 0.3$) as a function of mirror length and ratio. Top (a): the fluctuation power is normalized by the sum of the full-spectrum summed power. Bottom(b): the frequency of the power distribution > 50 kHz weighted by the fluctuation power.}
     \label{fig:Bperp_core_highfreq}
 \end{figure}
 
@@ -418,7 +418,7 @@ The low frequency fluctuations in the Bdot spectra may seem important but plotti
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/extra/bperp_x-vs-f_lowfreq_M=1_and_2-68}
-    \caption[$B_\perp$ fluctuation power profiles for low frequencies]{$B_\perp$ fluctuation power for mirror ratios of 1 and 2.68. Lower frequencies are shown and the colorbar clipped to show detail in what appears to be power supply fluctuations}
+    \caption[$B_\perp$ fluctuation power profiles for low frequencies]{$B_\perp$ fluctuation power for mirror ratios of 1 and 2.68. Lower frequencies are shown and the colorbar clipped to show detail in what appears to be power supply fluctuations.}
     \label{fig_extra:Bperp_lowfreq_profile}
 \end{figure}
 
@@ -435,14 +435,14 @@ Two main current channels can be seen with the magnetic fields circulating aroun
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig16.pdf}
-    \caption{Perpendicular magnetic field and the derived current density for the flat-field ($M=1$) case using a Bdot probe with an axially-separated $I_\text{sat}$ reference (\texttt{DR2}). The x-y plane was centered near $x_{PF}$.}
+    \caption[2d plane of the perpendicular magnetic field and the derived current density for $M=1$]{Perpendicular magnetic field and the derived current density for the flat-field ($M=1$) case using a Bdot probe with an axially-separated $I_\text{sat}$ reference (\texttt{DR2}). The x-y plane was centered near $x_{PF}$.}
     \label{fig:Bvec_jz_M=1}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=450pt]{figures/Bvec_Jz_M=1-9+2-68.pdf}
-    \caption{Perpendicular magnetic field and the derived current density for the $M=1.9$ and $M=2.68$ cases computed in the same manner as fig. \ref{fig:Bvec_jz_M=1}. The x-y planes were centered near $x_{PF}$, and the view size was kept constant across the plots. The structure is much less obvious in the mirror cases, but all exhibit the expected Alfv\`en wave pattern}. 
+    \caption[Perpendicular magnetic field and the derived current density for the $M=1.9$ and $M=2.68$ cases]{Perpendicular magnetic field and the derived current density for the $M=1.9$ and $M=2.68$ cases computed in the same manner as fig. \ref{fig:Bvec_jz_M=1}. The x-y planes were centered near $x_{PF}$, and the view size was kept constant across the plots. The structure is much less obvious in the mirror cases, but all exhibit the expected Alfv\`en wave pattern}. 
     \label{fig:Bvec_jz_M=1-9+2-68}
 \end{figure}
 
@@ -450,14 +450,14 @@ Using two, axially-separated, correlated $I_\text{sat}$ measurements (\texttt{DR
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig17.pdf}
-    \caption{Azimuthal mode number $m$ amplitudes calculated from two axially-separated, correlated, $I_\text{sat}$ probes. Increasing mirror ratio (a to e) leads to increased $m$ at higher frequencies. (\texttt{DR2})}
+    \caption[Azimuthal mode number $m$ amplitudes of $I_\text{sat}$ fluctuations]{Azimuthal mode number $m$ amplitudes calculated from two axially-separated, correlated, $I_\text{sat}$ probes. Increasing mirror ratio (a to e) leads to increased $m$ at higher frequencies. (\texttt{DR2})}
     \label{fig:isat-m-num}
 \end{figure}
 Calculating $k_\perp$ from $m$ evaluated at $x \sim x_c$ yields similar $k_y$ values as the two-tip technique (fig. \ref{fig:kperp}). The average $k_y$ for a given frequency can be calculated using two Vf tips on the same probe by calculating the phase difference and dividing by the spatial separation of $5$ mm: $k_y = \phi_{\text{vf1, vf2}} / \Delta y$ \cite{Powers-twoprobe-ky}. The maximum $|k_y|$ measurable before aliasing is $\pi / \Delta y \approx 628$ rad/m. As seen in fig. \ref{fig:kperp}, the $k_y$ spectrum remains similar across mirror ratios, but the wavenumber extends further into higher frequencies with increasing mirror ratio. 
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig18.pdf}
-    \caption{$k_y$ averaged about $x_{PF}$ and smoothed for each mirror ratio calculated using two vertically-separated Vf tips on the same probe. Little change is seen in $k_y$ at lower frequencies but higher frequencies tend towards larger $k_y$ at higher mirror ratios.}
+    \caption[$k_y$ averaged about $x_{PF}$]{$k_y$ averaged about $x_{PF}$ and smoothed for each mirror ratio calculated using two vertically-separated Vf tips on the same probe. Little change is seen in $k_y$ at lower frequencies but higher frequencies tend towards larger $k_y$ at higher mirror ratios.}
     \label{fig:kperp}
 \end{figure}
 These azimuthal mode numbers and gradient scale lengths are consistent with linear simulations using the 3d fluid code \texttt{BOUT} \cite{Popovich_2010} in the flat, unbiased case.
@@ -505,7 +505,7 @@ The conducting wall mode and nonlinear instability may be present in these mirro
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/fig19.pdf}
-    \caption{Gradient scale length $L_n$ and the associated term in the drift wave growth rate $L_n^{-2}$. This scale length was calculated over a 3 cm region around $x_\text{PF}$ (peak fluctuation region) at the midplane. Increasing the mirror ratio increases the gradient scale length, which suggests weakening of the underlying instability driver.}
+    \caption[Gradient scale length $L_n$]{Gradient scale length $L_n$ and the associated term in the drift wave growth rate $L_n^{-2}$. This scale length was calculated over a 3 cm region around $x_\text{PF}$ (peak fluctuation region) at the midplane. Increasing the mirror ratio increases the gradient scale length, which suggests weakening of the underlying instability driver.}
     \label{fig:L_n}
 \end{figure}
 
@@ -533,7 +533,7 @@ The estimated shearing rate from \texttt{DR2} can be seen in fig. \ref{fig_extra
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/extra/ExB_shearing-rate_zoomed.pdf}
-    \caption[ExB shearing rate]{ExB shearing rate.}
+    \caption[ExB shearing rate]{ExB shearing rate based on smoothed plasma potential profiles. This shearing rate is comparable to the decorrelation rate at $x_{PF}$, seen in fig. \ref{fig_extra:decorrelation_time}.}
     \label{fig_extra:ExB_shearing-rate}
 \end{figure}
 
@@ -545,7 +545,7 @@ Directly applying signals between these two dataruns is not quite appropriate be
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/extra/discharge-power_vs_M.pdf}
-    \caption[Discharge power vs mirror ratio]{}
+    \caption[Discharge power vs mirror ratio]{Discharge power vs mirror ratio. \texttt{DR2} had roughly 5\% lower discharge power than in \texttt{DR2} for unknown reasons.}
     \label{fig_extra:discharger-power_vs_M}
 \end{figure}
 
@@ -553,7 +553,7 @@ Changes in the $I_\text{sat}$ profiles between the two dataruns (and between two
 \begin{figure}
     \centering
     \includegraphics[width=300pt]{figures/extra/isat_profile_comparison.pdf}
-    \caption[$I_\text{sat}$ profiles (M=1), \texttt{DR1} vs \texttt{DR2}]{$I_\text{sat}$ profiles (M=1), \texttt{DR1} vs \texttt{DR2} in the mirror cell.}
+    \caption[$I_\text{sat}$ profiles (M=1), \texttt{DR1} vs \texttt{DR2}]{$I_\text{sat}$ profiles (M=1), \texttt{DR1} vs \texttt{DR2} in the mirror cell. \texttt{DR2} has reduced $I_\text{sat}$ across the entire profile. Identical machine settings in \texttt{DR1} a few days apart are also different.}
     \label{fig_extra:DR1-DR2_isat_profile_comparison}
 \end{figure}
 
