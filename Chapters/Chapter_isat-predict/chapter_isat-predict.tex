@@ -91,12 +91,12 @@ This study performs two firsts in magnetized plasma research: using NNs to direc
 %
 All the processed data used for training the models in this study are freely available\cite{phil_travis_2025_15007853} (see section \ref{app:repo}). Other devices have also made data publicly available. Namely, data for H-mode confinement scaling has been available since 2008\cite{roach_2008_2008}, and more recently some MAST\cite{jackson_fair-mast_2024} and all LHD\cite{lhd_data} data are now publicly available.  
 
-This paper is organized as follows: Section \ref{sec:data} discusses the LAPD and the data acquisition methodology. Sections \ref{sec:model_dev} and \ref{sec:uncertainty} detail development of the model and uncertainty quantification. Section \ref{sec:validation} presents model validation, followed by trends in discharge voltage and gas puff duration in Section \ref{sec:trends}. Section \ref{sec:optimization} demonstrates optimization of the axial $I_\text{sat}$ profile, with the discussion and conclusion in sections \ref{sec:discussion} and \ref{sec:conclusion}.
+%This paper is organized as follows: Section \ref{sec:data} discusses the LAPD and the data acquisition methodology. Sections \ref{sec:model_dev} and \ref{sec:uncertainty} detail development of the model and uncertainty quantification. Section \ref{sec:validation} presents model validation, followed by trends in discharge voltage and gas puff duration in Section \ref{sec:trends}. Section \ref{sec:optimization} demonstrates optimization of the axial $I_\text{sat}$ profile, with the discussion and conclusion in sections \ref{sec:isat-predict_discussion} and \ref{sec:isat-predict_conclusion}.
 
 \begin{figure*}
 	\centering
 	\includegraphics[width=\textwidth]{figures/LAPD+coordinates.pdf}
-	\caption[size=12]{\label{fig:LAPD_coords}A cartoon of the Large Plasma Device, the coordinate system used, examples of a mirror and anti-mirror magnetic field configuration, and probe locations used in this study. The source, mirror, and midplane regions are labeled; the three fields were programmed independently.}
+	\caption[Cartoon of the experiment setup]{\label{fig:LAPD_coords}A cartoon of the Large Plasma Device, the coordinate system used, examples of a mirror and anti-mirror magnetic field configuration, and probe locations used in this study. The source, mirror, and midplane regions are labeled; the three fields were programmed independently.}
 \end{figure*}
 
 \section{Processing of $I_\text{sat}$ signals}
@@ -108,7 +108,7 @@ $I_\text{sat}$ measurements were averaged over 10 to 20 ms to exclude plasma ram
 \begin{figure}
 	\centering
 	\includegraphics[width=270pt]{figures/PP1_isat_swept_probe.pdf}
-	\caption[size=12]{\label{fig:PP1_swept_probe}$I_\text{sat}$ traces from the swept probe (port 26) from \texttt{DR2} datarun 03, shot 1 of 6. The orange curve is excluding times when a sweep is active on an opposing tip. }
+	\caption[$I_\text{sat}$ traces from the swept probe]{\label{fig:PP1_swept_probe}$I_\text{sat}$ traces from the swept probe (port 26) from \texttt{DR2} datarun 03, shot 1 of 6. The orange curve is excluding times when a sweep is active on an opposing tip. }
 \end{figure}
 
 Profile evolution is not studied to minimize computational requirements. $I_\text{sat}$ characteristics vary significantly between axial (z) position machine parameters. For $I_\text{sat}$ measurements on the same probe as a Langmuir sweep (\texttt{DR2} port 26, z=863 cm), the averaging process excludes the sweep period with an additional 40 $\mu$s buffer. $I_\text{sat}$ measurements in \texttt{DR1} that saturated either the isolation amplifier or digitizer are excluded from the dataset. Only 484 shots were removed out of $\approx$132,000, so the impact on the aggregate dataset is minimal. 
@@ -124,7 +124,7 @@ While $I_\text{sat}$ exhibits a small degree of shot-to-shot variation, the pres
 \begin{figure}
 	\centering
 	\includegraphics[width=270pt]{figures/PP1_isat_example_bars.pdf}
-	\caption[size=12]{\label{fig:PP1_isat_example}Examples of $I_\text{sat}$ profiles from \texttt{DR2} run 15. The bars represent the minimum and maximum of the six $I_\text{sat}$ measurements taken at that position. }
+	\caption[Examples of $I_\text{sat}$ profiles from \texttt{DR2}]{\label{fig:PP1_isat_example}Examples of $I_\text{sat}$ profiles from \texttt{DR2} run 15. The bars represent the minimum and maximum of the six $I_\text{sat}$ measurements taken at that position. }
 \end{figure}
 
 \section{Model development and training}
@@ -151,7 +151,7 @@ Multiple models were trained with varying depths and widths to verify that train
 \begin{figure}
 	\centering
 	\includegraphics[width=300pt]{figures/PP1_overfit_losses.pdf}
-	\caption[size=12]{\label{fig:PP1_overfit_losses}Training and validation losses when overfitting the model. A deep double descent in the validation losses is observed when fitting a single batch of 128 examples. The 8-example batch hits near-zero loss after 50 steps. This process verifies our training process is functioning as expected. The spikes are from exploding gradients which can be mitigated by clipping the gradients. A model trained on blank data is also shown as the black dotted line.}
+	\caption[Training and validation losses when overfitting the model]{\label{fig:PP1_overfit_losses}Training and validation losses when overfitting the model. A deep double descent in the validation losses is observed when fitting a single batch of 128 examples. The 8-example batch hits near-zero loss after 50 steps. This process verifies our training process is functioning as expected. The spikes are from exploding gradients which can be mitigated by clipping the gradients. A model trained on blank data is also shown as the black dotted line.}
 \end{figure}
 
 \subsection{Baselines for mean-squared error}
@@ -166,7 +166,7 @@ A linear model obviously cannot fit the dataset (see the nonlinear shape of the 
 \begin{figure}
 	\centering
 	\includegraphics[width=300pt]{figures/PP1_linear_simple_vs_data.pdf}
-	\caption[size=12]{\label{fig:PP1_linear_simple_data}$I_\text{sat}$ profiles and predictions for ports 17 and 33 based on inputs from \texttt{DR2} run 08 using a liner and linear-with-tanh models. \texttt{DR2} run 08 is in the training set. The ``data'' points are averaged over six shots. Run 08 was chosen for its representative performance; ports 17 and 33 were chosen to demonstrate the maximal axial variation (across 511 cm). These models fail to describe the data accurately.}
+	\caption[Linear predictions of $I_\text{sat}$ profiles]{\label{fig:PP1_linear_simple_data}$I_\text{sat}$ profiles and predictions for ports 17 and 33 based on inputs from \texttt{DR2} run 08 using a liner and linear-with-tanh models. \texttt{DR2} run 08 is in the training set. The ``data'' points are averaged over six shots. Run 08 was chosen for its representative performance; ports 17 and 33 were chosen to demonstrate the maximal axial variation (across 511 cm). These models fail to describe the data accurately.}
 \end{figure}
 
 This feature engineering-like approach can continue. For example, the width of the profile is largely controlled by magnetic field configuration of the device, particularly by $\sqrt{B_\text{midplane}/B_\text{source}}$. This behavior can be added to this model, either as a new feature or as a custom relationship in the model. Note that, as seen in fig. \ref{fig:PP1_linear_simple_data}, the width of the profile also depends on the axial coordinate. Combined with other coordinates and actuators, like discharge voltage and gas pressure, the number of possible features or function space grows combinatorially, making this custom fitting process difficult and tedious to design and test by hand. The obvious solution would be to use symbolic regression or fitting to a function library which may be  ideal methods if simple profile prediction were the final goal. However, we are ultimately interested inferring trends in a much more complex input space where neural networks are more flexible and accurate. If NNs do face generalization issues, symbolic regression or a SINDy-like approach can used instead, albeit with limited applications. Symbolic methods are appealing because the fits are simple. However, even though a simple equation may fit the data well, it does not necessarily provide insight or relate to the underlying physics; using a freeform fitting function like a neural network is more appropriate in this use case.
@@ -232,7 +232,7 @@ Modifying the learning rate over time (scheduling) is known to improve model lea
 %\begin{figure}
 %	\centering
 %	\includegraphics[width=\columnwidth]{figures/PP1_test-loss_vs_dataset.pdf}
-%	\caption[size=12]{\label{fig:PP1_validation_diversity}Several models were trained with dataruns cut out, decreasing the diversity of the training set. The test set was kept fixed. Loss on the test set monotonically increases with decreasing diversity. }
+%	\caption[Effect of dataset diversity on MSE]{\label{fig:PP1_validation_diversity}Several models were trained with dataruns cut out, decreasing the diversity of the training set. The test set was kept fixed. Loss on the test set monotonically increases with decreasing diversity. }
 %\end{figure} 
 
 \section{Uncertainty quantification}
@@ -258,7 +258,7 @@ The loss function for one of the NNs in an ensemble is seen in fig. \ref{fig:bet
 \begin{figure}
 	\centering
 	\includegraphics[width=300pt]{figures/beta-NLL_loss-mse.pdf}
-	\caption[size=12]{\label{fig:beta-NLL_loss-mse}The loss and MSE for the training, validation, and test sets over the entire training duration of 500 epochs. The inclusion of the $\beta$ term in the loss function -- interpreted as a per-example learning rate -- makes the loss function no longer interpretable in simple terms. The mean-squared error benefits from longer training for all sets.}
+	\caption[The loss and MSE for the training, validation, and test sets]{\label{fig:beta-NLL_loss-mse}The loss and MSE for the training, validation, and test sets over the entire training duration of 500 epochs. The inclusion of the $\beta$ term in the loss function -- interpreted as a per-example learning rate -- makes the loss function no longer interpretable in simple terms. The mean-squared error benefits from longer training for all sets.}
 \end{figure}
 
 The ensemble predictive uncertainty can be broken down into the aleatoric and epistemic components \cite{valdenegro-toro_deeper_2022}: the aleatoric uncertainty is $\langle \sigma^2_i (\mathbf{x}) \rangle$ and the epistemic uncertainty is $\langle \mu^2_i (\mathbf{x}) \rangle - \mu^2_* (\mathbf{x}) = \text{Var}\lbrack\mu_i (\mathbf{x}) \rbrack$. The intuition behind these uncertainties is that the random fluctuations in the recorded data are captured in the variance of a single network, $\sigma^2_i$. If the choice of model parameters were significant, we would expect the predicted mean for a single model, $\mu_i$, to fluctuate as captured by $\text{Var}\lbrack\mu_i (\mathbf{x}) \rbrack$. 
@@ -313,7 +313,7 @@ Increased weight decay can lead to better model calibration \cite{guo_calibratio
 \begin{figure}
 	\centering
 	\includegraphics[width=300pt]{figures/beta-NLL_wd_model_performance.pdf}
-	\caption[size=12]{\label{fig:beta-NLL_wd_model_performance}Model performance and calibration for different weight decays. Highly biased models are better calibrated, but come at great expense of mean prediction error. At the weight decay value of 50, the model has worse error than a linear model. Note the linear scale below $10^{-2}$.}
+	\caption[Model performance and calibration for different weight decays]{\label{fig:beta-NLL_wd_model_performance}Model performance and calibration for different weight decays. Highly biased models are better calibrated, but come at great expense of mean prediction error. At the weight decay value of 50, the model has worse error than a linear model. Note the linear scale below $10^{-2}$.}
 \end{figure}
 
 Despite the better calibration, the uncertainty predicted by a model with a large weight decay is decidedly worse: the uncertainty is similar across an entire profile, and when projected beyond the training data, the total uncertainty remains largely constant as seen in Fig. \ref{fig:extrapolation-profile-var_two}. The zero weight decay model exhibits relatively increasing uncertainty beyond the bounds of the training data. Although not well-calibrated, this uncertainty can provide a hint of where the model lacks confidence relative to other predictions, even though the uncertainty is much less than it should be.
@@ -321,7 +321,7 @@ Despite the better calibration, the uncertainty predicted by a model with a larg
 \begin{figure*}
 	\centering
 	\includegraphics[width=\linewidth]{figures/extrapolation-profile-variance_DR2_10_wd-comparison_two.pdf}
-	\caption[size=12]{\label{fig:extrapolation-profile-var_two}Model extrapolation performance (top plots) with uncertainty (bottom plots) for a model ensemble trained on a $\beta$-NLL loss function. \texttt{DR2} run 10 was chosen as an illustrative example. The \em relative \em uncertainty appears to be more useful when zero weight decay ($\lambda = 0$, left) is used: the uncertainty increases when the model is predicting outside its training data along the x-axis.}
+	\caption[Model extrapolation performance and uncertainty]{\label{fig:extrapolation-profile-var_two}Model extrapolation performance (top plots) with uncertainty (bottom plots) for a model ensemble trained on a $\beta$-NLL loss function. \texttt{DR2} run 10 was chosen as an illustrative example. The \em relative \em uncertainty appears to be more useful when zero weight decay ($\lambda = 0$, left) is used: the uncertainty increases when the model is predicting outside its training data along the x-axis.}
 \end{figure*}
 
 \section{Evaluating model performance}
@@ -346,7 +346,7 @@ The x profiles at the midplane (z=790 cm) of the reference M=3 prediction, sourc
 \begin{figure}
 	\centering
 	\includegraphics[width=300pt]{figures/changing-B-field_M=3_x-prof.pdf}
-	\caption[size=12]{\label{fig:changing-B-field_M=3_x-prof}Plot of various mirror configurations scaled to the cathode radius $x_c=17.5$ cm at the midplane (z=790 cm). When scaled according to the expected magnetic expansion, the profiles generally agree. The smaller the plasma diameter (and thus smaller volume), the higher the peak in $I_\text{sat}$ at the core, as expected. }
+	\caption[Mirror configuration predictions scaled to the cathode radius]{\label{fig:changing-B-field_M=3_x-prof}Plot of various mirror configurations scaled to the cathode radius $x_c=17.5$ cm at the midplane (z=790 cm). When scaled according to the expected magnetic expansion, the profiles generally agree. The smaller the plasma diameter (and thus smaller volume), the higher the peak in $I_\text{sat}$ at the core, as expected. }
 \end{figure}
 
 \subsection{Directly comparing prediction to measurement}
@@ -365,12 +365,12 @@ The model reproduces the axial trend well, but slightly underestimates $I_\text{
 \begin{figure}
 	\centering
 	\includegraphics[width=300pt]{figures/measured-vs-predicted_off-axis_160V}
-	\caption[size=12]{\label{fig:measured-vs-predicted}Top: data collected at off-axis positions around x $=9.75$ cm and y $=-8.4$ cm are compared with predictions from the machine learning model at the same points in addition to two interpolating predictions. The model predicts the trend well, but underestimates $I_\text{sat}$ in general. The shaded orange region is the total model uncertainty ($\sigma = \sqrt{\text{Var}}$). Bottom: Measured vs predicted $I_\text{sat}$ values for an odd machine configuration with $B_\text{source}$=822 G and discharge voltage=160 V. The training data only covers discharge voltages up to 150 V The machine was also in an odd discharge state, so it's no surprise that the predicted uncertainty bounds are very large (even greater than the test set RMSE value) and that accuracy suffers.}
+	\caption[Predictions compared with validation dataruns]{\label{fig:measured-vs-predicted}Top: data collected at off-axis positions around x $=9.75$ cm and y $=-8.4$ cm are compared with predictions from the machine learning model at the same points in addition to two interpolating predictions. The model predicts the trend well, but underestimates $I_\text{sat}$ in general. The shaded orange region is the total model uncertainty ($\sigma = \sqrt{\text{Var}}$). Bottom: Measured vs predicted $I_\text{sat}$ values for an odd machine configuration with $B_\text{source}$=822 G and discharge voltage=160 V. The training data only covers discharge voltages up to 150 V The machine was also in an odd discharge state, so it's no surprise that the predicted uncertainty bounds are very large (even greater than the test set RMSE value) and that accuracy suffers.}
 \end{figure}
 
 An additional validation datarun was performed. For this run, the discharge voltage was increased to 160 V, and the source field changed to 822 G. The training data contains discharge voltages up to 150 V, so this case tests the extrapolation capabilities of the model. The comparison of model predictions and the measured data can be seen in Fig. \ref{fig:measured-vs-predicted}. As stated earlier, the absolute uncertainty provided of the model is not calibrated. However, note that the level of uncertainty provided by the model, as well as the large spread in model predictions, are much greater than seen in the interpolation regime (Fig. \ref{fig:measured-vs-predicted}) and eclipses the cross-validated test set root mean squared error (RMSE). We conclude that this model has good interpolation capabilities, but extrapolation -- as with any model -- remains difficult.
 
-%Probe tip rotation was not accounted for in the prediction, but including the correct rotation produces uncertainty meeting or exceeding the test RMSE threshold because rotations at this angle have not been seen by the model. This probe tip rotation bias suggests that for this model probe rotation need not be correct for accurate predictions. The model performs worse when azimuthal symmetry is assumed by treating x as the radial coordinate and calculating the distance from x=y=0 cm. This degraded inference performance, also seen when training the model (section \ref{subsec:azimuthal_symmetry}) suggests that there is some intrinsic azimuthal asymmetry in the plasma, possibly caused by the horizontal gas puff injection near the source.
+%Probe tip rotation was not accounted for in the prediction, but including the correct rotation produces uncertainty meeting or exceeding the test RMSE threshold because rotations at this angle have not been seen by the model. This probe tip rotation bias suggests that for this model probe rotation need not be correct for accurate predictions. The model performs worse when azimuthal symmetry is assumed by treating x as the radial coordinate and calculating the distance from x=y=0 cm. This degraded inference performance, also seen when training the model (section \ref{subsec:azimuthal_symmetry}) suggests that there is some intrinsicqazimuthal asymmetry in the plasma, possibly caused by the horizontal gas puff injection near the source.
 
 \subsection{Comparison with Thomson scattering}
 
@@ -390,7 +390,7 @@ The Langmuir probes did not seem to be behaving correctly when the optimization 
 \begin{figure}
 	\centering
 	\includegraphics[width=300pt]{figures/DR2-10_LHS-30_valdiation.pdf}
-	\caption[size=12]{\label{fig:DR2-10_LHS-30_valdiation}Comparison of original \texttt{DR2} profiles with the profiles from the optimization dataset (\texttt{DROpt}) for the same machine configuration. The $I_\text{sat}$ values in the \texttt{DROpt} dataset are not calibrated in this plot, indicating significant variation in probe calibration in this \texttt{DROpt} dataset.}
+	\caption[Comparison of original \texttt{DR2} profiles with the profiles from \texttt{DROpt}]{\label{fig:DR2-10_LHS-30_valdiation}Comparison of original \texttt{DR2} profiles with the profiles from the optimization dataset (\texttt{DROpt}) for the same machine configuration. The $I_\text{sat}$ values in the \texttt{DROpt} dataset are not calibrated in this plot, indicating significant variation in probe calibration in this \texttt{DROpt} dataset.}
 \end{figure}
 
 
@@ -421,7 +421,7 @@ A systematic study of the impact of discharge voltages on $I_\text{sat}$ profile
 \begin{figure}
 	\centering
 	\includegraphics[width=400pt]{figures/discharge_voltage_effect.pdf}
-	\caption[size=12]{\label{fig:discharge_voltage_effect}The z profile at x=0 cm and x profile at z=1140 cm for different discharge voltages. The $I_\text{sat}$ decreases with increasing voltage, and the error (filled regions) stays roughly the same, but in general increase slightly towards the cathode and at higher discharge voltages.}
+	\caption[Discharge voltage scan: effect on x and z profiles]{\label{fig:discharge_voltage_effect}The z profile at x=0 cm and x profile at z=1140 cm for different discharge voltages. The $I_\text{sat}$ decreases with increasing voltage, and the error (filled regions) stays roughly the same, but in general increase slightly towards the cathode and at higher discharge voltages.}
 \end{figure}
 
 Of particular interest for some LAPD users is achieving the most uniform axial profile possible. We explore this problem in the context of mirrors. The gas puff duration is known to be a large actuator for controlling density and temperature and so is explored as a way of shaping the axial profile. We predict discharges with a flat 1 kG field with the probe in the center. The discharge voltage was set at 110 (a reasonable, middle value) with the run set flag=\texttt{DR2} and top gas puffing=off. The inferred effect of gas puff duration on the axial gradient and axial gradient scale length can be seen in Fig. \ref{fig:axial-grad_gas-puff.pdf}. Care was taken to handle the aleatoric (independent) uncertainty separately from the axially-dependent epistemic uncertainty. As seen in the figure, the mean axial gradient decreases when the gas puff duration is shortened. The gradient scale length also increases, so the mean gradient is not decreasing simply because the bulk $I_\text{sat}$ is decreasing. This result suggests that the gas puff duration may be a useful actuator to consider when planning future experiments. 
@@ -433,7 +433,7 @@ Given this lack of data diversity, the accuracy and applicability of this study 
 \begin{figure}
 	\centering
 	\includegraphics[width=300pt]{figures/axial-grad_gas-puff.pdf}
-	\caption[size=12]{\label{fig:axial-grad_gas-puff.pdf}ML prediction: mean axial gradients decrease with decreased gas puff duration. Five durations are plotted between 5 and 38 ms (which are the bounds of the training data), evenly spaced. The gradient scale length also increases, indicating that the gradient change was not just from a decrease in the bulk $I_\text{sat}$.}
+	\caption[Predictions of axial gradient]{\label{fig:axial-grad_gas-puff.pdf}ML prediction: mean axial gradients decrease with decreased gas puff duration. Five durations are plotted between 5 and 38 ms (which are the bounds of the training data), evenly spaced. The gradient scale length also increases, indicating that the gradient change was not just from a decrease in the bulk $I_\text{sat}$.}
 \end{figure}
 
 \section{Optimizing profiles}
@@ -513,7 +513,7 @@ The predicted configurations with the run set flag on and top gas puff flag off 
 \begin{figure*}
 	\centering
 	\includegraphics[width=\linewidth]{figures/axial-var_prediction-vs-measurement_paper.pdf}
-	\caption[size=12]{\label{fig:axial-var_prediction-vs-measurement}Axial profiles, predicted and measured, for the optimized weakest (blue), intermediate (green), and strongest (orange) cases. a. The shaded region covers the mean prediction $\pm$ one standard deviation, and the dashed lines are $\pm$ the median cross-validation RMSE values. b. The measured $I_\text{sat}$ values are calibrated to \texttt{DR2} run 10 (solid lines), or using triple probe Te measurements on the probe and linearly extrapolating the interferometer measurements (dotted lines). The absolute values disagree between the predicted and measured values, but axial trends are consistent with the optimization.}
+	\caption[Optimized axial profiles, predicted and measured]{\label{fig:axial-var_prediction-vs-measurement}Axial profiles, predicted and measured, for the optimized weakest (blue), intermediate (green), and strongest (orange) cases. a. The shaded region covers the mean prediction $\pm$ one standard deviation, and the dashed lines are $\pm$ the median cross-validation RMSE values. b. The measured $I_\text{sat}$ values are calibrated to \texttt{DR2} run 10 (solid lines), or using triple probe Te measurements on the probe and linearly extrapolating the interferometer measurements (dotted lines). The absolute values disagree between the predicted and measured values, but axial trends are consistent with the optimization.}
 \end{figure*}
 
 For the optimized axial profiles, the absolute value of the $I_\text{sat}$ predictions compared to measurement do not agree. All of the predicted profiles have overlapping predictions (within the predicted error) at the region furthest from the cathode, but the measured values do not show that behavior. Although the mean $I_\text{sat}$ value was constrained to be greater than 7.5 mA/mm$^2$, the measured mean was 2 mA/mm$^2$ for the weakest case. 
@@ -531,7 +531,7 @@ Optimization requires correctly learning the trends of all inputs and how they i
 We did not check to see if the predicted optima were actually true optima: an approximation of the local derivative using a finite-difference technique would require much more run time on the LAPD than was available. 
 
 \section{Discussion}
-\label{sec:discussion}
+\label{sec:isat-predict_discussion}
 
 \subsection{Key achievements}
 
@@ -562,7 +562,7 @@ The neural network architecture used here can readily scale to additional inputs
 The problem presented here -- learning time-averaged $I_\text{sat}$ trends -- is fairly simple and required a relatively simple model. As demonstrated in this work, ML provides a way to explore regions of parameter space quickly and efficiently. Most physics studies on plasma devices (and fusion devices) are dedicated to a single particular problem, use grid scans, and are not useful to other experiments or campaigns. This work shows a way of using data and trends uncovered from other experimental studies. This work also demonstrates that random exploration can be a useful tool: the increased diversity of the aggregated data will generally benefit an ML model whether the experimenter discovers something new or not.
 
 \section{Conclusion}
-\label{sec:conclusion}
+\label{sec:isat-predict_conclusion}
 
 We demonstrate the first randomized experiments in a magnetized plasma experiment to train a neural network model. This learned model was then used to infer trends when changing field configuration, discharge voltage, or gas puff duration. This model was also used to optimize axial variation of $I_\text{sat}$ as measured by the standard deviation, which was validated in later experiments despite poor absolute error. 
 

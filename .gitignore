@@ -2,7 +2,12 @@
 *.texpadtmp
 
 # latex files
-thesis.aux
-thesis.log
-thesis.out
-thesis.toc
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.lof
+*.lot
+*.synctex.gz
