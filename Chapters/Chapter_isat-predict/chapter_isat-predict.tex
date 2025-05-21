@@ -1,7 +1,7 @@
 \graphicspath{{Chapters/Chapter_isat-predict/}}
 
 \chapter{Optimizing mirror configurations in the LAPD using machine learning}
-\label{ch:opt_ML}
+\label{ch:isat-predict}
 
 %\documentclass[aip,
 %	pop,
@@ -56,7 +56,7 @@ This study demonstrates the efficacy of machine learning (ML)-based trend infere
 %The LAPD is a flexible basic plasma science device with a high discharge repetition rate (0.25-1 Hz) and reproducible plasmas capable of collecting high-spatial-resolution probe measurements. A diverse dataset is collected through random sampling of LAPD operational parameters, including the magnetic field strength and profile, fueling settings, and the discharge voltage. 
 Neural network (NN) ensembles with uncertainty quantification are trained to predict time-averaged ion saturation current ($I_\text{sat}$ — proportional to density and the square root of electron temperature) at any position within the dataset domain. Model-inferred trends, such as the effects of introducing mirrors or changing the discharge voltage, are consistent with current understanding. In addition, axial variation is optimized via comprehensive search over $I_\text{sat}$ predictions. Experimental validation of these optimized machine parameters demonstrate qualitative agreement, with quantitative differences attributable to Langmuir probe variation and cathode conditions. This investigation demonstrates, using ML techniques, a new way of extracting insight from experiments and novel optimization of plasmas. The code and data used in this study are made freely available.
 
-This chapter is based on the publication (currently under review) in the Physics of Plasmas titled ``Machine-learned trends in mirror configurations in the Large Plasma Device'' by myself, Prof. Jacob Bortnik, and Prof. Troy Carter. The goals of this work are to show what a solid, validated machine learning study looks like, and how ML can be useful in understanding operating plasma devices.
+This chapter is based on the publication (currently under review) in the Physics of Plasmas titled ``Machine-learned trends in mirror configurations in the Large Plasma Device'' by myself, Prof. Jacob Bortnik, and Prof. Troy Carter. The goals of this work are to provide an example of a solid, validated machine learning study and demonstrate how ML can be useful in understanding operating plasma devices.
 
 \end{abstract}
 
@@ -111,7 +111,7 @@ $I_\text{sat}$ measurements were averaged over 10 to 20 ms to exclude plasma ram
 	\caption[$I_\text{sat}$ traces from the swept probe]{\label{fig:PP1_swept_probe}$I_\text{sat}$ traces from the swept probe (port 26) from \texttt{DR2} datarun 03, shot 1 of 6. The orange curve is excluding times when a sweep is active on an opposing tip. }
 \end{figure}
 
-Profile evolution is not studied to minimize computational requirements. $I_\text{sat}$ characteristics vary significantly between axial (z) position machine parameters. For $I_\text{sat}$ measurements on the same probe as a Langmuir sweep (\texttt{DR2} port 26, z=863 cm), the averaging process excludes the sweep period with an additional 40 $\mu$s buffer. $I_\text{sat}$ measurements in \texttt{DR1} that saturated either the isolation amplifier or digitizer are excluded from the dataset. Only 484 shots were removed out of $\approx$132,000, so the impact on the aggregate dataset is minimal. 
+Profile evolution is not studied to minimize computational requirements. $I_\text{sat}$ characteristics vary significantly between axial (z) position machine parameters. For $I_\text{sat}$ measurements on the same probe as a Langmuir sweep (\texttt{DR2} port 26, z=863 cm), the averaging process excludes the sweep period with an additional 40 $\mu$s buffer. 
 
 \begin{figure}
 	\centering
@@ -535,7 +535,7 @@ We did not check to see if the predicted optima were actually true optima: an ap
 
 \subsection{Key achievements}
 
-To the authors' knowledge, this work is one of the first instances machine learning has been used to infer specific trends and optimize profiles in magnetized plasmas. Three examples of trend inference were shown in this paper: influence of magnetic geometry on plasma width, changes in the axial and radial profiles with changing discharge voltage, and the relationship of gas puff duration with axial gradient scale length. In addition, the axial profile was optimized by minimizing (or maximizing) the axial standard deviation. There is no other way of simultaneously uncovering many trends or finding optima without using an ML model trained on a diverse dataset. Traditionally, such studies would require extensive scans over grids to map the parameter space, but here it was accomplished with a relatively small amount of data.
+To the authors' knowledge, this work is one of the first instances machine learning has been used to infer specific trends and optimize profiles in magnetized plasmas. Three examples of trend inference were shown in this study: influence of magnetic geometry on plasma width, changes in the axial and radial profiles with changing discharge voltage, and the relationship of gas puff duration with axial gradient scale length. In addition, the axial profile was optimized by minimizing (or maximizing) the axial standard deviation. There is no other way of simultaneously uncovering many trends or finding optima without using an ML model trained on a diverse dataset. Traditionally, such studies would require extensive scans over grids to map the parameter space, but here it was accomplished with a relatively small amount of data.
 
 %A few examples of trend discovery and optimization were outlined in this paper, but there are many more trends and optimizations that can be evaluated using this model.  like the one described in this paper. An optimization could be performed using a gradient-based method, Bayesian optimization, or another optimization scheme, but the process would only be applicable to one specific optimization problem.
 
@@ -551,7 +551,7 @@ This study would be dramatically improved by collecting more, diverse data. Only
 
 Probe calibrations differed between the two training run sets (\texttt{DR1} and \texttt{DR2}) -- and a flag was introduced to distinguish between them -- but despite this deficiency combining the two run sets was shown to be advantageous for model performance. The condition of the cathode (e.g., electron emissivity and uniformity) also has a large impact on the measured $I_\text{sat}$. The improved model performance with the flag suggests that inconsistencies between dataruns could be compensated for using latent variables if a generative modeling approach is to be taken. At the very least, this model provides a way to benchmark these differences in machine state.
 
-Concerning the model, hyperparameter tuning could be performed. In this study a few extra percent in MSE performance is not meaningful considering the limited dataset. Instead, we focused on the trends and insights that can be extracted from this model rather than simple predictive accuracy. There may also be regimes in hyperparameter space where the uncertainty is better calibrated (perhaps using early stopping). Uncertainty estimation is important, even if the absolute uncertainty is not well-calibrated because it can provide a useful relative estimate as shown in this paper. 
+Concerning the model, hyperparameter tuning could be performed. In this study a few extra percent in MSE performance is not meaningful considering the limited dataset. Instead, we focused on the trends and insights that can be extracted from this model rather than simple predictive accuracy. There may also be regimes in hyperparameter space where the uncertainty is better calibrated (perhaps using early stopping). Uncertainty estimation is important, even if the absolute uncertainty is not well-calibrated because it can provide a useful relative estimate as shown in this study. 
 
 Trends such as the dependence of axial gradient on the gas puff duration (fig. \ref{fig:axial-grad_gas-puff.pdf}) or the effect discharge voltage on x-z profiles (fig. \ref{fig:discharge_voltage_effect}), although intuitive, remain unverified. Verification of these trends would increase confidence of model predictions when setting LAPD parameters in future experiments.
 
@@ -579,6 +579,6 @@ We strongly advocate that all ML-based analyses in plasma and fusion research sh
 \section{The open dataset and repository} 
 \label{app:repo}
 All the code to perform the ML portion of this study is available at \url{https://doi.org/10.5281/zenodo.15007853}. The training datasets are also available in that repository in the \texttt{datasets} directory. Additional data are available upon request. The repository also contains additional training details and the notebooks for generating the plots in this document. 
-The plots used in this paper were made in jupyter notebooks, which are also uploaded. The final training code can be found in \texttt{train\_dense\_beta\_NLL.py}. Trained models are found in the \texttt{code/training\_runs} directory.
+The plots used in this study were made in jupyter notebooks, which are also uploaded. The final training code can be found in \texttt{train\_dense\_beta\_NLL.py}. Trained models are found in the \texttt{code/training\_runs} directory.
 The history of many training runs can be found on Weights and Biases: \url{https://wandb.ai/phil/profile-predict} and the accompanying notes on these trained models are found in the associated pdf on github.
 The code and dataset are licensed under Creative Commons Attribution Share Alike 4.0 International. 
