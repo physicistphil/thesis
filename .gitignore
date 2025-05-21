@@ -11,3 +11,5 @@
 *.lof
 *.lot
 *.synctex.gz
+
+*~lock~
