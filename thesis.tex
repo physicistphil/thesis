@@ -8,6 +8,21 @@
 \usepackage{mathptmx}
 \usepackage{siunitx}
 
+%\usepackage[utf8]{inputenc} % allow utf-8 input
+%\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+%\usepackage{hyperref}       % hyperlinks
+%\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+%\usepackage[numbers]{natbib}
+\usepackage{amssymb}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
 \special{papersize=8.5in,11in}
 \setlength{\pdfpageheight}{11in}
 \setlength{\pdfpagewidth}{8.5in}
@@ -44,10 +59,13 @@
 %    urlcolor=cyan              % color of external links
 %}
 
+
+
 \input{prelim}                           	% preliminary page info
 \begin{document}
 \makeintropages
 \input{Chapters/Chapter_intro/chapter_intro}
+\input{Chapters/Chapter_background/chapter_background}
 \input{Chapters/Chapter_mirror-turb/chapter_mirror-turb}
 \input{Chapters/Chapter_ml-dataruns/chapter_ml-dataruns}
 \input{Chapters/Chapter_isat-predict/chapter_isat-predict}
