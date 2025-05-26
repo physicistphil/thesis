@@ -13,10 +13,13 @@
 
 %TL;DR: Using data from a laboratory plasma device, we demonstrate reconstructing signals, trend inference, and multimodal distribution modeling using a single energy-based model.
 
-\section{Generative modeling of plasmas}
+\section{Goals and prior work}
 
+\subsection{Goals}
 %Nuclear fusion is an upcoming potential energy source that could offset carbon emissions and provide cleaner energy. Developing a fusion reactor is challenging: the environment is hostile to measurement (diagnostics can malfunction or break) and the physics of plasmas is highly nonlinear and dynamical. 
-We seek to use machine learning -- particularly generative models -- to alleviate some of the challenges facing fusion-related plasma science and to accelerate the advent of fusion power.
+We seek to use machine learning -- particularly generative models -- to alleviate some of the challenges facing fusion-related plasma science and to accelerate the advent of fusion power. In particular, we want to be able to reconstruct missing diagnostic signals from any other set of signals. In addition, the reconstruction should be a probability distribution, not just a single estimate. This distribution should also have the ability to be combined with other sources of information, such as simulations, or constraints placed on it via prior knowledge. 
+
+\subsection{Generative modeling of plasmas}
 
 The use of generative models in plasma physics is not without precedent, but remains relatively uncommon. Variational autoencoders \cite{kingma_auto-encoding_2022} have been used to generate new, realistic output from stellarator transport simulations for inferring trends and uncovering physics \cite{lennart_van_rijn_minimizing_2022} and to discover relationships between inputs and outputs \cite{vos_discovery_2024}. These VAEs have also been used in the COMPASS to identify a rare instability characterized by fluctuations in magnetic probes \cite{skvara_detection_2020} by pertaining on unlabeled data and combining the model with a classifier over a smaller, labeled dataset. 
 
@@ -38,35 +41,16 @@ Concerning EBMs, they have yet to be applied to plasma physics problems. One not
 
 \section{Introduction to energy-based models (EBMs)}
 
-Energy-based models interpret a probability distribution through the lens of the Boltzmann distribution \cite{hopfield_neural_1982, ackley_learning_1985, lecun_tutorial_2006}. In the EBM formulation, the unnormalized probability density is parameterized by an energy function, that is $\tilde{p}(\bf{x}) = \exp(-\beta E_\theta(\bf{x}))$. EBMs have been historically difficult to train, but recent work has demonstrated high-quality sampling using MCMC techniques in high-dimensional spaces \cite{du_model_2019, du_implicit_2020, du_improved_2021, du_compositional_2020, du_unsupervised_2021, nijkamp_anatomy_2020, nijkamp_learning_2019, deng_residual_2020}. These MCMC techniques are fundamentally based in contrastive divergence 
+Energy-based models interpret a probability distribution through the lens of the Boltzmann distribution \cite{hopfield_neural_1982, ackley_learning_1985, lecun_tutorial_2006}. In the EBM formulation, the unnormalized probability density is parameterized by an energy function, that is $\tilde{p}(\bf{x}) = \exp(-E_\theta(\bf{x}))$, where $\theta$ are the parameters of this energy function. In this work and the works cited, this energy function is parameterized by a neural network. EBMs have been historically difficult to train, but recent work has demonstrated high-quality sampling using MCMC techniques in high-dimensional spaces \cite{du_model_2019, du_implicit_2020, du_improved_2021, du_compositional_2020, du_unsupervised_2021, nijkamp_anatomy_2020, nijkamp_learning_2019, deng_residual_2020, gao_learning_2018}. These MCMC techniques are fundamentally based in contrastive divergence \cite{hinton_training_2002, ruslan_deep_2009, tieleman_training_2008}. The nature of MCMC-based sampling of EBMs, detailing the convergence and expansion and contraction of learned models (a paradigm particularly helpful for training EBMs in this work) has been studied \cite{nijkamp_anatomy_2020, nijkamp_learning_2019}. Training via contrastive divergence can be improved by implementing a term typically left out which approximates the KL-divergence \cite{du_improved_2021}. 
 
-Training via contrastive divergence can be improved by implementing a term typically left out which approximates the KL-divergence \cite{du_improved_2021}. 
+EBMs can attain GAN-like performance while generating all modes of a distribution \cite{du_implicit_2020}. These models have also been used for text generation \cite{deng_residual_2020} and model-based planning \cite{du_model_2019}. In addition, EBMs can be composed by combining the energy functions in various ways which has been demonstrated in image generation tasks \cite{du_compositional_2020, du_unsupervised_2021}.
 
-Training and generation of energy-based models can be performed using MCMC techniques, attaining GAN-like performance while generating all modes of a distribution \cite{du_implicit_2020}.
-
-Energy-based models can be composed by combining the energy functions in various ways which has been demonstrated in image generation tasks \cite{du_compositional_2020, du_unsupervised_2021}.
-
-Original tutorial on EBMs .
-
-The nature of MCMC-based sampling of EBMs, detailing the convergence and expansion/contraction of learned models (which was a paradigm particularly helpful for training EBMs in this work) \cite{nijkamp_anatomy_2020, nijkamp_learning_2019}.
-
-Classifiers have been interpreted in the context of EBMs to gain benefits of generative modeling while still achieving good accuracy.
-
-Model based planning with EBMs \cite{du_model_2019}
-
-EBMs for text generation \cite{deng_residual_2020}
-
-Contrastive divergence as proposed by Hinton \cite{hinton_training_2002}
+Overview of EBMs, how they are trained, and their place among generative models \cite{carbone_hitchhikers_2024}. Another helpful review of generative modeling that helped in the selection by detailing advantages and disadvantages of various methods \cite{bond-taylor_deep_2021}. EBMs in particular have some desirable properties. The implicit generation scheme does not require balancing an explicit generator with a discriminator or encoder. In addition, the energy-based representation is amenable to modification of an auxiliary function, allowing the generated samples to be easily steered, enabling the composition of multiple energy functions. Lastly, EBMs do not easily suffer from mode collapse or otherwise ignore parts of the distribution. For these reason we use EBMs for building a distribution of our LAPD data.
 
 %VAE paper \cite{kingma_auto-encoding_2022}
-
 %GAN paper \cite{goodfellow_generative_2014}
-
-Overview of EBMs, how they are trained, and their place among generative models \cite{carbone_hitchhikers_2024}. Another helpful review of generative modeling that helped in the selection by detailing advantages and disadvantages of various methods \cite{bond-taylor_deep_2021}.
-
-One of the earlier MCMC-based EBM papers \cite{gao_learning_2018}.
-
-.Hopfield nets:. Deep Boltzman Machines used contrastive divergence \cite{ruslan_deep_2009}. Persistent contrastive divergence: \cite{tieleman_training_2008}.
+%One of the earlier MCMC-based EBM papers \cite{gao_learning_2018}.
+%.Hopfield nets:. Deep Boltzman Machines used contrastive divergence \cite{ruslan_deep_2009}. Persistent contrastive divergence: \cite{tieleman_training_2008}.
 
 
 \section{Data preparation}
@@ -74,6 +58,8 @@ One of the earlier MCMC-based EBM papers \cite{gao_learning_2018}.
 Around 130 thousand shots were taken on the Large Plasma Device for 67 different dataruns, varying machine conditions and probe configurations as detailed in chapter \ref{ch:ml-dataruns}. The train-test split identical to what was performed in earlier chapters. Namely, four dataruns each from \texttt{DR1} and \texttt{DR2} were held out as representative configurations. In order to reduce computational requirements, the time series data was downsampled. The original sampling rates for the machine state information and auxiliary diagnostics was 25 kHz. The sampling rate for the $I_\text{sat}$ probe was 6.25 MHz. All time-series data were downsampled to a common sampling rate of 2.5 kHz. This downsample leads to the time series having a length of 76 points long, and the MSI were truncated to be identical in duration and start time to the $I_\text{sat}$ time series.
 
 The dataset includes nine time series in total: discharge current, discharge voltage, 5 diode signals (the last of which having a He-II filter), interferometer (line-integrated density), and $I_\text{sat}$ from a Langmuir probe. Additionally, several one-dimensional inputs and flags were included: probe position (x, y, z), magnetic field (source, mirror, and midplane), gas puff duration and voltage, total gas pressure, first 4 amu RGA readings, run set flag, and top gas puff flag. In total, the input length is 699 features when concatenated. 
+
+When fed into the model, each input is mean-subtracted and scaled independently by the peak-to-peak value. Scaling each value was found to work much better than scaling a whole time series by the same value. Often, the beginning and end of the time series would have very little variance (such as in discharge current always starting at 1 kA). Learning distributions of very small width  appears to be difficult for EBMs. 
 
 %An additional dataset of 29 million shots was collected over the span of 3 years
 
@@ -136,6 +122,12 @@ keeps the energy values centered near 0. The absolute value of the energy does n
 \end{algorithmic}
 \end{algorithm}
 
+\subsection{The sampler}
+
+The sampler is fundamental to how the model is trained and how samples are generated; the configuration of the sampler is one of the most important considerations when building the EBM. The samples are initialized from random noise between $-1$ and 1. We use Langevin dynamics to move the samples as formulated in Nijkamp et al. \cite{nijkamp_anatomy_2020}, as seen in algorithm \ref{alg:sampling}. A variety of step sizes and number of steps were used. The number of sampler steps per batch was critical for training stability: 30 appears to be close to the minimum number of steps for stable training, similar to what has been observed in other studies \cite{cheng_versatile_2024}.
+
+The step size is typically chosen to match the standard deviation of the smallest feature, but that was found to be too large for this use case. Given that our data is highly multimodal, some modes of the input distribution had a deviation of 0 (such as the flags).  For this reason, a smaller step size of $\epsilon = 0.01$ was used. 
+
 \begin{algorithm}
 \caption{EBM sampling}\label{alg:sampling}
 %\small
@@ -151,44 +143,9 @@ keeps the energy values centered near 0. The absolute value of the energy does n
 \end{algorithmic}
 \end{algorithm}
 
+The model was trained for 27 hours over 172 epochs. The  The batch size was 128 and was trained with the AdamW optimizer with a learning rate of $10^{-4}$, decaying to $10^{-5}$ after 20 epochs. Training using stochastic gradient descent required very large learning rates ($10^{-2}$) and could not generate realistic samples even with a learning rate decay schedule. The first 100 epochs were trained in a single run; the next 72  were resumed from the final checkpoint of the previous run, leading to reinitialization of the replay buffer. Given the low learning rate, this did not have a significant impact on model training. The model used for inference was from the 39th epoch into this second run, after which training diverged. 
 
-\subsection{Sampler configuration}
-The sampler is fundamental to how the model is trained and is critical. The negative samples are fundamental to how this model works. Step size and the number of steps needs to be tuned to converge well. The optimizer is important too.
-
-The 30 MCMC steps were used per training batch with a step size of 1e-2 for AdamW (1e-1 for SGD)
-
-\subsection{Replay buffer configuration}
-A replay buffer is used to provide a warm start for the sampler chains. Every batch iteration, 5\% of the samples from the buffer are replaced with random noise (a replay fraction of 0.95). This replay fraction leads to a mean of 1/0.05=20 batch iterations for each chain, with half the chains experiencing $\ln(2)/0.05 \approx 14$ batches. The replay buffer requires 4 to 5 epochs to converge to an exponential distribution in the number of steps experienced by each chain in the buffer. This diversity of chain lengths likely encourages quick convergence of the chain but good long-term samples (on average, each chain experience 600 MCMC updates/steps). The distribution of the batches among the replay buffer can be seen in fig. \ref{fig:buffer_distribution}.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=350pt]{figures/buffer_distributions.pdf}
-	\caption[Distribution of batches in replay buffer samples]{\label{fig:buffer_distribution}Distribution of batches in replay buffer. When training is starting (epoch 0, left), the number of batches each sample experiences is low and somewhat uniform. After 10 training epochs (right), the number of batches experienced by a sample converged to an exponential distribution.}
-\end{figure}
-
-This also means that bad samples have a $\approx$ 50\% chance of lasting 194 batches if one goes awry.
-
-\section{Architecture}
-
-The model is intrinsically multi-modal: time-series data from diagnostics is mixed in with machine settings, state, and probe position. Training on multi-modal data is difficult because it's difficult to weight the particular components of the input that are important. Not all inputs are necessarily correlated, and the less correlated (read: number of inputs not correlated with it) the harder it is to train. The ``position'' (x, y, and z) feature is like this because only the $I_\text{sat}$ time series is related to it.
-
-Pretraining an autoencoder was attempted to improve training stability but that did not help at all. The most important factor for training stability was the step size.
-
-Convolutional NNs were used for the time series input, and transformer-like multi-head attention blocks were used for the settings, state, and probe position. The time series convolutions were merged in another convolutional pass, and the two branches were combined using multi-head attention. Fully-connected networks were found to be difficult to train (which has been observed in other studies \cite{cheng_versatile_2024}) and are only used when projecting representations to higher or lower dimensions.
-
-\begin{figure}
-	\centering
-	\includegraphics[height=550pt]{figures/architecture.pdf}
-	\caption{\label{fig:architecture}EBM arch}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{figures/architecture_blocks.pdf}
-	\caption{\label{fig:architecture_blocks}Blocks used in the EBM arch}
-\end{figure}
-
-\subsection{Training tips}
+The training curves of loss, relative energy, and energy gradient can be seen in fig. \ref{fig:losses-energies}. The loss curve is very hard to interpret given all the components of the loss function. Maintaining a relative energy near 0 between negative and positive samples is crucial for model performance. A value near 0 indicates that the generated samples are close to the data distribution. When the sampler diverges, samples are no longer accurately representing the data and thus training fails. The energy function learns the scale of the gradients required to produce good samples. When training is proceeding normally, the ratio of the gradient step to the noise scale (step size) $\epsilon$ is near 1. 
 
 \begin{figure}
 	\centering
@@ -196,11 +153,40 @@ Convolutional NNs were used for the time series input, and transformer-like mult
 	\caption{\label{fig:losses-energies}Training curves of the model. Top: the total loss, middle: the relative energies of the negative samples and the training examples (positive samples), bottom: the gradient of the energy function normalized to the noise scale (step size $\epsilon$). \todo{replace with non-rasterized version}}
 \end{figure}
 
-Training with conditional samples did not work.
+\subsection{Replay buffer configuration}
+A replay buffer is used to provide a warm start for the sampler chains. Every batch iteration, 5\% of the samples from the buffer are replaced with random noise (a replay fraction of 0.95). This replay fraction leads to a mean of 1/0.05=20 batch iterations for each chain, with half the chains experiencing $\ln(2)/0.05 \approx 14$ batches. The replay buffer requires 4 to 5 epochs to converge to an exponential distribution in the number of steps experienced by each chain in the buffer. This diversity of chain lengths likely encourages quick convergence of the chain but good long-term samples (on average, each chain experience 600 MCMC updates/steps). The distribution of the batches among the replay buffer can be seen in fig. \ref{fig:buffer_distribution}. One downside of this long buffer is that if a sample ends up in a region far outside the domain ($-1$ to 1) it can cause exploding gradients; samples have a $\approx$ 50\% chance of lasting 194 batches if one goes awry. Implementing a reject step for this prodigal samples may improve training stability. 
 
-Reduce the learning rate and step size, increase the number of steps until the model starts learning something.
+\begin{figure}
+	\centering
+	\includegraphics[width=350pt]{figures/buffer_distributions.pdf}
+	\caption[Distribution of batches in replay buffer samples]{\label{fig:buffer_distribution}Distribution of batches in replay buffer. When training is starting (epoch 0, left), the number of batches each sample experiences is low and somewhat uniform. After 10 training epochs (right), the number of batches experienced by a sample converged to an exponential distribution.}
+\end{figure}
 
-SGD required a very large learning rate to learn anything (1e-2), Adam worked well despite warnings.
+\subsection{Sampling behavior}
+In general, if the model is not learning, increase the number of sample steps, decreasing the step size, and decreasing the learning rate are beneficial steps to take. A lower learning rate decreases the change per batch in the energy surface, so stale sample chains from the replay buffer may find themselves in more familiar territory than if the energy function is rapidly changing. More sample steps relaxes the requirement for the samples to rapidly find realistic (lower energy) locations, perhaps leading to shallower gradients and greater stability. Much work needs to be done to really understand the dynamics of the sampler in the training process. The samples from the replay buffer sampling may also benefit from a non-memoryless distribution so that the chains are guaranteed a certain number of sample steps over their lifetime, with a hard limit so that chains do not persist for too long. 
+
+\section{Architecture}
+
+The model is intrinsically multi-modal: time-series data from diagnostics is mixed in with machine settings, state, and probe position. In this model we preprocess separately each time series and the LAPD configuration. Convolutional NNs were used for the time series input, and transformer-like multi-head attention blocks were used for the settings, state, and probe position. The time series convolutions were merged in another convolutional pass, and the two branches were combined using multi-head attention.  A visual representation of the architecture can be seen in fig. \ref{fig:architecture}, with the layer blocks defined in fig. \ref{fig:architecture_blocks}. Convolutions were chosen for the time series input because they are relatively parameter efficient.  The depth of the network guarantees that the receptive field of the downstream neurons covers the entire input space so the positional dependence of the signal is maintained. No pooling layers were used. In general, fully-connected networks were found to be difficult to train (which has been observed in other studies \cite{cheng_versatile_2024}) and are only used when projecting representations to higher or lower dimensions. The cause of this training difficulty for dense networks is unknown. In general, including residual connections appeared to help training stability.
+
+\begin{figure}
+	\centering
+	\includegraphics[height=550pt]{figures/architecture.pdf}
+	\caption{\label{fig:architecture}Architecture for learning the energy function. Two main branches were used: processing the time series inputs and the machine settings. The layer blocks are defined in fig. \ref{fig:architecture_blocks}.}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{figures/architecture_blocks.pdf}
+	\caption{\label{fig:architecture_blocks}Layer blocks used in the EBM architecture. Residual layers work well.}
+\end{figure}
+
+During experimentation, it was found that preprocessing the signals before combining into the energy function worked much better than combining all the signals near the inputs. This may indicates that feature learning is very important for the EBM to learn a representative energy surface, at least for this dataset. The energy layers -- responsible for combining the learned representations -- were not as sensitive to parameter count. Despite this importance of feature learning, attempts to train the EBM with a pretrained encoder was difficult and could not converge to a good energy surface.
+
+The EBM struggled to model the positional dependence of the $I_\text{sat}$ signal, so a branch was added from the probe positions to add onto the intermediate representation of the $I_\text{sat}$ signal. This branch improved performance of the positional mapping, but is not as accurate as the simple feed forward model from the previous chapter. Performance may be improved by improving model capacity, or reducing the learning rate in conjunction with the step size. 
+
+The architecture developed for this study is not optimal -- it is simply one that works and is mostly stable. The architecture likely has ample room for improvement, particularly regarding the learning of the probe position. Additional, intermediate connections between the time series and 1d inputs should be explored. The current architecture can be thought of as a medium-term multimodal fusion design (early fusion did not work). 
+
 
 \section{Unconditional sampling}
 
@@ -231,6 +217,8 @@ Given that the data distributions are highly multi-modal, it is important that t
 	\includegraphics[width=\linewidth]{figures/uncond_histograms_merged_energy-dist_39-0}
 	\caption[Histograms of scaled values and energy for unconditional samples]{\label{fig:uncond_energy}Left: all scaled inputs from the training set vs samples inputs. The distributions are similar, but the EBM does not appear to learn more extreme values. Right: corresponding energy distribution. The EBM learns all the modes, but the probability mass is not properly distributed.}
 \end{figure}
+
+Given that the EBM learns the unconditional data distribution well, it should be able to perform well for anomaly detection. When a particular component of the input is outside the expected joint distribution, the energy will be higher and, when compared to usual negative samples, will clearly be an outlier.
 
 \section{Diagnostic reconstruction via conditional sampling}
 
@@ -264,7 +252,7 @@ Using this conditional sampling method, we now reconstruct interferometer signal
 
 For sampling, 90 samples steps were taken with the training step size of $\epsilon=0.01$. The auxiliary energy function used a width of $(2\epsilon)^2$. Interferometer traces from a single shot from each of the eight test set dataruns were sampled. 128 samples of the interferometer signal were taken from each datarun, taking approximately 9 seconds on an RTX 3090. 
 
-Sampling with only machine inputs given led to a large variety of potential interferometer signals, seen on the left of fig. \ref{fig:ifo_sample}. Comparing to the case where all data is given (middle of the figure) yields some interesting insights. First , the variety of the sample distribution is dramatically decreased (seen in the bottom row). The number of modes in the distribution dramatically decreased from over ten to four. Second, the shapes of the curves when diagnostics are given matches better. Third, the RMSE improves a little bit for this particular case, but reduces significantly -- $\gtrsim 25$\% -- when computed over the entire test set (tab. \ref{tab:ifo-cond-sample}. The $2 \sigma$ range of the samples increases, however, perhaps indicating increased uncertainty, though that is counterintuitive given the increased context. The particular $I_\text{sat}$ time trace did not make much of a difference on sample quality, indicating that the model was also using information in the discharge current and diode signals when reconstructing the interferometer signal.
+Sampling with only machine inputs given led to a large variety of potential interferometer signals, seen on the left of fig. \ref{fig:ifo_sample}. Comparing to the case where all data is given (middle of the figure) yields some interesting insights. First , the variety of the sample distribution is dramatically decreased (seen in the bottom row). The number of modes in the distribution dramatically decreased from over ten to four. Second, the shapes of the curves when diagnostics are given matches better. Third, the RMSE improves a little bit for this particular case, but reduces significantly -- $\gtrsim 25$\% -- when computed over the entire test set (tab. \ref{tab:ifo-cond-sample}). The $2 \sigma$ range of the samples increases, however, perhaps indicating increased uncertainty, though that is counterintuitive given the increased context. The particular $I_\text{sat}$ time trace did not make much of a difference on sample quality, indicating that the model was also using information in the discharge current and diode signals when reconstructing the interferometer signal.
 
 Sampling while freezing gradients (right side of fig. \ref{fig:ifo_sample}) can lead to good RMSE values relative to the other samples, but the actual samples look terrible and are unphysical: negative density is impossible. Constraining the samples to be greater than 0 using an auxiliary energy function ensures positive interferometer values, but the sample quality remains very poor and ironically increases the RMSE. The distribution of signals is also very narrow, leading to a very overconfident prediction. 
 
@@ -288,17 +276,32 @@ Structure in the energy function itself can also be examined to extract insights
 
 Certainly other symmetries in the data could be uncovered by directly analyzing this energy function (future work includes the relationship of gas puff duration and voltage to discharge power). Although obvious in retrospect, this energy function symmetry  indicates an important feature of inverse modeling using EBMs. This feature is that if the inversion is not well posed, or has many possible solutions, the EBM will predict many of them and not just the mean. In other words: using the energy function, anything can be predicted from anything else regardless of the invertibility of the problem.
 
-
 %\section{Improving model using 30 million-shot dataset}
 
+\section{Conclusion}
+
+In this work, we demonstrate using the usefulness of energy-based models (EBMs) for modeling the data distribution. Using a multi-branch, medium-term fusion architecture, signals from multiple time-series diagnostics, machine state information, and LAPD inputs are mapped onto an energy surface. This dataset is highly multimodal in both definitions of the term: the distribution has many modes and the inputs are different modalities. This energy surface is related to a probability distribution via $p(x) = \exp(-E(x))$ and can be easily sampled using Langevin dynamics. The distribution captures all modes of the data, though the represented probability mass has some room for improvement. Using this learned distribution, it is possible to detect anomalies, reconstruct diagnostic signals given other data, and uncover trends or symmetries. When reconstructing diagnostics, additional data is very beneficial, even when the signals are from an uncalibrated diagnostic and are unanalyzed. This result implies that collecting many different diagnostics signals -- even if they are basic -- can be very useful and contain exploitable information. In other words, this model can exploit information we humans cannot, either because of lack of time, manpower, or the complexity of analysis.
+
+This energy-based distributions are amenable to outside modification, as demonstrated by the novel conditional sampling technique in this work. This direct access to the distribution representations enables the scientist the shape the sampling process however desired, so that trends along any input or combination of inputs cam be performed.
+
 \section{Future work}
-The energy surface gradients in MCMC could be broken down on a per-input basis so that each input has its own step size. Adaptive step sizes could also be used. 
-Despite scaling the step size to the lowest standard deviation, the distribution of inputs are multimodal, so the standard deviation along one input may be much greater than the standard deviations of the modes in that input. For example, the flags (off or on) have a standard deviation of zero for each mode, but have a nonzero standard deviation when scaled according to the mean and peak-to-peak values. Data augmentation may be useful here to artificially spread the size of these delta-function inputs.
+Given the flexibility of EBMs, there are many potential ways of improving on this work. The most obvious improvement would be to collect additional data from random LAPD configurations. Expanded probe positions would also be useful. This EBM can be extended to include arbitrary amounts of diagnostics, enabling after-the-fact diagnostic calibration or inference of plasma parameters. 
 
-High-dimensional, multimodal inputs on EBMs have been relatively unexplored. Multimodal inputs introduce new challenges to the sampler. The importance of each input on the gradient is no long identical -- some parameters are more important (e.g., field strength) than, say, a single time step of the diode signal. 
+The compositional capabilities of EBMs could enable the model to expand to various machine states (e.g., cathode condition, heater temperature). An EBM could be trained on a 29 million shot dataset which covers various machine states over 3 years. Composing this model with the trained model in this work could enable this model to apply in a broader range of scenarios.
 
-This work could be extended with more randomly-sampled data from the Large Plasma Device
+EBMs may also provide a way of joining theory and experiment. One could train an EBM on a diverse array of simulations with a variety of included physics or strengths of various effects. Jointly sampling from the sum of the theory and experiment models will effectively select the appropriate physics model for the desired scenario, enabling better predictive performance of the simulations. 
 
-Curriculum learning could be an interesting way to improve model stability and distribution similarity (between the training data and sampled data).
+In summary, EBMs provide a powerful new way of representing and analyzing data from a plasma device, and may become more useful and easier to train as compute becomes cheaper. These EBMs may enable the future automation of fusion science and device optimization.
 
-This model can be composed with another EBM trained on an auxiliary dataset to improve model performance across different LAPD modes of operation.
+
+
+%The energy surface gradients in MCMC could be broken down on a per-input basis so that each input has its own step size. Adaptive step sizes could also be used. 
+%Despite scaling the step size to the lowest standard deviation, the distribution of inputs are multimodal, so the standard deviation along one input may be much greater than the standard deviations of the modes in that input. For example, the flags (off or on) have a standard deviation of zero for each mode, but have a nonzero standard deviation when scaled according to the mean and peak-to-peak values. Data augmentation may be useful here to artificially spread the size of these delta-function inputs.
+%
+%High-dimensional, multimodal inputs on EBMs have been relatively unexplored. Multimodal inputs introduce new challenges to the sampler. The importance of each input on the gradient is no long identical -- some parameters are more important (e.g., field strength) than, say, a single time step of the diode signal. 
+%
+%This work could be extended with more randomly-sampled data from the Large Plasma Device
+%
+%Curriculum learning could be an interesting way to improve model stability and distribution similarity (between the training data and sampled data).
+%
+%This model can be composed with another EBM trained on an auxiliary dataset toz improve model performance across different LAPD modes of operation.
