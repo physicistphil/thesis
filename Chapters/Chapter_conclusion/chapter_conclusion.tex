@@ -1,6 +1,12 @@
 \chapter{Conclusions}
 \label{ch:conclusion}
 
+This dissertation detailed several projects spanning turbulence and transport in mirror machines to machine learning applications for data analysis. The study of turbulence and transport did not yield the coupling between drift waves and the interchange mode as desired. However, this lack of evidence for the interchange mode highlights how complicated a system LAPD mirrors are, and how many different stabilization mechanisms can come into play. The reduced particle flux with increased mirror fields was also unexpected given the unfavorable curvature of mirror configurations.
 
-\section{Future Directions}
-\label{future}
+If this mirror turbulence project were to be taken up again on the current LaB$_6$ cathode, machine learning could have a very prominent role to play in finding the stability boundary. Like the work done on optimizing $I_\text{sat}$ profiles, the optimization function could instead be strength of an instability instead of axial variation. The current dataset collected -- although diverse -- likely does not contain sufficient information to find the stability boundary over the multidimensional LAPD actuator or settings space. More data would need to be taken for this approach to work.
+
+The machine learning work in this paper partially addressed the questions laid out in the introduction, summarized as: how can we accelerate fusion science? Evidently, an optimization can be performed by collecting randomized data, to a degree of qualitative success. Despite the poor quantitative performance, it is often good enough to know which direction to move in, as many steps in the right direction can put you on target. In that way machine learning could help accelerate progress -- I hope this work encourages other plasma and fusion groups to consider exploring beyond conventional experimental campaigns and increase the diversity of experiments. 
+
+The energy-based modeling work also indicates another path to accelerating fusion science. The learned energy function was evidently useful and flexible for reconstructing diagnostics (or theoretically performing any inverse problem) and extracting insight. This model, as demonstrated for conditional sampling, can be combined with any other energy-based model. This model could be trained on another experimental dataset or simulation results, and the joint distribution sampled from. The performance improvement by including uncalibrated and otherwise unused diagnostics while sampling hints that much more information is available to be exploited from our devices, even if this information is not directly interpretable. 
+
+In conclusion, when done properly, machine learning can be a very useful tool for extracting insight from data, and may also accelerate fusion 

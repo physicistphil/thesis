@@ -30,9 +30,6 @@
 %\subsection{Alfvén ion cyclotron (AIC)}
 %\subsection{Drift cyclotron loss cone (DCLC)}
 
-\section{Mirror machines}
-
-
 \section{The Large Plasma Device at UCLA}
 
 The Large Plasma Device (LAPD)\cite{gekelman_upgraded_2016,qian_design_2023} is a 26 meter long linear plasma device located Basic Plasma Science Facility (BaPSF) at the University of California, Los Angeles. This device is built for basic plasma science and can create quiescent, long-lived (read: longer than the timescales of interest) plasmas. The LAPD produces up to 18 m long, 1 m diameter plasmas. A cartoon of the LAPD and the canonical coordinate system can be seen in fig. \ref{fig:lapd-pics}.
@@ -45,38 +42,32 @@ The Large Plasma Device (LAPD)\cite{gekelman_upgraded_2016,qian_design_2023} is 
 
 \subsection{Plasma source}
 
-Typically, plasmas are produced using a hot cathode and anode at the south end of the device. This cathode was originally barium oxide (BaO)-plated nickel \cite{gekelman_upgraded_2016}, but was recently upgrade to a segmented lanthanum hexaboride (LaB$_6$) source \cite{qian_design_2023}. The BaO cathode was $72$ cm in diameter which mapped to 60 cm in a flat field magnetic field configuration. A $72$ cm diameter, 50\% transparent molybdenum anode was used to accelerate electrons from the cathode down the length of the machine. This BaO source could reach densities of $4 \times 10^{12}$ cm$^{-3}$ and up to 8 eV. The LaB$_6$ cathode is 35 cm across and electrons are accelerated through a 64.4 cm diameter, 66\% transparent molybdenum anode. The LaB$_6$ cathode can form hotter, denser plasmas with densities up to $3 \times 10^{13}$ cm$^{-3}$ and temperatures up to 20 eV, though typical operation yields temperatures around 5 eV, and is also more robust to accidental atmospheric exposure. The LaB$_6$ cathode is heated to $\approx$ 1700 $^\circ$C using a $\approx$2 kA heater. Both of these cathodes were used in the work presented here. An insertable, smaller (20 cm diameter) LaB$_6$ source also exists at the north end of the machine but is not used in this work.
+Typically, plasmas are produced using a hot cathode and anode at the south end of the device. This cathode was originally barium oxide (BaO)-plated nickel \cite{gekelman_upgraded_2016}, but was recently upgrade to a segmented lanthanum hexaboride (LaB$_6$) source \cite{qian_design_2023}. The BaO cathode was $72$ cm in diameter which mapped to 60 cm in a flat field magnetic field configuration. A $72$ cm diameter, 50\% transparent molybdenum anode was used to accelerate electrons from the cathode down the length of the machine. This BaO source could reach densities of $4 \times 10^{12}$ cm$^{-3}$ and up to 8 eV. The LaB$_6$ cathode is 35 cm across and electrons are accelerated through a 64.4 cm diameter, 66\% transparent molybdenum anode. The LaB$_6$ cathode can form hotter, denser plasmas with densities up to $3 \times 10^{13}$ cm$^{-3}$ and temperatures up to 20 eV, though typical operation yields temperatures around 5 eV, and is also more robust to accidental atmospheric exposure. The LaB$_6$ cathode is heated to $\approx$ 1700 $^\circ$C using a $\approx$2 kA heater. Both of these cathodes were used in the work presented here. An insertable, smaller (20 cm diameter) LaB$_6$ source also exists at the north end of the machine but is not used in this work. An interior shot of the LAPD can be seen in fig. \ref{fig:lapd-inside}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=350pt]{figures/lapd_inside.jpg}
+	\caption[Picture of LAPD interior]{\label{fig:lapd-inside}The interior of the LAPD taken during a discharge from the end of the machine. The hot LaB$_6$ cathode can be seen at the far end. Inside the plasma chamber are, from left to right, a carbon iris (used in Josh Larson's experiments) for controlling the width of the plasma from the smaller north-end source, an electric dipole probe, and the traveling wave antenna. The pink glow is the plasma formed by the far, main LaB$_6$ source. This picture was included for no other reason other than it's a banger.}
+\end{figure}
+
 
 The voltage applied across the cathode and anode is supplied by a 4.2 Farad capacitor bank switched by group of IGBTs. The discharge voltage is configurable up to 180V before triggering the over-voltage protection, though the capacitors are rated up to 200V. Current through the cathode can exceed 10 kA. Discharges can last as long as 70 ms, though a typical duration is around 15-20 ms. Discharge duration, power, and repetition rate are governed by the size of the capacitor bank and the charging power supply. The discharge repetition rate is configurable between 0.1 and 1 Hz.
 
 \subsection{Magnetic field}
-The LAPD has 13 independently-configurable magnet power supplies to shape the geometry of the axial magnetic field. Two of the supplies control the source region field, one controls the north end field where the smaller LaB$_6$ source resides, and the remaining 10 supplies control the field of the main plasma column. The source field can reach up to 8 kG and the main plasma column field up to 1.6 kG. A 1 kG field leads to an ion gyroradius of 2 mm at 1 eV, and a electron gyroradius of 50 $\mu$m at 5 eV, so these plasmas are highly magnetized.
+The LAPD has 13 independently-configurable magnet power supplies to shape the geometry of the axial magnetic field. Two of the supplies control the source region field, one controls the north end field where the smaller LaB$_6$ source resides, and the remaining 10 supplies control the field of the main plasma column. The source field can reach up to 8 kG and the main plasma column field up to 1.6 kG. A 1 kG field leads to an ion gyroradius of 2 mm at 1 eV, and a electron gyroradius of 50 $\mu$m at 5 eV, so these plasmas are highly magnetized. The source field is set manually on the power supplies themselves, but the middle 10 fields can be programmed on the LabView housekeeping system.
 
 \subsection{Gas fueling}
-There are two main ways of providing the neutral gas necessary for producing plasmas: the static fill system and gas puffing. The static fill system utilizes mass flow controllers to fill the chamber to the desired pressure, usually between $10^{-5}$ and $5 \times 10^{-4} Torr$. The LAPD can be filled with a variety of (nonreactive) gasses, helium being the most common, followed by hydrogen and argon. The gas puff system utilizes piezo valves to puff gas into the chamber halfway between the cathode and anode. Gas puff duration and valve voltage can be set which influence the total amount of gas puffed and thus plasma density. Plasma  breakdown using gas puffing is very reliable. Without fueling the LAPD has a base pressure of 5 $\times 10^{-7}$ Torr. 
+There are two main ways of providing the neutral gas necessary for producing plasmas: the static fill system and gas puffing. The static fill system utilizes mass flow controllers to fill the chamber to the desired pressure, usually between $10^{-5}$ and $5 \times 10^{-4}$ Torr. The LAPD can be filled with a variety of (nonreactive) gasses, helium being the most common, followed by hydrogen and argon. The gas puff system utilizes piezo valves to puff gas into the chamber halfway between the cathode and anode. Gas puff duration and valve voltage can be set which influence the total amount of gas puffed and thus plasma density. Plasma  breakdown using gas puffing is very reliable. Without fueling the LAPD has a base pressure of 5 $\times 10^{-7}$ Torr. The pressure is constantly monitored by the housekeeping system. 
 
 \section{Data acquisition}
 
-Probes can sample virtually any point in this plasma through unique ball valves placed every $\approx$32 cm along the length of the device, enabling the collection of time series data with high spatial resolution. Four probe drives can simultaneously be used to move probes in the x-y plane. An x-y-z probe drive is also available for collecting volumetric data. 
-
-There are also 3 permanently attached probe drives mounted 45$^\circ$ up from the -x axis, on which, at the time of this writing, are mounted Langmuir probes. These drives have a limited motion compared to the standard x-y probe drives used during dataruns.
+Probes can sample virtually any point in this plasma through unique ball valves placed every $\approx$32 cm along the length of the device, enabling the collection of time series data with high spatial resolution. Four probe drives can simultaneously be used to move probes in the x-y plane. An x-y-z probe drive is also available for collecting volumetric data. There are also 3 permanently attached probe drives mounted 45$^\circ$ up from the -x axis, on which, at the time of this writing, are mounted Langmuir probes. These drives have a limited motion compared to the standard x-y probe drives used during dataruns and the signals are digitized on 8-bit oscilloscopes. Typically many shots are taken at one position to obtain good sample statistics.
 
 Primarily, probe data acquisition is handled through the main data acquisition system, simply referred to as the ``DAQ''. The DAQ consists of SIS 3302 digitizers (theoretically 32 channels total) capable of sampling signals between $\pm 2.5$ V at 100 MHz at 16 bits. Typically sample averages are taken (16 samples for my data) to reduce data transfer and file size. The DAQ is set up through a LabView-based control system. 
 
-This LabView system manages ``dataruns''
-which are a series of discharges with a particular LAPD, DAQ, probe motion control, and general device configuration
-This system also manages probe drive configuration. Probe motion can be lines or planes using this LabView system
-Typically collect many shots per location to get good statistics
-Can control other devices like oscilloscope
+This LabView system manages ``dataruns'' which are a series of discharges with a particular LAPD configuration (including the DAQ, probe motion control, and other device configurations such as function generators). Another LabView system controls the probe movements. All these devices are enabled and commands in a particular order via the run sequencer. 
 
-
-The machine state information system (MSI)
-Information about the discharge (current, voltage), auxiliary diagnostic signals (used to record interferometer)
-Also records gas information (puffing is not digitized, however)
-Uses a National Instruments PCIe-6346, 16 bits, 8 analog inputs, 500 kS/s
-Records state of magnets, calculated field
-Auxiliary python system to collate diagnostics from multiple sources
-
+Another LabView system manages the machine state information (MSI). This system collects information on the discharge (current, voltage), auxiliary diagnostic signals (and it used to record interferometer), gas total pressure and RGA pressures. The time series diagnostics are read by a National Instruments PCIe-6346 data acquisition card which samples with 16 bits over 8 analog inputs at 500 kS/s per input. The MSI also collects information on the state of the magnetic field and cathode heater from the housekeeping system. An auxiliary python system can also be used collate diagnostics from multiple sources, including the machine state information.
 
 \section{Diagnostics}
 
@@ -198,22 +189,37 @@ Showstopper for earlier mirror machines
 
 \section{Machine learning and neural networks}
 
-Neural networks are a way of expressing a function
-Can represent any function given sufficient capacity (universal approximation theorem)
+Fundamentally, neural networks (NNs) are a function that, given sufficient capacity, can represent any function -- this is the ``universal approximation theorem''. Stated succinctly, NNs are fancy curve fits. As we will see in this work, fancy curve fits can be very useful.
 
 \subsection{Fundamentals of neural networks}
 
-Weights, nonlinearities, biases
-Train using gradient descent
+Neural networks are built one `layer' at a time. A layer in an NN is a vector $\vec x_i$ multiplied by some weight matrix $\mathbf{W}$ followed by a nonlinearity to get the activation $x_{i+1}$:
+\begin{equation}
+	\vec x_{i+1} = f( \mathbf{W} \vec x_i)
+\end{equation}
+where $\vec x_i$ is the previous activation (or input). A bias $b$ (a learnable offset) is often concatenated to the input vector beforehand. The activation function $f$ can be any nonlinearity. Typical choices for $f$ include the rectified  linear unit -- ReLU (zero when the input is less than zero, linear otherwise), tanh, sigmoids, sigmoid linear unit (SiLU), and so on. ReLU, and a variant of which called Leaky ReLU, are popular choices given the simplicity of computation.
+
+Stacking these layers one after another leads to the ability to express very complex curves. The true innovation here is the ability to express very high dimensional curves which was otherwise impossible until the advent of modern NN techniques, enabled by fast matrix multiplication hardware (read: GPUs).
+
+The weights of these layers are trained via gradient descent of some loss function $\mathcal{L}$. The loss is effectively the penalty for the network predicting the incorrect answer. A typical loss function for regression tasks is the mean-squared error: 
+\begin{equation}
+	\mathcal{L} = \frac{1}{M} \sum_{i=1}^M (x_i - g(x_i))^2
+\end{equation}
+where $g(x)$ is the output of the neural network and $x_i$ is a training example in a batch size M. Training over a dataset is often done in batches to reduce the memory required and to introduce stochasticity into the training process which can improve generalization. 
+
+Gradient descent is the process of modifying the NN weights by calculating the gradient of the loss function with respect to those weights:
+\begin{equation}
+	\theta \gets \theta - \nabla_\theta \mathcal{L}
+\end{equation}
+Advanced purpose-built algorithms exist to do this gradient descent in a fast manner, the most popular being Adaptive Moment Estimation, known as Adam  \cite{kingma_adam_2017}. 
+
 
 \subsection{Common layer types}
 
-Dense: every input connects to every output
-CNNs: scan filter across input
-Attention blocks: model learns to pay attention to certain features
+In this work we use three types of NN layers. First is the dense layer, also referred to as a ``fully-connected'' layers or ``multilayer perceptron'' if the entire model uses dense layers. In this layer every input is connected to every output. This fully-connected topology can lead to very large parameter counts if these layers are repeatedly stacked with a large width.
 
+Second: the convolutional layer, or convolutional neural network (CNN) \cite{lecun_convolutional_1995}. Technically a misnomer (it should be a ``correlation''), this layer scans along the input with a smaller NN. The input dimension of this layer is the ``kernel size'', and the different networks scanning across the input are the ``filters''. These CNNs have been used to great effect in image processing and time series analysis and are relatively parameter-efficient.
 
-
-
+Third: the attention layers. These layers have three inputs called the query, key, and value. When these are all the same the mechanism is called ``self-attention''. The query and key are matrix-multiplied and converted to a probability distribution via a softmax function. This softmax result is then applied to the value. The result of this combination is mask that selects important parts of the value vector. Stacking many of these layers, with multiple self-attention mechanisms for the same input vectors, creates a ``transformer'' \cite{vaswani_attention_2017} which is the basis for the recent advancements in large language models. Here we use these attention mechanisms more modestly.
 
 

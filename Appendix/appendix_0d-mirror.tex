@@ -8,23 +8,23 @@
 \chapter{0D mirror optimization}
 \label{app:0d-mirror}
 
-\begin{enumerate}
-    \item \bad{Main things that need to be done: find references and double check the equations}
-    \item \bad{Power to central cell isn't accounted for in plug temperature caluations — fudge factor is used}
-\end{enumerate}
-
-\begin{enumerate}
-    \item \todo{Check that DT alpha orbit is contained}
-    \item \todo{Add HHFW heating to increase Einj above Ebeam}
-    \item \todo{Add neutron dpa}
-    \item \todo{Implement assumption calculations for FLR effects and the paraxial approximation}
-    \item \todo{Add FLR stabilization estimate (Eq 38 in "Magneto-hydrodynamically stable[...]", Ryutov 2011}
-    \item \todo{Add neutral beam shine through as a condition for plasma density}
-    \item \todo{Compare to baseline in section 7 of Egedal et al 2022 \cite{Egedal_2022}}
-    \item \todo{Implement beta-enhanced mirror ratio limits from diamagnetic-bubble paper. Beta-enhanced mirror ratio flag?}
-    \item \todo{Add "tail wagging" stabilization power cost}
-    \item \todo{Calculate stability thresholds and growth rates}
-\end{enumerate}
+%\begin{enumerate}
+%    \item \bad{Main things that need to be done: find references and double check the equations}
+%    \item \bad{Power to central cell isn't accounted for in plug temperature caluations — fudge factor is used}
+%\end{enumerate}
+%
+%\begin{enumerate}
+%    \item \todo{Check that DT alpha orbit is contained}
+%    \item \todo{Add HHFW heating to increase Einj above Ebeam}
+%    \item \todo{Add neutron dpa}
+%    \item \todo{Implement assumption calculations for FLR effects and the paraxial approximation}
+%    \item \todo{Add FLR stabilization estimate (Eq 38 in "Magneto-hydrodynamically stable[...]", Ryutov 2011}
+%    \item \todo{Add neutral beam shine through as a condition for plasma density}
+%    \item \todo{Compare to baseline in section 7 of Egedal et al 2022 \cite{Egedal_2022}}
+%    \item \todo{Implement beta-enhanced mirror ratio limits from diamagnetic-bubble paper. Beta-enhanced mirror ratio flag?}
+%    \item \todo{Add "tail wagging" stabilization power cost}
+%    \item \todo{Calculate stability thresholds and growth rates}
+%\end{enumerate}
 
 %\tableofcontents
 %\listoffigures
@@ -114,7 +114,10 @@ This parameterization accepts ion temperature in keV and gives reactivity in cm$
     & \xi = \left( B_G^2 / 4\theta \right)^{1/3} \\
     & B_G = \pi \alpha Z_1 Z_2 \sqrt{2 m_r c^2}
 \end{align}
-where $m_r$ is the reduced mass and $\alpha$ is the fine structure constant. The coefficients ($C1$, $C2$, and so on) are in the paper cited above. This parameterization is valid for $T_i$ between $0.2$ to $100$ keV. \bad{We will definitely exceed this in our optimization -- the extent of the deviation should be quantified. The cross section explodes for DD after roughly 500 keV} Max error is 0.25\% for DT and 0.35\% and 0.3\% for DD $\Rightarrow$ p T and DD $\Rightarrow$ n He3, respectively. \phil{We will want to use the cross-section (the parameterization of which goes up to 550 keV for DT in \cite{Bosch_1992}) and integrate over ion distribution. Integration over non-Maxwellian ion distributions should be doable if FBIS \cite{Egedal_2022} can give the full distribution.} \phil{For now I'm just linearly interpolating (in log-log space) between the points provided in the NRL. Comparison plots of the different methods for DD and DT can be seen in figures \ref{fig:DT_reac} and \ref{fig:DD_reac}.}
+where $m_r$ is the reduced mass and $\alpha$ is the fine structure constant. The coefficients ($C1$, $C2$, and so on) are in the paper cited above. This parameterization is valid for $T_i$ between $0.2$ to $100$ keV. 
+%\bad{We will definitely exceed this in our optimization -- the extent of the deviation should be quantified. The cross section explodes for DD after roughly 500 keV}
+Max error is 0.25\% for DT and 0.35\% and 0.3\% for DD $\Rightarrow$ p T and DD $\Rightarrow$ n He3, respectively. 
+%\phil{We will want to use the cross-section (the parameterization of which goes up to 550 keV for DT in \cite{Bosch_1992}) and integrate over ion distribution. Integration over non-Maxwellian ion distributions should be doable if FBIS \cite{Egedal_2022} can give the full distribution.} \phil{For now I'm just linearly interpolating (in log-log space) between the points provided in the NRL. Comparison plots of the different methods for DD and DT can be seen in figures \ref{fig:DT_reac} and \ref{fig:DD_reac}.}
 
 \begin{figure}
     \centering
@@ -163,7 +166,8 @@ It's useful to split the power into charged and neutrons because energy is extra
     &P_{\text{cat DD,n}} &&= 14.1|e| R_{\text{x,DD}} \cdot \frac{1}{2} \\
     &P_{\text{cat DD,+}} &&= \left(3.5+18.3 \right) |e| R_{\text{x,DD}} \cdot \frac{1}{2} \\
 \end{alignat}
-We assume the tritium is burned instantly because the DT reaction rate is much higher than DD and D-He3 fusion up to around 200 keV, after which it's only slightly higher up to around 1 MeV. A more accurate estimate of fusion power would require estimates of D-He3, TT, and T-He reaction rates and density evolution of each species. A plot of reactivities can be found in Fig. \ref{fig:compare_reac}. \phil{I do not know how to do this steady-state calculation in a simple 0d way -- perhaps this sort of calculation is left for a more detailed reactor model.}
+We assume the tritium is burned instantly because the DT reaction rate is much higher than DD and D-He3 fusion up to around 200 keV, after which it's only slightly higher up to around 1 MeV. A more accurate estimate of fusion power would require estimates of D-He3, TT, and T-He reaction rates and density evolution of each species. A plot of reactivities can be found in Fig. \ref{fig:compare_reac}. 
+%\phil{I do not know how to do this steady-state calculation in a simple 0d way -- perhaps this sort of calculation is left for a more detailed reactor model.}
 
 \section{General formulae}
 
@@ -203,7 +207,8 @@ Ion thermal velocity:
     v_{Ti}=97900\sqrt{\frac{10^3E_{\text{ion}}}{\mu}}
 \end{equation}
 
-Ion gyroradius: \bad{Cary's spreadsheet uses the temperature to calculate this but calls it "$E_{\text{ion}}$". I think temperature should be used to accurately account for the energy in vperp}
+Ion gyroradius: 
+%\bad{Cary's spreadsheet uses the temperature to calculate this but calls it "$E_{\text{ion}}$". I think temperature should be used to accurately account for the energy in vperp}
 \begin{equation}
     \rho_i = \frac{m v_\perp}{q B} = 3.22\cdot 10^{-3} \frac{\sqrt{\mu E_{\text{ion}}}}{B_p}
 \end{equation}
@@ -221,13 +226,15 @@ Collision rates (from NRL):
     \nu_i &= 4.80\cdot10^{-8}\frac{Z_{\text{eff}}^4n_i\ln\Lambda}{\mu^{1/2}T_i^{3/2}}
 \end{align}
 
-These can be rearranged to give the following collision times (s): \bad{this seems to assume $\log{\Lambda} = 20$ (should be doubled check but doesn't probably make much of a difference -- comparing to eq 4.8 in \cite{baldwin_end-loss_1977}).} \bad{Depends on Zeff which isn't accounted for during optimization/power balance.} \phil{Technically we should use $T = \frac{2}{3} E_{ion}$ for the central cell since the distribution is likely approximately Maxwellian, but it only changes $\tau_{ii}$ by a factor of 1.8.} 
+These can be rearranged to give the following collision times (s): 
+%\bad{this seems to assume $\log{\Lambda} = 20$ (should be doubled check but doesn't probably make much of a difference -- comparing to eq 4.8 in \cite{baldwin_end-loss_1977}).} \bad{Depends on Zeff which isn't accounted for during optimization/power balance.} \phil{Technically we should use $T = \frac{2}{3} E_{ion}$ for the central cell since the distribution is likely approximately Maxwellian, but it only changes $\tau_{ii}$ by a factor of 1.8.} 
 \begin{align}
     \tau_{ee} &= 10^{-4} \frac{T_e^{3/2}}{n_{20} \lambda_{ee}} \\
     \tau_{ii} &= 1.25\cdot10^{-4} \frac{\mu^{1/2} E_{\text{ion}}^{3/2}}{n_{20}Z_{\text{eff}}^4}
 \end{align}
 
-Slowing down times \cite{dolan_1982} \phil{I assume Z is Zeff? Need to double check. I put it as Zeff in the ipynb}:
+Slowing down times \cite{dolan_1982} 
+%\phil{I assume Z is Zeff? Need to double check. I put it as Zeff in the ipynb}:
 \begin{align}
     \tau_{i,\text{slow}} &= 0.1 \frac{\mu T_e^{3/2}}{n_{20} Z^2 \lambda_{ei}} \\
     \tau_{i,\text{fast}} &= \left( \left( \tau_{ii} 0.4 \log{\frac{R_m}{\sqrt{1-\beta}}} \right)^{-1} + \frac{1}{\tau_{\text{slow}}} \right)^{-1}
@@ -269,7 +276,7 @@ Combining all of this together gives
 \end{equation}
 
 \subsection{Bohm diffusion}
-\phil{I don't like how pessimistic the estimates are for this are. Reasonable values gets you 500 $\mu$s confinement times for Bohm diffusion.}
+%\phil{I don't like how pessimistic the estimates are for this are. Reasonable values gets you 500 $\mu$s confinement times for Bohm diffusion.}
 Bohm diffusivity:
 \begin{equation}
     D_\text{Bohm} = \frac{1}{16} \cdot \frac{T_{i,cc} \cdot 10^3}{B_{cc}}
@@ -300,11 +307,13 @@ The gyro-Bohm estimate is then:
 \begin{equation}
     \tau_\text{gyro-Bohm} = \frac{8 a B_{cc}}{3 T_{i,cc} 10^3} \cdot \frac{1}{\rho^*}
 \end{equation}
-The $\frac{1}{\rho^*}$ factor can boost the confinement time estimate by a factor of 50-100. \phil{But the confinement times still seems a little low.}
+The $\frac{1}{\rho^*}$ factor can boost the confinement time estimate by a factor of 50-100. 
+%\phil{But the confinement times still seems a little low.}
 
 \subsection{ETG-driven transport}
 
-Cary's spreadsheet says \phil{(I'm having trouble finding a derivation or hand-wavy justification)}:
+Cary's spreadsheet says 
+%\phil{(I'm having trouble finding a derivation or hand-wavy justification)}:
 \begin{equation}
     \chi_\text{ETG} = 0.1 \frac{T_{e,cc}^{3/2}}{B_{cc}}
 \end{equation}
@@ -333,7 +342,8 @@ where $p_{aux}$ is the combined sources and losses, such as alpha-particle heati
 \begin{align}
     \tau_p = \tau^{90}_{Ti} \frac{1}{\alpha_1 \lambda_1} \frac{\mathcal{H}}{T_i/E_{beam}}\int^1_0 M_1(\xi) d\xi
 \end{align}
-where $\tau^{90}_{Ti}$ is the "scattering reactivity", $\alpha_1$, $\lambda_1$, and $M_1$ are the normalization value, eigenvalue, and eigenfunction of the Lorentz scattering operator (eq 4 in \cite{Egedal_2022}). \phil{I can't be bothered to write a differentiable solver for the confinement time right now so we're just going to use the values of $\tau_\text{Fowler-Baldwin}$ for the first rough optimizations (which Cary says will give pessimistic estimates (actually, not sure)).}
+where $\tau^{90}_{Ti}$ is the "scattering reactivity", $\alpha_1$, $\lambda_1$, and $M_1$ are the normalization value, eigenvalue, and eigenfunction of the Lorentz scattering operator (eq 4 in \cite{Egedal_2022}). 
+%\phil{I can't be bothered to write a differentiable solver for the confinement time right now so we're just going to use the values of $\tau_\text{Fowler-Baldwin}$ for the first rough optimizations (which Cary says will give pessimistic estimates (actually, not sure)).}
 By particle conservation and because NBI will be the dominant fueling mechanism, confinement time relates to density and beam current by:
 \begin{align}
     \tau_p = e V n_b / I_\text{NBI}
@@ -343,7 +353,8 @@ For ion temperature, Cary's spreadsheet says:
 \begin{equation}
     T_i = \frac{2}{3} E_{inj}
 \end{equation}
-This emerges from the relation that $E=\frac{1}{2}k_BT$ for every degree of freedom. For single particles, we assume 3 degrees of freedom to get $E=\frac{3}{2}T$ where T is expressed in eV. \bad{If referencing Egedal et al 2022 \cite{Egedal_2022}, this is only true if the electrons are very hot, i.e., $T_e (\log{R_M})^{2/3} / E_{inj} \approx 1$. However, it is also shown in the paper that $T_i / E_{inj} \sim 0.6$. Assuming $2/3$ is more conservative because a higher temperature means a lower reactivity and thus lower total fusion power at temperatures above 70-ish keV.}
+This emerges from the relation that $E=\frac{1}{2}k_BT$ for every degree of freedom. For single particles, we assume 3 degrees of freedom to get $E=\frac{3}{2}T$ where T is expressed in eV. 
+%\bad{If referencing Egedal et al 2022 \cite{Egedal_2022}, this is only true if the electrons are very hot, i.e., $T_e (\log{R_M})^{2/3} / E_{inj} \approx 1$. However, it is also shown in the paper that $T_i / E_{inj} \sim 0.6$. Assuming $2/3$ is more conservative because a higher temperature means a lower reactivity and thus lower total fusion power at temperatures above 70-ish keV.}
 
 For electron temperature, Cary's spreadsheet says:
 \begin{align}
@@ -351,7 +362,7 @@ For electron temperature, Cary's spreadsheet says:
     &= 0.089 E_b \log_{10} \left(\frac{R_p}{1-\beta} \right)^{0.4}
 \end{align}
 which seems to give a roughly 2x higher electron temperature than the reduced model in Egedal 2022 \cite{Egedal_2022}, which means that our estimate will be more optimistic.
-\kunal{Cary said this comes from working through the energy balance of a beam heated mirror device. Apparently it is in their new paper. I will go over this and figure it out. The $1-\beta$ term is from the finite beta corrections to the mirror ratio.}
+%\kunal{Cary said this comes from working through the energy balance of a beam heated mirror device. Apparently it is in their new paper. I will go over this and figure it out. The $1-\beta$ term is from the finite beta corrections to the mirror ratio.}
 
 Particle confinement time (Convention: $R_p = R_m$) found in Baldwin's end-loss paper \cite{baldwin_end-loss_1977} equations 4.14 and 4.13. The same equation can be applied to tandem mirrors with thermal barriers and plug cells \cite{PhysRevLett.43.1318}. According to Cary, this number will give pessimistic estimates.
 Equation 4.14 \cite{baldwin_end-loss_1977} states:
@@ -362,7 +373,9 @@ where [$n$] is cm$^{-3}$ and [$E_b$] is keV, and
 \begin{equation}
     R_{\text{eff}} = R_m / \left( 1 + (q \phi / m E_i) \right)
 \end{equation}
-For $90$º NBI, $\kappa$ falls between 2.4 and 2.8 according to Fokker-Planck calculations \cite{baldwin_end-loss_1977}; it would be $\sim$1.7 if the ion distribution did not have a loss-cone hole because the average energy is higher. \bad{Angled injection can impact this significantly (but ignoring for reduced model optimization)} \phil{I don't understand what this $(q \phi / m E_i)$ term is.} This is a purely classical number -- the main loss of ion energy is to electron drag, followed by ion-ion collisions / scattering into the loss cone (ions lost and accelerated by the ambipolar potential can be recaptured by direct energy conversion, but that is not accounted for here). Electrons are chilled by neutral beam injection and lost out the ends of the mirror if their energy exceeds the ambipolar potential.
+For $90$º NBI, $\kappa$ falls between 2.4 and 2.8 according to Fokker-Planck calculations \cite{baldwin_end-loss_1977}; it would be $\sim$1.7 if the ion distribution did not have a loss-cone hole because the average energy is higher. 
+%\bad{Angled injection can impact this significantly (but ignoring for reduced model optimization)} 
+%\phil{I don't understand what this $(q \phi / m E_i)$ term is.} This is a purely classical number -- the main loss of ion energy is to electron drag, followed by ion-ion collisions / scattering into the loss cone (ions lost and accelerated by the ambipolar potential can be recaptured by direct energy conversion, but that is not accounted for here). Electrons are chilled by neutral beam injection and lost out the ends of the mirror if their energy exceeds the ambipolar potential.
 Converting to [$n$] in m${^-3}$:
 \begin{equation}
     \tau_{\text{Fowler/Baldwin}} = 2.8 \cdot 10^{16} \frac{E_b^{3/2}}{n_e} \log R_m / \log{10}
@@ -437,7 +450,8 @@ Here, $T_{\text{ion}}$ and $T_e$ are expressed in eV. This can be found in Wesso
     n_{20}=n_{\text{plug}} / 10^{20} = B_p^2 \frac{\beta_{\text{limit}}}{0.04 \left(T_{\text{ion}} + T_e \right)}
 \end{equation}
 
-NBI Current (A): \phil{This should already account for dN/dt caused by fusion reactions if we assume that alphas have a similar confinement time? This is the current that the lost particles are reinjected after filtering out ash. Fusion reactions decrease the number of ions so $N$ will actually be lower at a factor of around $1-$ burnup fraction.}
+NBI Current (A): 
+%\phil{This should already account for dN/dt caused by fusion reactions if we assume that alphas have a similar confinement time? This is the current that the lost particles are reinjected after filtering out ash. Fusion reactions decrease the number of ions so $N$ will actually be lower at a factor of around $1-$ burnup fraction.}
 \begin{equation}
     I_{\text{NBI}}=|e|\frac{dN}{dt}
 \end{equation}
@@ -474,7 +488,8 @@ Injected NBI Power (MW):
     P_{\text{NBI}} = 10^{-3}I_{\text{NBI}} E_b
 \end{equation}
 
-Injected ECH Power (MW): \bad{Roll this into power balance equation (eq 24 in \cite{Egedal_2022}). But this will take considerable effort.} \phil{Electron endloss power should already be accounted for in the reduced model, but heating from fast ions is not. Synchotron + fast ion heating + Bremsstrahlung must be included in ECH to have a consistent Te.}
+Injected ECH Power (MW): 
+%\bad{Roll this into power balance equation (eq 24 in \cite{Egedal_2022}). But this will take considerable effort.} \phil{Electron endloss power should already be accounted for in the reduced model, but heating from fast ions is not. Synchotron + fast ion heating + Bremsstrahlung must be included in ECH to have a consistent Te.}
 \begin{equation}
     P_{\text{ECH}} = \frac{P_{\text{synch}}}{20} +P_{\text{e,endloss}} - \left(\text{Electron heating from fast ions}\right)
 \end{equation}
@@ -485,13 +500,14 @@ Lawson Triple Product ($10^{20}$keV$\cdot$s/m$^3$):
     \tau_{\text{Fowler/Baldwin}} n_{20} T_i
 \end{equation}
 
-Neutron Flux (MW/m$^2$): \bad{This should include DD and cat-DD neutrons.}
+Neutron Flux (MW/m$^2$): 
+%\bad{This should include DD and cat-DD neutrons.}
 \begin{equation}
     \frac{14}{17.6}\frac{P_{\text{plug}}}{4\pi a_{\text{wall}}^2}
 \end{equation}
-\phil{Does DD vs DT neutron flux significantly affect breeding ratios? For ~400 keV ion temperatures it could lower the DT TBR requirements by like ~10\% or so -- definitely significant when targeting TBRs of like 1.1. This info can be found on \texttt{https://www-nds.iaea.org/exfor/endf.htm} using the targets \texttt{LI-6; LI-7}, reactions MT-105 and 205: \texttt{N,T;N,XT}, and extending the energy above ~10 MeV.}
+%\phil{Does DD vs DT neutron flux significantly affect breeding ratios? For ~400 keV ion temperatures it could lower the DT TBR requirements by like ~10\% or so -- definitely significant when targeting TBRs of like 1.1. This info can be found on \texttt{https://www-nds.iaea.org/exfor/endf.htm} using the targets \texttt{LI-6; LI-7}, reactions MT-105 and 205: \texttt{N,T;N,XT}, and extending the energy above ~10 MeV.}
 
-\phil{Burnup fraction, alpha particle density, and Zeff aren't really used in the optimization anywhere. It'd be tricky to include the effects of alpha particle density because that may change the slowing-down times which effects the power balance of the end plugs and so on. These effects would require time-evolution, which is beyond the scope of this "0D" analysis. We would expect the density and reaction rate error to be on the order of the burnup fraction, because ash can be filtered out and exhausted while the fuel is reinjected.}
+%\phil{Burnup fraction, alpha particle density, and Zeff aren't really used in the optimization anywhere. It'd be tricky to include the effects of alpha particle density because that may change the slowing-down times which effects the power balance of the end plugs and so on. These effects would require time-evolution, which is beyond the scope of this "0D" analysis. We would expect the density and reaction rate error to be on the order of the burnup fraction, because ash can be filtered out and exhausted while the fuel is reinjected.}
 
 Burnup fraction:
 \begin{equation}
@@ -501,12 +517,13 @@ Burnup fraction:
 $\alpha$ particle density ($10^{20}m^{-3}$):
 \begin{equation}
     n_{\alpha} = \frac{I_{\text{NBI}} Q_{\text{plug}} \tau_{\alpha} E_b}{16 V_p E_{\alpha}}
-\end{equation} but a more intuitive way of putting it may be \phil{(need to double check this)}:
+\end{equation} but a more intuitive way of putting it may be 
+%\phil{(need to double check this)}:
 \begin{equation}
     n_{\alpha} = \frac{\tau_{\alpha} \left(R_{\text{x, DT}} + \frac{1}{2} R_{\text{x, DD}} \right)}{V}
 \end{equation}
 
-$Z_{\text{eff}}$: (from Wesson section 2.16 \cite{wesson_1987_419}) \phil{We assume no impurities!}:
+$Z_{\text{eff}}$: (from Wesson section 2.16 \cite{wesson_1987_419}) assuming no impurities!:
 \begin{equation}
     Z_{\text{eff}} = \frac{\sum_j n_j Z_j^2}{\sum_j n_j Z_j} = \frac{n + 4 n_\alpha}{n + 2 n_\alpha}
 \end{equation}
@@ -516,19 +533,21 @@ $Q_{\text{plug}}$:
     Q_{\text{plug}} = \frac{P_{\text{plug}}}{P_{\text{injected}}}
 \end{equation}
 
-\phil{These quantities below are for a simple mirror. These will be duplicated for a tandem system and will be unused in any optimization since simple mirrors are unlikely to make a compelling reactor.}
+%\phil{These quantities below are for a simple mirror. These will be duplicated for a tandem system and will be unused in any optimization since simple mirrors are unlikely to make a compelling reactor.}
 
 $P_{\text{electric,in}}$:
 \begin{equation}
     P_{\text{electric,in}} = P_{\text{total}}\left(\frac{1}{\eta_{HS}} - \eta_{DC}\left(1-\frac{T_e}{E_b}\right)\right)
 \end{equation}
 
-$P_{\text{electric,out}}$: \phil{The 0.8 represents the heating contribution from neutrons.}
+$P_{\text{electric,out}}$: 
+%\phil{The 0.8 represents the heating contribution from neutrons.}
 \begin{equation}
     P_{\text{electric,out}} = 0.8\eta_{HS}P_{\text{plug}}
 \end{equation}
 
-$Q^{\ast}$: \phil{The 0.2 represents the alpha particle contribution. Note that }
+$Q^{\ast}$: 
+%\phil{The 0.2 represents the alpha particle contribution. Note that }
 \begin{equation}
     Q^{\ast} = \frac{Q_{\text{plug}}}{\frac{1}{\eta_{HS}} - \eta_{DC}\left(1-\frac{T_e}{E_b}+0.2Q_{\text{plug}}\right)}
 \end{equation}
@@ -617,7 +636,8 @@ The central cell will be fueld using cold gas puffing and is ionized and heated 
 %     R_x=\pi a_{\text{cc}}^2 \frac{n_{\text{cc}}^2}{4} \langle\sigma v\rangle_{DT}
 % \end{equation}
 
-Fusion Power per meter (MW/m): \phil{here for legacy reasons. In the actual optimization procedure length will be one of the quantities that is optimized}
+Fusion Power per meter (MW/m): 
+%\phil{here for legacy reasons. In the actual optimization procedure length will be one of the quantities that is optimized}
 \begin{equation}
     P_{\text{fusion}} = 17.6|e|R_x  
 \end{equation}
@@ -628,7 +648,7 @@ Breakeven length:
     L_{\text{breakeven}}=\frac{2P_\text{plug,injected}}{P_{\text{fusion per m}}}
 \end{equation}
 
-\phil{Cary's spreadsheet solves for $L_{cc}$ given $Q$ but we probably won't want $Q$ directly in the cost function since we'll be optimizing for dollar cost or something else that depends on $Q$.}
+%\phil{Cary's spreadsheet solves for $L_{cc}$ given $Q$ but we probably won't want $Q$ directly in the cost function since we'll be optimizing for dollar cost or something else that depends on $Q$.}
 Central cell length:
 \begin{equation}
     L_{cc} = Q \cdot L_{\text{breakeven}}
@@ -679,7 +699,8 @@ Interchange growth rate ($s^{-1}$):
     \gamma_{\text{interchange}}=\frac{v_{Ti}}{L_p}
 \end{equation}
 
-Electron temperature gradient... something \bad{need to understand}
+Electron temperature gradient
+%\bad{need to understand}
 \begin{equation}
     \chi_{\text{ETG}} = 0.1 \frac{T_{cc,e}^{3/2}}{B_{cc}}
 \end{equation}
@@ -689,7 +710,8 @@ Electron temperature gradient... something \bad{need to understand}
 
 \section{Costs and economics}
 
-\subsection{Heating} \bad{Citations needed}
+\subsection{Heating} 
+%\bad{Citations needed}
 
 ECH: \$10/W
 
@@ -697,7 +719,8 @@ RF: \$1/W
 
 NBI: \$5/W
 
-\subsection{Magnets} \bad{Citations needed}
+\subsection{Magnets} 
+%\bad{Citations needed}
 
 kA-turns of coil needed for a given field and radius:
 \begin{equation}
@@ -713,15 +736,17 @@ Cost per kA$\cdot$m $=$ $10^{-4}$ M\$ / kA$\cdot$m
 
 Cost of magnet $=$ $S \cdot$(cost per kA$\cdot$m)
 
-Radii of magnet coils needed: \phil{The numbers below are from Cary's spreadsheet. I can't quite follow the thought process that went into these -- the ones with my highlight are the quantities I'm using.} \bad{Rethink and justify these.}
+Radii of magnet coils needed: 
+%\phil{The numbers below are from Cary's spreadsheet. I can't quite follow the thought process that went into these -- the ones with my highlight are the quantities I'm using.} \bad{Rethink and justify these.}
 \begin{enumerate}
     \item Mirror: $r_\text{bore} + d_\text{vv}$ (0.1m) $ + d_\text{blanket}$ (0.6m) \\
-    \phil{$r_\text{bore} \cdot a_\text{wall, ratio} + d_\text{vv}$ (0.1m) $ + d_\text{blanket}$ (0.6m)}
+%    \phil{$r_\text{bore} \cdot a_\text{wall, ratio} + d_\text{vv}$ (0.1m) $ + d_\text{blanket}$ (0.6m)}
     \item Plug midplane: $(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{blanket} + d_\text{vv} $(0.2m) \\
-    \phil{This will need to change depending on the length of the plug: we may need a solenoid or Maxwell coil instead of just a simple coil to keep }
-    \item Plug divertor: beta limit + 0.2 \bad{Doesn't make sense -- ignoring for now}
+%    \phil{This will need to change depending on the length of the plug: we may need a solenoid or Maxwell coil instead of just a simple coil to keep }
+    \item Plug divertor: beta limit + 0.2 
+%    \item \bad{Doesn't make sense -- ignoring for now}
     \item Central cell: $(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{blanket}$ \\
-    \phil{$(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{vv} + d_\text{blanket}$}
+%    \phil{$(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{vv} + d_\text{blanket}$}
 \end{enumerate}
 
 For the central cell solenoid we are assuming a spacing of one coil per meter for diagnostic access. This is an adjustable parameter but will not be optimized because that would require energetic particle confinement estimates for coil ripple. For reference, the MARS study \cite{MARS_Logan_1984} had 42 central cell magnets spaced 3.16m apart with an inner radius of roughly 2m which led to 6\% field ripple, which I assume is tolerable.
@@ -732,7 +757,7 @@ For the central cell solenoid we are assuming a spacing of one coil per meter fo
 
 \section{Optimization constraints}
 
-\phil{This method doesn't work for constraining the minimum field!}
+%\phil{This method doesn't work for constraining the minimum field!}
 \subsection{Midplane fields regularization via alpha particle confinement penalties}
 If we do not regularize field strengths, then the optimizer will bring the central cell (or plug) magnetic fields to 0 or negative. Only the midplane fields of the central cell and plugs will be regularized because the cost functions of interest tend towards higher reactor performance (and/or lower cost), and thus higher mirror ratios (and less HTS tape).
 The vacuum vessel should be, at minimum, four alpha gyroradii across. If an alpha is produced in the core, it will reach a distance of two gyroradii if all the energy is perpendicular to the field (aside: this is more likely with spin-polarized fuels). Doubling the vacuum vessel radius to four alpha gyroradii is the safer bet.
@@ -753,26 +778,26 @@ These particle losses depend on the radial plasma profile and should be simulate
 
 \subsection{Kunal's suggestions}
 
-\kunal{
-If we want to pursue Cary's NBI only reactor design concept, then we need to use $\geq$100keV beams since the DT reaction cross section peaks at a center of mass energy of $\sim$65keV. Currently, Cary is using 1MeV beams in his code.
-
-I think we should just assume we are shooting for something that is Q=10 and has a usable power out of 200MW. This should stop our coding analysis from making something dumb like a Q=1,000 reactor which has a total power out of 5W by just using a very low beam current.
-
-Cary calculates a lot of stuff with regards to the growth rate of various instabilities. Do we have/want to take all/some of the them into account in our optimization? For example, keeping the DCLC parameter at 1,000,
-}
-
-Per Kunal's suggestion we'll be operating under the following constraints:
-\begin{enumerate}
-    \item Minimum usable power out- 200MW
-    \item Maximum NBI energy- 1MeV
-    \item Maximum Central cell length- 300m
-    \item Maximum plasma radius- 0.6m
-    \item Maximum field strength- 25T
-    \item Maximum beta- 0.8
-    \item Minimum DCLC ratio- 1000
-\end{enumerate}
-
-These constraints will be soft — either a quadratic or exponential penalty for exceeding them — so that the cost function is differentiable.
+%\kunal{
+%If we want to pursue Cary's NBI only reactor design concept, then we need to use $\geq$100keV beams since the DT reaction cross section peaks at a center of mass energy of $\sim$65keV. Currently, Cary is using 1MeV beams in his code.
+%
+%I think we should just assume we are shooting for something that is Q=10 and has a usable power out of 200MW. This should stop our coding analysis from making something dumb like a Q=1,000 reactor which has a total power out of 5W by just using a very low beam current.
+%
+%Cary calculates a lot of stuff with regards to the growth rate of various instabilities. Do we have/want to take all/some of the them into account in our optimization? For example, keeping the DCLC parameter at 1,000,
+%}
+%
+%Per Kunal's suggestion we'll be operating under the following constraints:
+%\begin{enumerate}
+%    \item Minimum usable power out- 200MW
+%    \item Maximum NBI energy- 1MeV
+%    \item Maximum Central cell length- 300m
+%    \item Maximum plasma radius- 0.6m
+%    \item Maximum field strength- 25T
+%    \item Maximum beta- 0.8
+%    \item Minimum DCLC ratio- 1000
+%\end{enumerate}
+%
+%These constraints will be soft — either a quadratic or exponential penalty for exceeding them — so that the cost function is differentiable.
 
 \section{Optimizing mirror configurations}
 
@@ -799,7 +824,8 @@ For this optimization case, we hold constant auxiliary heating power ($p_{aux} =
 
 In this optimization, the step size $\lambda$ is set to $1$. The optimization was run for 1000 steps which was chosen arbitrarily—it doesn't converge in that step range (and we don't expect it to in this case). 
 
-Plots of the cost function $\mathcal{C}$ and the gradient L2 norm for each different configuration can be seen in fig. \ref{fig:simple_Q_opt}. The effects of the optimization on the fields $B_{pm}$ and $B_p$ can be seen in fig. \ref{fig:simple_Q_fields}. The optimization favors lowering $B_p$ until the regularization cost becomes significant at around step 60. The dramatic increase in mirror ratio leads to greater axial confinement, which decreases NBI current and power, leading to increased Q and decreased fusion power. Plots of Q and fusion power can be seen in fig. \ref{fig:simple_Q_power}. The effects of this optimization on the temperatures (or average energy in the ion case) can be seen in in fig. \ref{fig:simple_Q_temps}. The increased confinement time allows the beam ions more time to slow on the background electrons, decreasing $T_i$ and increase $T_e$. The decreased $T_i$ decreases D-D reactivity but \emph{increases} D-T reactivity at a faster rate, leading to higher fusion power. However, the lower density caused by the lower midplane field (as mandated by the $\beta$ limit) causes a net \emph{decrease} in fusion power. \phil{The increased axial confinement time implies increased confinement of fusion alphas. The estimated total fuel burnup fraction $f_\text{burnup} = \frac{2 R_x(\text{DT} + \text{DD})}{\frac{dN}{dt} + 2 R_x(\text{DT} + \text{DD})}$ is 24\% which may lower fusion power by roughly 42\% (since the density would be 24\% lower?). Something to think about.}
+Plots of the cost function $\mathcal{C}$ and the gradient L2 norm for each different configuration can be seen in fig. \ref{fig:simple_Q_opt}. The effects of the optimization on the fields $B_{pm}$ and $B_p$ can be seen in fig. \ref{fig:simple_Q_fields}. The optimization favors lowering $B_p$ until the regularization cost becomes significant at around step 60. The dramatic increase in mirror ratio leads to greater axial confinement, which decreases NBI current and power, leading to increased Q and decreased fusion power. Plots of Q and fusion power can be seen in fig. \ref{fig:simple_Q_power}. The effects of this optimization on the temperatures (or average energy in the ion case) can be seen in in fig. \ref{fig:simple_Q_temps}. The increased confinement time allows the beam ions more time to slow on the background electrons, decreasing $T_i$ and increase $T_e$. The decreased $T_i$ decreases D-D reactivity but \emph{increases} D-T reactivity at a faster rate, leading to higher fusion power. However, the lower density caused by the lower midplane field (as mandated by the $\beta$ limit) causes a net \emph{decrease} in fusion power. 
+%\phil{The increased axial confinement time implies increased confinement of fusion alphas. The estimated total fuel burnup fraction $f_\text{burnup} = \frac{2 R_x(\text{DT} + \text{DD})}{\frac{dN}{dt} + 2 R_x(\text{DT} + \text{DD})}$ is 24\% which may lower fusion power by roughly 42\% (since the density would be 24\% lower?). Something to think about.}
 
 Two insights can be gleaned from this simplified optimization task. Firstly, given optimistic physics, excessively high beam energies, incredibly high field strengths, and ignored impurity and ash accumulation, the reactor still only tops out at Q of around 2.3. This low Q implies that simple mirrors will never be a viable source of electricity. Secondly, Q is a shockingly bad optimization target because it maximizes fusion power \emph{and} minimizes heating power simultaneously, thus high Q's can be obtained at low fusion power as demonstrated here. An expensive, low-power reactor is not useful.
 
