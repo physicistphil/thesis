@@ -1,6 +1,5 @@
 \graphicspath{{Chapters/Chapter_ebm/}}
 
-
 \chapter{Reconstructing missing diagnostics using energy-based models}
 \label{ch:ebm}
 
@@ -41,7 +40,7 @@ Concerning EBMs, they have yet to be applied to plasma physics problems. One not
 
 \section{Introduction to energy-based models (EBMs)}
 
-Energy-based models interpret a probability distribution through the lens of the Boltzmann distribution \cite{hopfield_neural_1982, ackley_learning_1985, lecun_tutorial_2006}. In the EBM formulation, the unnormalized probability density is parameterized by an energy function, that is $\tilde{p}(\bf{x}) = \exp(-E_\theta(\bf{x}))$, where $\theta$ are the parameters of this energy function. In this work and the works cited, this energy function is parameterized by a neural network. EBMs have been historically difficult to train, but recent work has demonstrated high-quality sampling using MCMC techniques in high-dimensional spaces \cite{du_model_2019, du_implicit_2020, du_improved_2021, du_compositional_2020, du_unsupervised_2021, nijkamp_anatomy_2020, nijkamp_learning_2019, deng_residual_2020, gao_learning_2018}. These MCMC techniques are fundamentally based in contrastive divergence \cite{hinton_training_2002, ruslan_deep_2009, tieleman_training_2008}. The nature of MCMC-based sampling of EBMs, detailing the convergence and expansion and contraction of learned models (a paradigm particularly helpful for training EBMs in this work) has been studied \cite{nijkamp_anatomy_2020, nijkamp_learning_2019}. Training via contrastive divergence can be improved by implementing a term typically left out which approximates the KL-divergence \cite{du_improved_2021}. 
+Energy-based models interpret a probability distribution through the lens of the Boltzmann distribution \cite{hopfield_neural_1982, ackley_learning_1985, lecun_tutorial_2006}. In the EBM formulation, the unnormalized probability density is parameterized by an energy function, that is $\tilde{p}(\mathbf{x}) = \exp(-E_\theta(\mathbf{x}))$, where $\theta$ are the parameters of this energy function. In this work and the works cited, this energy function is parameterized by a neural network. EBMs have been historically difficult to train, but recent work has demonstrated high-quality sampling using MCMC techniques in high-dimensional spaces \cite{du_model_2019, du_implicit_2020, du_improved_2021, du_compositional_2020, du_unsupervised_2021, nijkamp_anatomy_2020, nijkamp_learning_2019, deng_residual_2020, gao_learning_2018}. These MCMC techniques are fundamentally based in contrastive divergence \cite{hinton_training_2002, ruslan_deep_2009, tieleman_training_2008}. The nature of MCMC-based sampling of EBMs, detailing the convergence and expansion and contraction of learned models (a paradigm particularly helpful for training EBMs in this work) has been studied \cite{nijkamp_anatomy_2020, nijkamp_learning_2019}. Training via contrastive divergence can be improved by implementing a term typically left out which approximates the KL-divergence \cite{du_improved_2021}. 
 
 EBMs can attain GAN-like performance while generating all modes of a distribution \cite{du_implicit_2020}. These models have also been used for text generation \cite{deng_residual_2020} and model-based planning \cite{du_model_2019}. In addition, EBMs can be composed by combining the energy functions in various ways which has been demonstrated in image generation tasks \cite{du_compositional_2020, du_unsupervised_2021}.
 
@@ -150,7 +149,7 @@ The training curves of loss, relative energy, and energy gradient can be seen in
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{figures/losses-energies-rasterized.pdf}
-	\caption{\label{fig:losses-energies}Training curves of the model. Top: the total loss, middle: the relative energies of the negative samples and the training examples (positive samples), bottom: the gradient of the energy function normalized to the noise scale (step size $\epsilon$). \todo{replace with non-rasterized version}}
+	\caption[EBM training curves]{\label{fig:losses-energies}Training curves of the model. Top: the total loss, middle: the relative energies of the negative samples and the training examples (positive samples), bottom: the gradient of the energy function normalized to the noise scale (step size $\epsilon$).}
 \end{figure}
 
 \subsection{Replay buffer configuration}
@@ -218,7 +217,7 @@ Given that the data distributions are highly multi-modal, it is important that t
 	\caption[Histograms of scaled values and energy for unconditional samples]{\label{fig:uncond_energy}Left: all scaled inputs from the training set vs samples inputs. The distributions are similar, but the EBM does not appear to learn more extreme values. Right: corresponding energy distribution. The EBM learns all the modes, but the probability mass is not properly distributed.}
 \end{figure}
 
-Given that the EBM learns the unconditional data distribution well, it should be able to perform well for anomaly detection. When a particular component of the input is outside the expected joint distribution, the energy will be higher and, when compared to usual negative samples, will clearly be an outlier.
+%Given that the EBM learns the unconditional data distribution well, it should be able to perform well for anomaly detection. When a particular component of the input is outside the expected joint distribution, the energy will be higher and, when compared to usual negative samples, will clearly be an outlier.
 
 \section{Diagnostic reconstruction via conditional sampling}
 
