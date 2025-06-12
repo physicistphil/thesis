@@ -47,7 +47,7 @@ Typically, plasmas are produced using a hot cathode and anode at the south end o
 \begin{figure}
 	\centering
 	\includegraphics[width=350pt]{figures/lapd_inside.jpg}
-	\caption[Picture of LAPD interior]{\label{fig:lapd-inside}The interior of the LAPD taken during a discharge from the end of the machine. The hot LaB$_6$ cathode can be seen at the far end. Inside the plasma chamber are, from left to right, a carbon iris (used in Josh Larson's experiments) for controlling the width of the plasma from the smaller north-end source, an electric dipole probe, and the traveling wave antenna. The pink glow is the plasma formed by the far, main LaB$_6$ source. This picture was included for no other reason other than it's a banger.}
+	\caption[Picture of LAPD interior]{\label{fig:lapd-inside}The interior of the LAPD taken during a discharge from the end of the machine. The hot LaB$_6$ cathode can be seen at the far end. Inside the plasma chamber are, from left to right, a carbon iris (used in Josh Larson's experiments) for controlling the width of the plasma from the smaller north-end source, an electric dipole probe, and the traveling wave antenna. The pink glow is the plasma formed by the far, main LaB$_6$ source.}
 \end{figure}
 
 
@@ -81,7 +81,7 @@ Langmuir probes (LPs) are a workhorse of diagnostics in low temperature plasmas,
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{figures/langmuir_pics.jpg}
-	\caption[Images of Langmuir probes used in the LAPD]{\label{fig:langmuir_tips}Three different types of Langmuir probes used in the LAPD: flat protruding tips (top left), flat, flush tips (bottom left), and cylindrical tips (right). Probe areas are often not as advertised based on measurements using a camera and macro lens.}
+	\caption[Images of Langmuir probes used in the LAPD]{\label{fig:langmuir_tips}Three different types of Langmuir probes used in the LAPD: flat protruding tips (top left), flat, flush tips (bottom left), and cylindrical tips (right). Based on measurements using a camera and macro lens, probe areas are often different from what is assumed.}
 \end{figure}
 
 The LP can be biased to measure different portions of the current-voltage relationship. Common biasing schemes are: applying a strong negative bias, sweeping the bias along a set range, free-floating the tip, and biasing another tip via the ion saturation current  from another tip. The I-V relationship of a LP and the quantities deduced from it can be seen in fig. \ref{fig:langmuir_sweep} which will be detailed below.
@@ -218,8 +218,59 @@ Advanced purpose-built algorithms exist to do this gradient descent in a fast ma
 
 In this work we use three types of NN layers. First is the dense layer, also referred to as a ``fully-connected'' layers or ``multilayer perceptron'' if the entire model uses dense layers. In this layer every input is connected to every output. This fully-connected topology can lead to very large parameter counts if these layers are repeatedly stacked with a large width.
 
-Second: the convolutional layer, or convolutional neural network (CNN) \cite{lecun_convolutional_1995}. Technically a misnomer (it should be a ``correlation''), this layer scans along the input with a smaller NN. The input dimension of this layer is the ``kernel size'', and the different networks scanning across the input are the ``filters''. These CNNs have been used to great effect in image processing and time series analysis and are relatively parameter-efficient.
+Second: the convolutional layer, or convolutional neural network (CNN) \cite{lecun_convolutional_1995}. This layer scans along the input with a smaller NN. The input dimension of this layer is the ``kernel size'', and the different networks scanning across the input are the ``filters''. These CNNs have been used to great effect in image processing and time series analysis and are relatively parameter-efficient.
 
-Third: the attention layers. These layers have three inputs called the query, key, and value. When these are all the same the mechanism is called ``self-attention''. The query and key are matrix-multiplied and converted to a probability distribution via a softmax function. This softmax result is then applied to the value. The result of this combination is mask that selects important parts of the value vector. Stacking many of these layers, with multiple self-attention mechanisms for the same input vectors, creates a ``transformer'' \cite{vaswani_attention_2017} which is the basis for the recent advancements in large language models. Here we use these attention mechanisms more modestly.
+Third: the attention layers. These layers have three inputs called the query, key, and value. When these are all the same the mechanism is called ``self-attention''. The query and key are matrix-multiplied and converted to a probability distribution via a softmax function. This softmax result is then applied to the value, yielding scaled dot product attention \cite{vaswani_attention_2017}: 
+\begin{equation}
+	\text{Attention}(Q, K, V) = \text{softmax}\left( \frac{QK^T}{\sqrt{d_k}} \right)V
+\end{equation}
+where $d_k$ is the dimension of the query and key.
+The result of this combination is mask that selects important parts of the value vector. Stacking many of these layers, with multiple self-attention mechanisms for the same input vectors, creates a ``transformer'' \cite{vaswani_attention_2017} which is the basis for the recent advancements in large language models. 
+%Here we use these attention mechanisms more modestly.
+
+\subsection{Generative models}
+Generative models are models that learn a joint probability distribution over the inputs $X$ and outputs $Y$, $p(X, Y)$  instead of learning the conditional distribution $p(y \vert X=x)$ which are ``discriminative'' models. Models that produce a single point estimate are also considered to be discriminative. The learned joint distribution can typically be sampled both unconditionally (generating realistic-looking data) or conditionally to generate samples when given additional information. A brief overview of most commonly used generative models in fusion will be given here. Common generative architectures are variational autoencoders (VAEs), generative adversarial networks (GANs), diffusion models, autoregressive models, and energy-based models (EBMs).
+
+A VAE \cite{kingma_auto-encoding_2022} is composed of an encoder network and a decoder network. The model is trained by mapping the encoder output to a latent probability distribution. This probability distribution can then be sampled by the decoder. The model is trained by minimizing the difference between the data distribution and the sampled distribution (such as using the Kullback-Leibler divergence) and also minimizing the reconstruction error.
+
+A GAN \cite{goodfellow_generative_2014} is composed of an explicit generator network that generates plausible samples, and a discriminator network that distinguishes between generated samples and data. The generator is trained on how well it fools the discriminator, and the discriminator is trained on how well it can discriminate between generated samples and real data. These two optimizations compete.
+
+Diffusion models \cite{ho_denoising_2020} work in a somewhat different way compared to GANs and VAEs. The diffusion model functions by iteratively adding noise to an image such that the image converges to a Gaussian. An NN is then trained to invert this noising process, enabling sampling from a distribution from pure noise. 
+
+Autoregressive models, usually for time-series data or language modeling, predict the next item in a sequence given an earlier (set of) items. This model is the main idea behind training of large language models -- so called ``generative pretrained transformers'', or ``GPT'' \cite{radford_improving_2018}. 
+
+Energy-based models parameterize the probability distribution via an energy function where the probability is defined as $p =\exp(-E) / Z$, where Z is the partition function. These are trained by evaluating the log-likelihood of the probability to get contrastive divergence. 
+
+\section{Machine learning in plasma science}
+
+\section{ML in ICF}
+
+\section{ML for control}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
