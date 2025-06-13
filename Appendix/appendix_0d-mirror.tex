@@ -31,6 +31,10 @@
 %\listoftables
 %\newpage
 
+This appendix describes a 0d mirror reactor optimization project. The equations and assumptions used for this optimization are described. This project provided good intuition on the limitations of simple mirrors. In addition, it gave practical experience using SymPy and Jax. The work has yet to be extended to tandem mirrors.
+
+This work was built off an Excel spreadsheet created by Cary Forest, with contributions from Kunal Sanwalka.
+
 \section{List of assumptions / conditions}
 
 There are many issues and assumptions with this analysis (in no particular order):
@@ -312,7 +316,7 @@ The $\frac{1}{\rho^*}$ factor can boost the confinement time estimate by a facto
 
 \subsection{ETG-driven transport}
 
-Cary's spreadsheet says 
+%Cary's spreadsheet says 
 %\phil{(I'm having trouble finding a derivation or hand-wavy justification)}:
 \begin{equation}
     \chi_\text{ETG} = 0.1 \frac{T_{e,cc}^{3/2}}{B_{cc}}
@@ -349,14 +353,14 @@ By particle conservation and because NBI will be the dominant fueling mechanism,
     \tau_p = e V n_b / I_\text{NBI}
 \end{align}
 
-For ion temperature, Cary's spreadsheet says:
+For ion temperature, %Cary's spreadsheet says:
 \begin{equation}
     T_i = \frac{2}{3} E_{inj}
 \end{equation}
 This emerges from the relation that $E=\frac{1}{2}k_BT$ for every degree of freedom. For single particles, we assume 3 degrees of freedom to get $E=\frac{3}{2}T$ where T is expressed in eV. 
 %\bad{If referencing Egedal et al 2022 \cite{Egedal_2022}, this is only true if the electrons are very hot, i.e., $T_e (\log{R_M})^{2/3} / E_{inj} \approx 1$. However, it is also shown in the paper that $T_i / E_{inj} \sim 0.6$. Assuming $2/3$ is more conservative because a higher temperature means a lower reactivity and thus lower total fusion power at temperatures above 70-ish keV.}
 
-For electron temperature, Cary's spreadsheet says:
+For electron temperature, %Cary's spreadsheet says:
 \begin{align}
     T_e &= 0.089 E_b \log_{10} \left( R_p \right)^{0.4} \\
     &= 0.089 E_b \log_{10} \left(\frac{R_p}{1-\beta} \right)^{0.4}
@@ -364,7 +368,7 @@ For electron temperature, Cary's spreadsheet says:
 which seems to give a roughly 2x higher electron temperature than the reduced model in Egedal 2022 \cite{Egedal_2022}, which means that our estimate will be more optimistic.
 %\kunal{Cary said this comes from working through the energy balance of a beam heated mirror device. Apparently it is in their new paper. I will go over this and figure it out. The $1-\beta$ term is from the finite beta corrections to the mirror ratio.}
 
-Particle confinement time (Convention: $R_p = R_m$) found in Baldwin's end-loss paper \cite{baldwin_end-loss_1977} equations 4.14 and 4.13. The same equation can be applied to tandem mirrors with thermal barriers and plug cells \cite{PhysRevLett.43.1318}. According to Cary, this number will give pessimistic estimates.
+Particle confinement time (Convention: $R_p = R_m$) found in Baldwin's end-loss paper \cite{baldwin_end-loss_1977} equations 4.14 and 4.13. The same equation can be applied to tandem mirrors with thermal barriers and plug cells \cite{PhysRevLett.43.1318}. This may be pessimistic. %According to Cary, this number will give pessimistic estimates.
 Equation 4.14 \cite{baldwin_end-loss_1977} states:
 \begin{equation}
      n\tau_{\text{Fowler/Baldwin}} = \kappa \times 10^{10} {E_b^{3/2}} \log{R_{\text{eff}}} / \log{10}
@@ -739,13 +743,13 @@ Cost of magnet $=$ $S \cdot$(cost per kA$\cdot$m)
 Radii of magnet coils needed: 
 %\phil{The numbers below are from Cary's spreadsheet. I can't quite follow the thought process that went into these -- the ones with my highlight are the quantities I'm using.} \bad{Rethink and justify these.}
 \begin{enumerate}
-    \item Mirror: $r_\text{bore} + d_\text{vv}$ (0.1m) $ + d_\text{blanket}$ (0.6m) \\
+    \item Mirror: $r_\text{bore} + d_\text{vv}$ (0.1m) $ + d_\text{blanket}$ (0.6m) 
 %    \phil{$r_\text{bore} \cdot a_\text{wall, ratio} + d_\text{vv}$ (0.1m) $ + d_\text{blanket}$ (0.6m)}
-    \item Plug midplane: $(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{blanket} + d_\text{vv} $(0.2m) \\
+    \item Plug midplane: $(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{blanket} + d_\text{vv} $(0.2m) 
 %    \phil{This will need to change depending on the length of the plug: we may need a solenoid or Maxwell coil instead of just a simple coil to keep }
     \item Plug divertor: beta limit + 0.2 
 %    \item \bad{Doesn't make sense -- ignoring for now}
-    \item Central cell: $(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{blanket}$ \\
+    \item Central cell: $(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{blanket}$ 
 %    \phil{$(a_\text{wall, ratio} \cdot a_\text{plasma}) + d_\text{vv} + d_\text{blanket}$}
 \end{enumerate}
 
@@ -776,7 +780,7 @@ This regularization is enforced as a penalty coefficient on charged particle fus
 where $a_\text{diff}$ is the difference between the vessel wall and 4 alpha gyroradii: $a_\text{diff} = 4 r_\text{Larmor, 3.5 MeV alphas} - a_\text{vv}$. 
 These particle losses depend on the radial plasma profile and should be simulated and implicitly affect the optimization instead of the explicit penalty as done here. Only the 3.5 MeV alpha gyroradius is considered because it's the largest of all the usual fusion products but we apply the penalty to all fusion products. This penalty aims to be a conservative estimate.
 
-\subsection{Kunal's suggestions}
+%\subsection{Kunal's suggestions}
 
 %\kunal{
 %If we want to pursue Cary's NBI only reactor design concept, then we need to use $\geq$100keV beams since the DT reaction cross section peaks at a center of mass energy of $\sim$65keV. Currently, Cary is using 1MeV beams in his code.
@@ -827,7 +831,9 @@ In this optimization, the step size $\lambda$ is set to $1$. The optimization wa
 Plots of the cost function $\mathcal{C}$ and the gradient L2 norm for each different configuration can be seen in fig. \ref{fig:simple_Q_opt}. The effects of the optimization on the fields $B_{pm}$ and $B_p$ can be seen in fig. \ref{fig:simple_Q_fields}. The optimization favors lowering $B_p$ until the regularization cost becomes significant at around step 60. The dramatic increase in mirror ratio leads to greater axial confinement, which decreases NBI current and power, leading to increased Q and decreased fusion power. Plots of Q and fusion power can be seen in fig. \ref{fig:simple_Q_power}. The effects of this optimization on the temperatures (or average energy in the ion case) can be seen in in fig. \ref{fig:simple_Q_temps}. The increased confinement time allows the beam ions more time to slow on the background electrons, decreasing $T_i$ and increase $T_e$. The decreased $T_i$ decreases D-D reactivity but \emph{increases} D-T reactivity at a faster rate, leading to higher fusion power. However, the lower density caused by the lower midplane field (as mandated by the $\beta$ limit) causes a net \emph{decrease} in fusion power. 
 %\phil{The increased axial confinement time implies increased confinement of fusion alphas. The estimated total fuel burnup fraction $f_\text{burnup} = \frac{2 R_x(\text{DT} + \text{DD})}{\frac{dN}{dt} + 2 R_x(\text{DT} + \text{DD})}$ is 24\% which may lower fusion power by roughly 42\% (since the density would be 24\% lower?). Something to think about.}
 
-Two insights can be gleaned from this simplified optimization task. Firstly, given optimistic physics, excessively high beam energies, incredibly high field strengths, and ignored impurity and ash accumulation, the reactor still only tops out at Q of around 2.3. This low Q implies that simple mirrors will never be a viable source of electricity. Secondly, Q is a shockingly bad optimization target because it maximizes fusion power \emph{and} minimizes heating power simultaneously, thus high Q's can be obtained at low fusion power as demonstrated here. An expensive, low-power reactor is not useful.
+\section{Conclusions}
+
+Two insights can be gleaned from this simplified optimization task. Firstly, given optimistic physics, excessively high beam energies, incredibly high field strengths, and ignored impurity and ash accumulation, the reactor still only tops out at Q of around 2.3. This low Q implies that simple mirrors will never be a viable source of electricity. Secondly, Q is a shockingly bad optimization target because it maximizes fusion power \emph{and} minimizes heating power simultaneously, thus high Q's can be obtained at low fusion power as demonstrated here. An expensive, low-power reactor is not useful for power production.
 
 % \begin{table}
 %     \centering
