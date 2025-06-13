@@ -4,7 +4,7 @@
 %                                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Study of turbulence and transport in and optimization of mirror configurations in the Large Plasma Device}
+\title{Study of turbulence and transport in and optimization of \\mirror configurations in the Large Plasma Device}
 
 \author         {Philip Travis}
 \department     {Physics}
@@ -21,32 +21,19 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \dedication{\emph{To humanity\\and Altair, my dog}}
-\acknowledgments {
-I have many to thank for making my PhD such an enjoyable and satisfying part of my life. 
+\acknowledgments {I am fortunate to have many to thank for making my PhD such an enjoyable and satisfying part of my life. Shout out to my homies Gurleen Bal, Kamil Sklodowski, and Yhoshua Wug for providing much-needed support and camaraderie over all these years -- graduate school would have been very different (maybe painful!) without you guys.
 
-The homies Gurleen Bal, Kamil Sklodowski, and Yhoshua Wug
+I would also like to extend gratitude to all those in the nfmfmhdut community and the SULI mafia for their support and friendship, particularly Becky Masline and Shawn Zamperini for building a community for us over covid. In no particular order: Kunal Sanwalka, Sam Frank, Nick McGreivy, Ben Israeli, Garrett Prechel, Andrew Maris, Allen Wang, Kenny Gage, Ryan Chaban, Mason Yu, Tyler Cote, Genevieve DeGrandchamp, Alex Leviness, Nirbhav Chopra (UIUC gang), Oak Nelson. If I forgot anyone, I apologize, and be sure grab me next APS for a drink.
 
-The nfmfmhdut community, SULI mafia, and friends in plasma physics in no particular order: Sam Frank, Ben Israeli, Garrett Prechel, Becky Masline, Shawn Zamperini, Ryan Chaban, Kunal Sanwalka, Andrew Maris, Allen Wang, Mason Yu, Kenny Gage, Tyler Cote, Genevieve DeGrandchamp, Juan, 
+Thank you to my labmates, classmates, and collaborators for fostering a warm community: Jeff Robertson, Mel Abler, Tom Look, Javi Serrano, Jesus Perez, Josh Larson, Henry Wong, Erik Everson, Tim Vanhoomissen, Ryan Buckley, Henry Wong, Sarah Chase, Tri Luong, Lukas Rovige, Yuchen Qian, Bobby Dorst, Jess Pilgram, Jia Han, Seth Dorfman, Angelica Ottaviano, Patrick Crandall, Gary Wan, Jess Gonzalez, Graeme Sabiston, Mary Konopliv, Ani Thuppul, and Adam Collins. And in particular, shoutout to Gio Rossi for helping pass the comprehensive exam with a hilariously imbalanced competition and Kyle Callahan and Tom Neiser for being such great roommates at conferences. To those in the astronomy department, thank you for accepting a wayward physicist as one of your own (at least on the camping trips). Thanks to the lab staff for their willingness to help running experiments and answering late-night texts: Shreekrishna Tripathi, Steve Vincena, Pat Pribyl, Zoltan Lucky, Marvin Drandell, and Tai Sy Ly. On behalf of all of us, I'd like to thank lab mom Meg Murphy for the administrative and emotional support (and food!) over all these years -- it's hard to imagine what the lab would be like without her.
 
-Nirbhav, Alex Leviness, 
+Friends and family, thank you for providing support and homes to crash at when I needed to: Lydia and Andy Wilson (and Savannah and Shepard), Tim and Allison Travis, Sean Lyon, Claire Baum, Erik Wessel, Rory Bentley (spacebros), Ada Morral, Antonett Prado, and most of all Piper (Bernese) and Blake (terrier mix). And anti-collaborator Altair (Golden-Bernese mix), thank you for keeping me sane in all the important ways and driving me nuts in all the others.
 
-Labmates Jeff Robertson, Gio Rossi, Mel Abler, Tom Look, JJ, Jesus, Josh Larson, Henry Wong, Erik Everson, Tim, Ryan Buckley, Sarah Chase, Kyle Callahan, Tri, Lukas, Tom Neiser, Yuchen, Bobby, Jess, Jia
+Thank you professors Walter Gekelman, George Morales, and Derek Schaeffer for your instruction and insight.
+To committee members, Jacob Bortnik and Paulo Alves, thank you for your insight and support in my exploration of machine learning techniques. And thank you to Chris Niemann for answering my late-night texts when troubleshooting the Thomson scattering system.
+Lastly, and most importantly, I'd like to thank my advisor, Troy Carter, for supporting me despite my wanderings in ML territory. I am certain that the work I have done here would not have been possible anywhere else under any other advisor, and for that I am immeasurably grateful. 
 
-Lab staff: Lucky, Marvin, Tai, Byonghoon, Shreekrishna, Seth, Steve
-
-Family, Sean
-
-Other friends
-
-Claire Baum, Erik Wessel, Rory Bentley, Ada, Antonett (Piper, Blake)
-
-Jess, Gary Wan, Angelica, Pat, Graeme, Mary, Ani, Adam 
-
-Altair
-
-Troy, Walter, George, Derek, Chris
-
-Funding agencies
+Oh, and thank you U.S. taxpayers: this work was performed at the Basic Plasma Science Facility, which is a DOE Office of Science, FES collaborative user facility and is funded by DOE (DE-FC02-07ER54918) and the National Science Foundation (NSF-PHY 1036140).
 
 }
 
@@ -62,7 +49,17 @@ Funding agencies
 
 \publication{Y. Qian, W. Gekelman, P. Pribyl, T. Sketchley, S. Tripathi, Z. Lucky, M. Drandell, S. Vincena, T. Look, P. Travis, T. Carter, G. Wan, M. Cattelan, G. Sabiston, A. Ottaviano, R. Wirz, \emph{Design of the Lanthanum hexaboride based plasma source for the large plasma device at UCLA}, Rev. Sci. Instrum. 94, 085104 (2023). doi:10.1063/5.0152216}
 
-%\presentation{aaa}
+\presentation{P. Travis, J. Bortnik, T. Carter, \emph{An open dataset from the Large Plasma Device for machine learning and profile prediction}, poster presentation, 66$^\text{th}$ Annual Meeting of the APS Division of Plasma Physics, Atlanta, GA (2024)}
+
+\presentation{P. Travis, T. Look, L. Rovige, C. Niemann, P. Pribyl, T. Carter, \emph{Predicting profiles in LAPD mirror configurations}, poster presentation, 65$^\text{th}$ Annual Meeting of the APS Division of Plasma Physics, Denver, CO (2023)}
+
+\presentation{P. Travis, S. Vincena, P. Pribyl, T. Carter, \emph{Developing a generative ML model for LAPD trend inference and profile prediction}, 64$^\text{th}$ Annual Meeting of the APS Division of Plasma Physics, Spokane, WA (2022)}
+
+\presentation{P. Travis, T. Carter, \emph{Upgrading LAPD diagnostic pipelines for training generative ML models}, poster presentation, 63$^\text{rd}$ Annual Meeting of the APS Division of Plasma Physics, Pittsburg, PA (2021)}
+
+\presentation{P. Travis, T. Carter, \emph{Automated Langmuir sweep analysis using machine learning}, contributed talk, 62$^\text{nd}$ Annual Meeting of the APS Division of Plasma Physics, online, FL (2020)}
+
+\presentation{P. Travis, T. Carter, \emph{Study of turbulence and transport in magnetic mirror geometries in the LAPD}, poster presentation, Transport Task Force, San Diego, CA (2018)}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

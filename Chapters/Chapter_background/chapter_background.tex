@@ -71,8 +71,7 @@ Another LabView system manages the machine state information (MSI). This system 
 
 \section{Diagnostics}
 
-LAPD can field many different diagnostics and other equipment through the ball-valve ports as well as much larger box-shaped ports.
-Probe diagnostics typically go through an isolation amplifier before heading into the DAQ, along with attenuators so the signals fit the DAQ range
+LAPD can field many different diagnostics and other equipment through the ball-valve ports as well as much larger box-shaped ports. The most common and useful diagnostics used are discussed.
 
 \subsection{Langmuir probes: $I_\text{sat}$, sweeps, triple probes}
 
@@ -168,24 +167,39 @@ The Thomson scattering system benefits from higher density (above $10^{13}$ cm$^
 
 The facility currently has a Phantom v7.3 fast framing camera. At 800 by 600 resolution, it can record at 6,688 frames per second, but can record at over 35,000 frames per second at a 256 by 256 resolution. The camera sensor is 14 bit monochrome and capable of resetting pixels and reacquiring light on event of sensor saturation (the ``extreme dynamic range'' feature). Although this footage is not analyzed in a quantitative way, it is nonetheless useful for building intuition on the structures and dynamics in the device (and worst case, makes for some pretty images). The light collected by the camera has been shown to correlate fairly well with $I_\text{sat}$, at least in the plasma bulk (according to unpublished work by Daniel Guice). 
 
-\section{Instabilities in mirrors and the LAPD}
+\section{Potential instabilities in the LAPD}
+
+A brief overview of potential instabilities is given here. The applicability of and evidence for the existence of these instabilities is further discussed in chapter \ref{ch:mirror_turbulence}.
 
 \subsection{Drift waves}
 
-Drift waves exist in any magnetized plasma that has a density gradient. For this reason, this is often called a ``universal'' wave or instability. 
+Drift waves exist in any magnetized plasma that has a density gradient, and are driven unstable in the presence of dissipation (such as finite resistivity) \cite{Tynan_review_2009}. For this reason, these drift waves are often called a ``universal'' wave or instability. A schematic of the wave can be seen in fig. \ref{fig:drift-wave}. The mechanism behind the wave is as follows: assuming the plasma follows a Boltzman relationship, that is $\delta n/n \approx e \delta \phi / T$, a density perturbation results in a potential perturbation. This resulting electric field creates an $E \times B$ force that push portions of the perturbation out and other portions inward. These forces lead to a propagating wave. If there is dissipation in the electron response, it leads to a phase shift $\epsilon$ such that the density and potential fluctuations are related by $\delta n/n \approx e \delta \phi / T (1+i\epsilon)$. This phase shift leads to a growing mode -- an instability.
 
-Pressure gradient in a slab
-Any resistivity leads to charge separation and instability growth
-Show diagram 
+\begin{figure}
+	\centering
+	\includegraphics[width=170pt]{figures/drift-wave.pdf}
+	\caption[Schematic of a drift wave]{\label{fig:drift-wave}Schematic of the drift wave. A density perturbation is propagated by the resulting $E \times B$ force, where the electric field is created by the Boltzman relationship}
+\end{figure}
+
+The currents created by the electron response can couple to an Alfv\'en wave, leading to drift-Alf\'en waves which have been observed in the LAPD in the past \cite{Maggs_1997, Vincena_2006}, and are discussed further in chapter \ref{ch:mirror_turbulence}.
+
+\subsection{Curvature interchange}
+
+Curvature-induced interchange modes occur in the presence of a pressure gradient in line with the curvature vector. A schematic of these modes can be seen in fig. \ref{fig:interchange}. The curvature drift (and in many cases, $\nabla B$ drift) lead to charge separation in the plasma. If there is a positive density perturbation, there will be a large current. A nearby density depletion will have a similar current, but at a lower level. On average, this leads to an electric field which is then reinforce by the $E \times B$ force. These instabilities were showstoppers for early mirrors, and resulted in non-axisymmetric configurations to stabilize the mode \cite{Post_1987}. The large amplitude of the mode would make it very obvious in a density fluctuation measurement. These modes are also called ``flute modes'' in mirror machine literature.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=400pt]{figures/interchange.pdf}
+	\caption[Schematic of an interchange mode]{\label{fig:interchange}Schematic of the interchange mode. A density perturbation, combined with charge separation, leads to a growing mode.}
+\end{figure}
 
 \subsection{Rotational interchange}
 
+Similar to drift and curvature-induced modes, the rotational interchange mode is caused by charge separation resulting from the curvature force. Like the interchange mode, these can be flute modes, but can also have $n\neq0$ and could couple to other instabilities as well \cite{Friedman_simulation_2013}.
 
+\subsection{Nonlinear instability and conducting wall mode}
 
-\subsection{Interchange}
-
-Pressure gradient aligned with curvature vector
-Showstopper for earlier mirror machines
+Other instabilities may be present in the LAPD as well. Simulations and statistical comparison with experiments suggest the presence of a nonlinear instability with the largest growth rate \cite{Friedman_2013}. These modes are flute-like, but can three-wave couple to non-flute modes. This instability has not been directly observed, but the statistics of fluctuations are consistent with experiment. Simulations also suggest the possible presence temperature gradient- and conducting wall-driven modes (CWM) \cite{Friedman_2013, Berk_1991}. This mode has not been directly observed on the LAPD, but nonetheless should be considered when evaluating fluctuation spectra given the presence of strong gradients and at least one conducting boundary.
 
 \section{Machine learning and neural networks}
 
@@ -239,13 +253,17 @@ Diffusion models \cite{ho_denoising_2020} work in a somewhat different way compa
 
 Autoregressive models, usually for time-series data or language modeling, predict the next item in a sequence given an earlier (set of) items. This model is the main idea behind training of large language models -- so called ``generative pretrained transformers'', or ``GPT'' \cite{radford_improving_2018}. 
 
-Energy-based models parameterize the probability distribution via an energy function where the probability is defined as $p =\exp(-E) / Z$, where Z is the partition function. These are trained by evaluating the log-likelihood of the probability to get contrastive divergence. 
+Energy-based models parameterize the probability distribution via an energy function where the probability is defined as $p =\exp(-E) / Z$, where Z is the partition function. These are trained by evaluating the negative log-likelihood of the probability distribution via contrastive divergence \cite{hinton_training_2002, ruslan_deep_2009, tieleman_training_2008}: 
+\begin{equation}
+	- \log p(x\vert \theta) = E(x \vert \theta) - \log Z_\theta
+\end{equation}
+where $\theta$ are the parameters of the model. Taking the gradient with respect to model parameters yields 
+\begin{equation}
+	 - \frac{\partial \log p(x\vert \theta)}{\partial \theta} = \frac{\partial E(x \vert \theta)}{\partial \theta} \bigg \rvert_{x \sim p} - \frac{\partial E(x \vert \theta)}{\partial \theta} \bigg \rvert_{x \sim q}
+\end{equation}
+where the terms on the right hand side are averaged over samples drawn from the data distribution $p$ and model distribution $q$, respectively. These are called the ``positive'' and ``negative'' samples, respectively.
 
-\section{Machine learning in plasma science}
 
-\section{ML in ICF}
-
-\section{ML for control}
 
 
 
